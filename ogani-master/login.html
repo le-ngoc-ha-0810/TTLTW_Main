@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ogani | Đăng nhập</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/login.css" type="text/css">
+</head>
+
+<body>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Humberger Begin -->
+<div class="humberger__menu__overlay"></div>
+<!-- Header Section Begin -->
+<header class="header">
+<!--    <div class="header__top">-->
+<!--        <div class="container">-->
+<!--            <div class="row">-->
+<!--                <div class="col-lg-6 col-md-6">-->
+<!--                    <div class="header__top__left">-->
+<!--                        <ul>-->
+<!--                            <li><i class="fa fa-envelope"></i> hello@gmail.com</li>-->
+<!--                            <li>SĐT: 0123456789</li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-lg-6">-->
+<!--                    <div class="header__top__right">-->
+<!--                        <div class="header__top__right__social">-->
+<!--                            <a href="#"><i class="fa fa-facebook"></i></a>-->
+<!--                            <a href="#"><i class="fa fa-twitter"></i></a>-->
+<!--                        </div>-->
+<!--                        <div class="header__top__right__language">-->
+<!--                            <img src="img/language1.png" alt="">-->
+<!--                            <div>Việt Nam</div>-->
+<!--                        </div>-->
+<!--                        <div class="header__top__right__auth">-->
+<!--                            <a class="active" href="signup.html"><i class="fa fa-user"></i> Đăng ký</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+    <div class="wrap-menu-desktop">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="header__logo">
+                        <a href="./index.html"><img src="img/logo_2.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <nav class="header__menu">
+                        <ul>
+                            <li><a href="./index.html">Trang chủ</a></li>
+                            <li><a href="./shop-grid.html">Sản phẩm</a></li>
+                            <li><a href="./blog.html">Tin tức</a></li>
+                            <li><a href="./contact.html">Liên hệ</a></li>
+                            <li><a href="./help.html">Hỗ trợ</a></li>
+                        </ul>
+
+                    </nav>
+                </div>
+                <div class="col-lg-3">
+                    <div class="header__cart">
+                        <ul>
+                            <li><a class="active" href="#"><i class="fa fa-user"></i> Đăng nhập</a>
+                                <ul class="header__cart__dropdown">
+                                    <li><a href="./login.html"><i class="fa fa-user"></i> Tài khoản</a></li>
+                                    <li><a href="#"><i class="fa fa-gear"></i> Cài đặt</a></li>
+                                    <li><a href="./shoping-cart.html"><i class="fa fa-receipt"></i> Đơn mua</a></li>
+                                    <li><a href="#"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></li>
+                                </ul>
+                            <li><a href="signup.html"><i class="fa fa-user"></i> Đăng ký</a></li>
+                            <li><a href="./checkout.html"><i class="fa fa-shopping-bag"></i> <span>3</span></a>
+                                <ul class="header__cart__dropdown_cart">
+                                    <li>Hãy đăng nhập để xem giỏ hàng <br></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <!--                        <div class="header__cart__price">item: <span>$150.00</span></div>-->
+                    </div>
+                </div>
+            </div>
+            <div class="humberger__open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Header Section End -->
+
+<!--Login Section Begin -->
+
+<section class="page-login">
+    <div id="form-signIn">
+        <div id="form-bg">
+            <img id="image-bg" src="./img/banner-login.jpg" width="100%" height="620px">
+        </div>
+        <div class="container">
+            <div class="title">
+                <h3>Đăng nhập</h3>
+            </div>
+            <form class="form_input_group">
+                <div class="input-group-control user">
+                    <input type="text" id="user" required placeholder="Tên đăng nhập hoặc Email">
+                </div>
+                <div class="input-group-control pass">
+                    <input type="password" id="password" required placeholder="Mật khẩu">
+                </div>
+                <div id="forgot">
+                    <div class="fg-left">
+                        <a href="forgotpass.html">Quên mật khẩu</a>
+                    </div>
+                    <div id="help-right">
+                        <a href="help.html">Cần trợ giúp?</a>
+                    </div>
+                </div>
+                <button class="btn btn-signIn">Đăng nhập</button>
+                <div id="txt-loginWith">
+                    <p>Hoặc đăng nhập với</p>
+                </div>
+                <div id="icon-socs">
+                    <button class="left"><a class="fab fa-facebook-f"></a>Facebook</button>
+                    <button class="right"><a class="fab fa-google"></a>Google</button>
+                </div>
+                <div id="sign_up">
+                    <p>Bạn chưa có tài khoản? <a href="signup.html">Đăng ký tại đây</a></p>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</section>
+<!-- Login Section End -->
+
+<!-- Footer Section Begin -->
+<!-- Footer Section Begin -->
+<footer class="footer spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="footer__about">
+                    <div class="footer__about__logo">
+                        <a href="./index.html"><img src="img/logo_2.png" alt=""></a>
+                    </div>
+                    <ul>
+                        <li>Address: Đại học Nông Lâm TPHCM</li>
+                        <li>Phone: +84 123456789</li>
+                        <li>Email: hello@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                <div class="footer__widget">
+                    <h6>Liên kết hữu ích</h6>
+                    <ul>
+                        <li><a href="#">Về chúng tôi</a></li>
+                        <li><a href="#">Mua sắm</a></li>
+                        <li><a href="#">Giao hàng</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="./contact.html">Vị trí của chúng tôi</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#">Chúng tôi là ai?</a></li>
+                        <li><a href="#">Dịch vụ</a></li>
+                        <li><a href="#">Dự án</a></li>
+                        <li><a href="#">Kết nối</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="footer__widget">
+                    <h6>Tham gia bản tin của chúng tôi ngay bây giờ</h6>
+                    <p>Nhận thông tin cập nhật qua E-mail về cửa hàng mới nhất của chúng tôi và các ưu đãi đặc biệt.</p>
+                    <form action="#">
+                        <input type="text" placeholder="Nhập vào email của bạn">
+                        <button type="submit" class="site-btn">Đăng ký</button>
+                    </form>
+                    <div class="footer__widget__social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Section End -->
+
+<!-- Js Plugins -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.nice-select.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery.slicknav.js"></script>
+<script src="js/mixitup.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/main.js"></script>
+
+
+</body>
+
+</html>
