@@ -7,12 +7,12 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
+    <title>Ogani | Đăng ký</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-    <!-- Css Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/signup.css" type="text/css">
 </head>
 
 <body>
@@ -76,7 +77,7 @@
                             <li><a href="./index.html">Trang chủ</a></li>
                             <li><a href="./shop-grid.html">Sản phẩm</a></li>
                             <li><a href="./blog.html">Tin tức</a></li>
-                            <li class="active"><a href="./contact.html">Liên hệ</a></li>
+                            <li><a href="./contact.html">Liên hệ</a></li>
                             <li><a href="./help.html">Hỗ trợ</a></li>
                         </ul>
 
@@ -111,155 +112,56 @@
 </header>
 <!-- Header Section End -->
 
-<!-- Hero Section Begin -->
-<!--<section class="hero hero-normal">-->
-<!--    <div class="container">-->
-<!--        <div class="row">-->
-<!--            <div class="col-lg-3">-->
-<!--                <div class="hero__categories">-->
-<!--                    <div class="hero__categories__all">-->
-<!--                        <i class="fa fa-bars"></i>-->
-<!--                        <span>Tất cả sản phẩm</span>-->
-<!--                    </div>-->
-<!--                    <ul>-->
-<!--                        <li><a href="#">Gạch giá rẻ</a></li>-->
-<!--                        <li><a href="#">Gạch lát nền</a></li>-->
-<!--                        <li><a href="#">Gạch ốp tường</a></li>-->
-<!--                        <li><a href="#">Gạch lát sân vườn</a></li>-->
-<!--                        <li><a href="#">Gạch giả gỗ</a></li>-->
-<!--                        <li><a href="#">Gạch ốp lát cao cấp</a></li>-->
-<!--                        <li><a href="#">Gạch tranh thảm</a></li>-->
-<!--                        <li><a href="#">Gạch trang trí</a></li>-->
-<!--                        <li><a href="#">Gạch vỉa hè</a></li>-->
-<!--                        <li><a href="#">Gạch kính lấy sáng</a></li>-->
-<!--                        <li><a href="#">Gạch lát cầu thang</a></li>-->
-<!--                    </ul>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="col-lg-9">-->
-<!--                <div class="hero__search">-->
-<!--                    <div class="hero__search__form">-->
-<!--                        <form action="#">-->
-<!--                            <input type="text" placeholder="Bạn đang cần gì?">-->
-<!--                            <button type="submit" class="site-btn">Tìm kiếm</button>-->
-<!--                        </form>-->
-<!--                    </div>-->
-<!--                    <div class="hero__search__phone">-->
-<!--                        <div class="hero__search__phone__icon">-->
-<!--                            <i class="fa fa-phone"></i>-->
-<!--                        </div>-->
-<!--                        <div class="hero__search__phone__text">-->
-<!--                            <h5>+65 11.188.888</h5>-->
-<!--                            <span>Hỗ trợ 24/7</span>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</section>-->
-<!-- Hero Section End -->
+<!--Login Section Begin -->
 
-<!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-section set-bg section_martop" data-setbg="img/banner2.jpg">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <div class="breadcrumb__text">
-                    <h2>Liên hệ</h2>
-                    <div class="breadcrumb__option">
-                        <a href="./index.html">Trang chủ</a>
-                        <span>Liên hệ</span>
+<section class="page-login">
+    <div id="form-signIn">
+        <div id="form-bg">
+            <img id="image-bg" src="./img/banner-login.jpg" width="100%" height="680px">
+        </div>
+        <div class="container">
+            <div class="title">
+                <h3>Đăng ký</h3>
+            </div>
+            <form class="form_input_group">
+                <div class="input-group-control user">
+                    <input type="text" id="email" required placeholder="Email">
+                </div>
+                <div class="input-group-control user">
+                    <input type="text" id="user" required placeholder="Tên đăng nập">
+                </div>
+                <div class="input-group-control pass">
+                    <input type="password" id="password" required placeholder="Mật khẩu">
+                </div>
+                <div class="input-group-control user">
+                    <input type="text" id="passwordrepair" required placeholder="Nhập lại mật khẩu">
+                </div>
+                <div id="forgot">
+<!--                    <div class="fg-left">-->
+<!--                        <a href="forgotpass.html">Quên mật khẩu</a>-->
+<!--                    </div>-->
+                    <div id="help-right">
+                        <a href="help.html">Cần trợ giúp?</a>
                     </div>
                 </div>
-            </div>
+                <button class="btn btn-signIn">Đăng ký</button>
+                <div id="txt-loginWith">
+                    <p>Hoặc đăng ký với</p>
+                </div>
+                <div id="icon-socs">
+                    <button class="left"><a class="fab fa-facebook-f"></a>Facebook</button>
+                    <button class="right"><a class="fab fa-google"></a>Google</button>
+                </div>
+                <div id="sign_up">
+                    <p>Bạn đã có tài khoản? <a href="login.html">Đăng nhập tại đây</a></p>
+                </div>
+            </form>
+
+
         </div>
     </div>
 </section>
-<!-- Breadcrumb Section End -->
-
-<!-- Contact Section Begin -->
-<section class="contact spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                <div class="contact__widget">
-                    <span class="icon_phone"></span>
-                    <h4>Điện thoại</h4>
-                    <p>+84 123456789</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                <div class="contact__widget">
-                    <span class="icon_pin_alt"></span>
-                    <h4>Địa chỉ</h4>
-                    <p>Đại học Nông Lâm TPHCM</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                <div class="contact__widget">
-                    <span class="icon_clock_alt"></span>
-                    <h4>Mở cửa</h4>
-                    <p>08:00 am to 23:00 pm</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                <div class="contact__widget">
-                    <span class="icon_mail_alt"></span>
-                    <h4>Email</h4>
-                    <p>hello@gmail.com</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Contact Section End -->
-
-<!-- Map Begin -->
-<div class="map">
-    <iframe
-            src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3918.2169407422025!2d106.78825936079417!3d10.871097757395267!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1zxJHhuqFpIGjhu41jIG7DtG5nIGzDom0!5e0!3m2!1svi!2s!4v1698564170879!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-            height="500" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-    <div class="map-inside">
-        <i class="icon_pin"></i>
-        <div class="inside-widget">
-            <h4>Nông Lâm</h4>
-            <ul>
-                <li>Phone: +84 123456789</li>
-                <li>Add: Khu Phố 6, Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam</li>
-            </ul>
-        </div>
-    </div>
-</div>
-<!-- Map End -->
-
-<!-- Contact Form Begin -->
-<div class="contact-form spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="contact__form__title">
-                    <h2>Để lại phản hồi</h2>
-                </div>
-            </div>
-        </div>
-        <form action="#">
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <input type="text" placeholder="Tên của bạn">
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <input type="text" placeholder="Địa chỉ mail">
-                </div>
-                <div class="col-lg-12 text-center">
-                    <textarea placeholder="Phản hồi"></textarea>
-                    <button type="submit" class="site-btn">Gửi phản hồi</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-<!-- Contact Form End -->
+<!-- Login Section End -->
 
 <!-- Footer Section Begin -->
 <!-- Footer Section Begin -->

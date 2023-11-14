@@ -62,10 +62,10 @@
         </li>
         <li><a class="app-menu__item" href="table-data-oder.html"><i class='app-menu__icon bx bx-task'></i><span
                 class="app-menu__label">Quản lý đơn hàng</span></a></li>
-        <li><a class="app-menu__item active" href="table-data-blog.html"><i class='app-menu__icon bx bx bxl-blogger'></i><span
+        <li><a class="app-menu__item" href="table-data-blog.html"><i class='app-menu__icon bx bx bxl-blogger'></i><span
                 class="app-menu__label">Quản lý tin tức
           </span></a></li>
-        <li><a class="app-menu__item" href="table-data-discount.html"><i class='app-menu__icon bx bx bxs-discount'></i><span
+        <li><a class="app-menu__item active" href="table-data-discount.html"><i class='app-menu__icon bx bx bxs-discount'></i><span
                 class="app-menu__label">Quản lý giảm giá
           </span></a></li>
         <!--      <li><a class="app-menu__item" href="table-data-money.html"><i class='app-menu__icon bx bx-dollar'></i><span-->
@@ -82,7 +82,7 @@
 <main class="app-content">
     <div class="app-title">
         <ul class="app-breadcrumb breadcrumb side">
-            <li class="breadcrumb-item active"><a href="#"><b>Danh sách tin tức</b></a></li>
+            <li class="breadcrumb-item active"><a href="#"><b>Danh sách sản phẩm</b></a></li>
         </ul>
         <div id="clock"></div>
     </div>
@@ -93,9 +93,9 @@
                     <div class="row element-button">
                         <div class="col-sm-2">
 
-                            <a class="btn btn-add btn-sm" href="form-add-blog.html" title="Thêm"><i
+                            <a class="btn btn-add btn-sm" href="form-add-discount.html" title="Thêm"><i
                                     class="fas fa-plus"></i>
-                                Tạo mới tin tức</a>
+                                Tạo mới khuyến mãi</a>
                         </div>
                         <div class="col-sm-2">
                             <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập"
@@ -131,27 +131,25 @@
                     <table class="table table-hover table-bordered" id="sampleTable">
                         <thead>
                         <tr>
-                            <th width="10"><input type="checkbox" id="all"></th>
-                            <th>Mã tin tức</th>
-                            <th>Tiêu đề tin tức</th>
-                            <th>Ảnh</th>
-                            <th>Loại tin tức</th>
-                            <th>Ngày đăng</th>
+                            <th width="15"><input type="checkbox" id="all"></th>
+                            <th>Mã khuyến mãi</th>
+                            <th>Tên khuyến mãi</th>
                             <th>Mô tả</th>
+                            <th>Phần trăm</th>
+                            <th>Ngày bắt đầu</th>
+                            <th>Ngày kết thúc</th>
                             <th>Chức năng</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                            <td>71309005</td>
-                            <td>LỰA CHỌN AN TOÀN CHO NGÔI NHÀ CỦA ÔNG BÀ</td>
-                            <td><img src="/img-sanpham/theresa.jpg" alt="" width="100px;"></td>
-                            <td>24 tháng 10, 2023</td>
-                            <td><span class="badge bg-success">Sức khỏe</span></td>
-                            <td>Không gian phòng ngủ của ông bà cần phải
-                                được cân nhắc và tính toán sao cho hợp lý, phù hợp với sức khỏe và thuận tiện
-                                với...</td>
+                            <td>1</td>
+                            <td>Khuyến mãi tồn kho</td>
+                            <td>Tất cả sản phẩm tồn kho được giảm</td>
+                            <td><span class="badge bg-success">30%</span></td>
+                            <td>20/10/2023</td>
+                            <td>1/11/2023</td>
                             <td>
                                 <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
                                         onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
@@ -164,14 +162,12 @@
                         </tr>
                         <tr>
                             <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                            <td>61304005</td>
-                            <td>HÃY ĐỂ NHÀ LÀ NƠI CHỮA LÀNH TÂM HỒN</td>
-                            <td><img src="/img-sanpham/reno.jpg" alt="" width="100px;"></td>
-                            <td>14 tháng 10, 2023</td>
-                            <td><span class="badge bg-success">Tâm lý</span></td>
-                            <td>hám phá xu hướng và lợi ích của Gạch lát nền vân gỗ
-                                trong thiết kế không gian. Bài viết này sẽ tập trung vào khả năng tạo cảm giác ấm áp
-                                và bình yên...</td>
+                            <td>2</td>
+                            <td>Khuyến mãi 20/10</td>
+                            <td>Tất cả sản phẩm gạch lát nền được giảm</td>
+                            <td><span class="badge bg-success">20%</span></td>
+                            <td>20/10/2023</td>
+                            <td>20/10/2023</td>
                             <td>
                                 <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
                                         onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
@@ -184,13 +180,12 @@
                         </tr>
                         <tr>
                             <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                            <td>62304003</td>
-                            <td>PHÒNG TẮM MỞ PHÓNG KHOÁNG ĐỂ THƯ GIÃN TỐI ĐA</td>
-                            <td><img src="/img-sanpham/matda.jpg" alt="" width="100px;"></td>
-                            <td>11 tháng 10, 2023</td>
-                            <td><span class="badge bg-success">Phong cách</span></td>
-                            <td>Phòng tắm hiện
-                                đại ngày nay không đơn thuần là “công trình phụ” khép kín mà thay vào đó...</td>
+                            <td>3</td>
+                            <td>Sân vườn đẹp</td>
+                            <td>Tất cả sản phẩm gạch sân vườn được giảm</td>
+                            <td><span class="badge bg-success">10%</span></td>
+                            <td>1/11/2023</td>
+                            <td>10/11/2023</td>
                             <td>
                                 <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
                                         onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
@@ -198,38 +193,17 @@
                                 <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
                                         data-toggle="modal"
                                         data-target="#ModalUP"><i class="fas fa-edit"></i></button>
-
 
                             </td>
                         </tr>
                         <tr>
                             <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                            <td>72638003</td>
-                            <td>PHÒNG TẮM CHILL CHO ĐỜI THÊM YÊU</td>
-                            <td><img src="/img-sanpham/ghethera.jpg" alt="" width="100px;"></td>
-                            <td>29 tháng 9, 2023</td>
-                            <td><span class="badge bg-success">Đời sống</span></td>
-                            <td>Phòng tắm không chỉ là nơi sinh hoạt riêng tư mà còn
-                                là nơi giúp thư giãn. Do vậy, đầu tư thiết kế không gian này sẽ nâng cao chất lượng
-                                cuộc...</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                                        onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
-                                </button>
-                                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
-                                        data-toggle="modal"
-                                        data-target="#ModalUP"><i class="fas fa-edit"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                            <td>72109004</td>
-                            <td>THAY GỖ CHĂM SÓC CHO CON</td>
-                            <td><img src="/img-sanpham/zuno.jpg" alt="" width="100px;"></td>
-                            <td>4 tháng,2019</td>
-                            <td><span class="badge bg-success">Sức khỏe</span></td>
-                            <td>Trong quá trình xây dựng và trang trí phòng ngủ cho trẻ, lựa
-                                chọn vật liệu phù hợp để bảo vệ sức khỏe và tạo nên không...</td>
+                            <td>4</td>
+                            <td>Sinh nhật DHH Ceramic</td>
+                            <td>Tất cả sản phẩm giảm một nữa, mỗi khách hàng chỉ được mua 1 lần</td>
+                            <td><span class="badge bg-success">50%</span></td>
+                            <td>13/11/2023</td>
+                            <td>18/11/2023</td>
                             <td>
                                 <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
                                         onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
@@ -240,6 +214,25 @@
 
                             </td>
                         </tr>
+                        <tr>
+                            <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                            <td>5</td>
+                            <td>Sản phẩm mới</td>
+                            <td>Sản phẩm gạch tranh thảm mới ra mắt được giảm giá</td>
+                            <td><span class="badge bg-success">20%</span></td>
+                            <td>20/10/2023</td>
+                            <td>1/11/2023</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
+                                        onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
+                                </button>
+                                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
+                                        data-toggle="modal"
+                                        data-target="#ModalUP"><i class="fas fa-edit"></i></button>
+
+                            </td>
+                        </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -260,34 +253,34 @@
                 <div class="row">
                     <div class="form-group  col-md-12">
           <span class="thong-tin-thanh-toan">
-            <h5>Chỉnh sửa bản tin tức cơ bản</h5>
+            <h5>Chỉnh sửa thông tin khuyến mãi cơ bản</h5>
           </span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label">Mã tin tức </label>
-                        <input class="form-control" type="number" value="71309005">
+                        <label class="control-label">Mã khuyến mãi </label>
+                        <input class="form-control" type="number" value="1">
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label">Tiêu đề tin tức</label>
-                        <input class="form-control" type="text" required value="THAY GỖ CHĂM SÓC CHO CON">
+                        <label class="control-label">Tên Khuyến mãi</label>
+                        <input class="form-control" type="text" required value="Khuyến mãi tồn kho">
                     </div>
                     <div class="form-group  col-md-6">
-                        <label class="control-label">Ngày tạo tin tức</label>
-                        <input class="form-control" type="date" required value="29 tháng 9, 2023">
-                    </div>
-                    <div class="form-group col-md-6 ">
-                        <label for="exampleSelect1" class="control-label">Loại tin tức</label>
-                        <select class="form-control" id="exampleSelect1">
-                            <option>Sức khỏe</option>
-                            <option>Đời sống</option>
-                            <option>Tâm lý</option>
-                        </select>
+                        <label class="control-label">Mô tả</label>
+                        <input class="form-control" type="text" required value="Tất cả sản phẩm tồn kho được giảm">
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label">Mô tả</label>
-                        <input class="form-control" type="text" value="Trong quá trình xây dựng và trang trí phòng ngủ cho trẻ, lựa chọn vật liệu phù hợp để bảo vệ sức khỏe và tạo nên không...">
+                        <label class="control-label">Phần trăm</label>
+                        <input class="form-control" type="text" value="30%">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Ngày băt đầu</label>
+                        <input class="form-control" type="date" required value="20/10/2023">
+                    </div>
+                    <div class="form-group  col-md-6">
+                        <label class="control-label">Ngày kết thúc</label>
+                        <input class="form-control" type="date" required value="1/11/2023">
                     </div>
                 </div>
                 <BR>
