@@ -718,6 +718,7 @@
     width: 300px;
 }
 #cancelOrder textarea{
+    margin-top: 20px;
     height: 100px;
     width: 300px;
 }
