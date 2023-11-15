@@ -1,0 +1,703 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DHH Ceramic - Tài khoản</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/aucount.css" type="text/css">
+</head>
+<!--/head-->
+
+<body>
+<!-- Header Section Begin -->
+<header class="header">
+    <div class="wrap-menu-desktop">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="header__logo">
+                        <a href="./index.html"><img src="img/logo_2.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <nav class="header__menu">
+                        <ul>
+                            <li><a href="./index.html">Trang chủ</a></li>
+                            <li><a href="./shop-grid.html">Sản phẩm</a></li>
+                            <!--                            <li><a href="#">Pages</a>-->
+                            <!--                                <ul class="header__menu__dropdown">-->
+                            <!--                                    <li><a href="./shop-details.html">Shop Details</a></li>-->
+                            <!--                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>-->
+                            <!--                                    <li><a href="./checkout.html">Check Out</a></li>-->
+                            <!--                                    <li><a href="./blog-details.html">Blog Details</a></li>-->
+                            <!--                                </ul>-->
+                            <!--                            </li>-->
+                            <li><a href="./blog.html">Tin tức</a></li>
+                            <li><a href="./contact.html">Liên hệ</a></li>
+                            <li><a href="./help.html">Hỗ trợ</a></li>
+                        </ul>
+
+                    </nav>
+                </div>
+                <div class="col-lg-3">
+                    <div class="header__cart">
+                        <ul>
+                            <li><a class="active" href="login.html"><i class="fa fa-user"></i> Đăng nhập</a>
+                                <ul class="header__cart__dropdown">
+                                    <li><a href="./account.html"><i class="fa fa-user"></i> Tài khoản</a></li>
+                                    <li><a href="#"><i class="fa fa-gear"></i> Cài đặt</a></li>
+                                    <li><a href="./shoping-cart.html"><i class="fa fa-receipt"></i> Đơn mua</a></li>
+                                    <li><a href="#"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></li>
+                                </ul>
+                            <li><a href="./signup.html"><i class="fa fa-user"></i> Đăng ký</a></li>
+                            <li><a href="./shoping-cart.html"><i class="fa fa-shopping-bag"></i> <span>3</span></a>
+                                <ul class="header__cart__dropdown_cart">
+                                    <li>Hãy đăng nhập để xem giỏ hàng <br></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--            <div class="humberger__open">-->
+            <!--                <i class="fa fa-bars"></i>-->
+            <!--            </div>-->
+        </div>
+    </div>
+</header>
+<!-- Header Section End -->
+
+<script>
+    function cartRemove(param) {
+        var txtSearch = param.value;
+        $.ajax({
+            url: '',
+            type: 'GET',
+            data: {
+                pId: txtSearch
+            },
+            success: function (data) {
+                var row = document.getElementById('removeCart');
+                row.innerHTML = data;
+            }
+        });
+    }
+</script>
+<script>
+    $(document).ready(
+        function () {
+            $(".navbar__header-first").click(
+                function () {
+                    $(this).addClass("active").siblings().removeClass("active");
+                }
+            );
+        });
+</script>
+<script>
+
+    let newYears = '13 September 2023';
+    const dayEl = document.getElementById('days')
+    const hourEl = document.getElementById('hours')
+    const minsEl = document.getElementById('mins')
+    const secondeEl = document.getElementById('seconds')
+    const changeDate = document.getElementById('date')
+    changeDate.addEventListener('change', myChange)
+
+    function countdown() {
+        const newYearsDate = new Date(newYears)
+        const currentDate = new Date()
+        const totalsecond = (newYearsDate - currentDate) / 1000
+        const days = Math.floor(totalsecond / 3600 / 24)
+        const hours = Math.floor(totalsecond / 3600) % 24
+        const minutes = Math.floor(totalsecond / 60) % 60
+        const second = Math.floor(totalsecond % 60)
+        dayEl.innerHTML = time(days);
+        hourEl.innerHTML = time(hours);
+        minsEl.innerHTML = time(minutes);
+        secondeEl.innerHTML = time(second);
+    }
+
+    function time(time) {
+        if (time < 10) {
+            return `0`
+        } else {
+            return time
+        }
+    }
+
+    function myChange() {
+        const change = document.getElementById('date').value
+        newYears = change
+        console.log(change)
+    }
+
+    //countdown ();
+    setInterval(countdown, 1000);
+</script>
+<!--/header-->
+
+<div class="container">
+    <div class="view-account">
+        <section class="module">
+            <div class="module-inner">
+                <div class="side-bar">
+                    <div class="user-info">
+                        <img class="img-profile img-circle img-responsive center-block"
+                             src="https://lh3.googleusercontent.com/a/default-user=s96-c" alt="">
+                        <ul class="meta list list-unstyled">
+                            <li class="name">user123</li>
+                        </ul>
+                    </div>
+                    <nav class="side-menu">
+                        <ul class="nav">
+                            <li class="active"><a href="#" onclick="showInformation()"><span
+                                    class="fa fa-user"></span>
+                                Hồ sơ</a></li>
+                            <li><a href="#" onclick="showOrder()"><span class="fas fa-money-check-alt"></span> Đơn
+                                mua</a></li>
+                            <li><a href="#" onclick="showNo()"><span class="fas fa-bell"
+                                                                     style="color: #c43434;"></span> Thông báo</a></li>
+                            <li><a href="#" onclick="showVoucher()"><span class="fas fa-ticket-alt"></span> Kho
+                                Voucher</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="content-panel">
+                    <div id="information">
+                        <h2 class="title">Hồ sơ</h2>
+                        <form class="form-horizontal">
+                            <input name="role" value="2" hidden="true">
+                            <input name="id" value="0" hidden="true">
+                            <fieldset class="fieldset">
+                                <h3 class="fieldset-title">Thông tin cá nhân</h3>
+
+                                <div class="form-group avatar">
+                                    <figure class="figure col-md-2 col-sm-3 col-xs-12">
+
+                                        <img class="img-rounded img-responsive avatar" name="image"
+                                             src="https://lh3.googleusercontent.com/a/default-user=s96-c"
+                                             alt="">
+                                    </figure>
+
+                                    <div class="form-inline col-md-10 col-sm-9 col-xs-12">
+                                        <input type="button" value="Tải ảnh lên"
+                                               onclick="BrowseServer();" class="btn btn-controls"/>
+                                        <input type="text" name="avatar" id="avatar" hidden="true"
+                                               value="https://lh3.googleusercontent.com/a/default-user=s96-c">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">Tên đăng nhập</label>
+                                    <div class="col-md-10 col-sm-9 col-xs-12">
+                                        <input type="text" class="form-control" name="username"
+                                               value="user123">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">Họ tên</label>
+                                    <div class="col-md-10 col-sm-9 col-xs-12">
+                                        <input type="text" class="form-control" name="name"
+                                               value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">Địa chỉ</label>
+                                    <div class="col-md-10 col-sm-9 col-xs-12">
+                                        <input type="text" class="form-control" name="address"
+                                               value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">Số điện thoại</label>
+                                    <div class="col-md-10 col-sm-9 col-xs-12">
+                                        <input type="text" class="form-control" name="phone"
+                                               value="">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="fieldset">
+                                <h3 class="fieldset-title">Thông tin liên lạc</h3>
+                                <div class="form-group">
+                                    <label class="col-md-2  col-sm-3 col-xs-12 control-label">Email</label>
+                                    <div class="col-md-10 col-sm-9 col-xs-12">
+                                        <input type="email" class="form-control" name="email"
+                                               value="abc@gmail.com">
+                                        <p class="help-block">Đây là Email của bạn</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2  col-sm-3 col-xs-12 control-label">Facebook</label>
+                                    <div class="col-md-10 col-sm-9 col-xs-12">
+                                        <input type="text" class="form-control" name="facebook"
+                                               value="">
+                                        <p class="help-block">Tên Facebook của bạn</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2  col-sm-3 col-xs-12 control-label">Mật khẩu</label>
+                                    <div class="col-md-10 col-sm-9 col-xs-12">
+                                        <input type="password" class="form-control" name="password"
+                                               value="">
+                                        <input type="button" id="changePasswordBtn" class="change__password-btn"
+                                               style="margin-top: 6px;" onclick="showChangePassword()"
+                                               value="Thay đổi mật khẩu">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <hr>
+                            <div class="form-group">
+                                <div class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
+                                    <input class="btn btn-primary" type="submit" value="Cập nhật">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!--Đơn mua-->
+                    <div id="order" style="display: none">
+                        <h2 class="title">Đơn hàng</h2>
+                        <div class="one-order">
+                            <div class="row order-header">
+                                <div class="col-md-8 col-sm-12 order-id">
+                                    <strong>Đơn hàng:</strong>
+                                    <span>#12</span>
+                                </div>
+                                <div class="col-md-4 col-sm-12 order-id">
+                                    <span class="fas fa-truck"></span>
+                                    <span class="complete">Đang xử lí</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2 product-img">
+                                    <img src="${url}/images/shop/pants/7milionShort.jpg">
+                                </div>
+                                <div class="col-md-10 product-info">
+                                    <h4>Gạch lát cầu thang</h4>
+                                    <p>x10</p>
+                                    <span class="base-price">300.000đ</span>
+                                    <span class="discount">280.000đ</span>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-8 total">
+                                    <span><i class="fas fa-donate"></i></span>
+                                    <span class="total-price">Tổng tiền: <strong>2.800.000đ</strong></span>
+                                </div>
+                                <div class="col-md-4 total">
+                                    <span><button class="btn-again" type="button">Liên hệ</button></span>
+                                    <span><button class="btn-rate" type="button" data-toggle="modal"
+                                                  data-target="#cancelOrder">Hủy đơn hàng</button></span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Thông báo -->
+
+                    <div id="notify_account" style="display: none">
+                        <h2 class="title">Thông báo</h2>
+                        <div class="box-body p-0">
+                            <div class="p-3 one-notify">
+                                <div class="row">
+                                    <div class="col-lg-2 col-sm-2 icon-round text-center">
+                                        <i class="fas fa-bell"></i>
+                                    </div>
+                                    <div class="col-lg-10 col-sm-10 text-truncate">
+                                        <h5>**RA MẮT SẢN PHẨM MỚI**</h5>
+                                        <div class="mb-2">
+                                            Ghé thăm cửa hàng để xem những sản phẩm mới cũng như nhận những ưu đãi
+                                            hấp dẫn từ...
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="option">
+    <div class="btn-group">
+    <button type="button" class="btn btn-light btn-sm rounded"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            style="margin-top:-65px;">
+    <i class="fas fa-ellipsis-v"></i>
+    </button>
+    <div class="dropdown-menu dropdown-menu-right">
+    <button class="dropdown-item" type="button" style="margin: 0 14px;"><i
+            class="mdi mdi-delete"></i> Delete</button>
+    <button class="dropdown-item" type="button"><i
+            class="mdi mdi-close"></i> Turn Off</button>
+    </div>
+    </div>
+    </span>
+                            </div>
+                            <hr>
+                            <div class="p-3 one-notify">
+
+                                <div class="row">
+                                    <div class="col-lg-2 col-sm-2 icon-round text-center">
+                                        <i class="fas fa-percent"></i>
+                                    </div>
+                                    <div class="col-lg-10 col-sm-10 text-truncate">
+                                        <h5>MỪNG GIÁNG SINH - SIÊU KHUYẾN MÃI</h5>
+                                        <div class="mb-2">
+                                            Giảm giá đến 50% các sản phẩm, free ship cho đơn từ 500.000 VNĐ trở lên. Mua ngay
+                                            nào...
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="option">
+    <div class="btn-group">
+    <button type="button" class="btn btn-light btn-sm rounded"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            style="margin-top:-65px;">
+    <i class="fas fa-ellipsis-v"></i>
+    </button>
+    <div class="dropdown-menu dropdown-menu-right">
+    <button class="dropdown-item main-btn" type="button"
+            style="margin: 0 14px;"><i
+            class="mdi mdi-delete"></i>Delete</button>
+    <button class="dropdown-item main-btn" type="button"><i
+            class="mdi mdi-close"></i> Turn Off</button>
+    </div>
+    </div>
+    </span>
+                            </div>
+                            <hr>
+                            <div class="p-3 one-notify">
+                                <div class="row">
+                                    <div class="col-lg-2 col-sm-2 icon-round text-center">
+                                        <i class="fas fa-bell"></i>
+                                    </div>
+                                    <div class="col-lg-10 col-sm-10 text-truncate">
+                                        <h5>**RA MẮT SẢN PHẨM MỚI**</h5>
+                                        <div class="mb-2">
+                                            Ghé thăm cửa hàng để xem những sản phẩm mới cũng như nhận những ưu đãi
+                                            hấp
+                                            dẫn từ...
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="option">
+    <div class="btn-group">
+    <button type="button" class="btn btn-light btn-sm rounded"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            style="margin-top:-65px;">
+    <i class="fas fa-ellipsis-v"></i>
+    </button>
+    <div class="dropdown-menu dropdown-menu-right">
+    <button class="dropdown-item" type="button" style="margin: 0 14px;"><i
+            class="mdi mdi-delete"></i> Xóa</button>
+    <button class="dropdown-item" type="button"><i
+            class="mdi mdi-close"></i> Tắt thông báo</button>
+    </div>
+    </div>
+    </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!--Voucher -->
+                    <div id="voucher" style="display: none">
+                        <h2 class="title">Voucher khuyến mãi</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="content-voucher">
+                                    <span><img src="/CelineShop/view/client/static/images/home/logoSale.png"></span>
+                                    <h4>Giảm giá 10%</h4>
+                                    <ul class="list-unstyled m-t-md">
+                                        <li>Giảm giá 10% trên tổng hóa đơn khi mua từ 3 sản phẩm gạch lát nền cùng loại trở lên...</li>
+                                        <li>Hạn sử dụng: vô hạn</li>
+                                        <li>Áp dụng cho hình thức mua hàng trực tiếp và online</li>
+                                    </ul>
+                                    <button type="button">Sử dụng</button>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="content-voucher">
+                                    <span><img src="/CelineShop/view/client/static/images/home/logoSale.png"></span>
+                                    <h4>Giảm giá 5%</h4>
+                                    <ul class="list-unstyled m-t-md">
+                                        <li>Giảm giá 5% trên tổng hóa đơn khi khách hàng tới cửa hàng lấy hàng
+                                        </li>
+                                        <li>Áp dụng cho hình thức mua hàng trực tiếp</li>
+                                    </ul>
+                                    <button type="button">Sử dụng</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Modal-->
+                    <div class="modal fade" id="cancelOrder" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="cancel-title">Lí do hủy đơn</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <select>
+                                        <option>Thay đổi địa chỉ nhận hàng.</option>
+                                        <option>Tôi không muốn đặt đơn hàng này nữa.</option>
+                                        <option>Thay đổi hình thức thanh toán.</option>
+                                        <option>Tôi đặt nhầm size sản phẩm.</option>
+                                    </select>
+                                    <div id="another">
+                                        <h5>Lí do khác</h5>
+                                        <textarea id="anotherReason" placeholder="Vui lòng nhập tại đây"></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn-again" data-dismiss="modal">Đóng</button>
+                                    <button type="button" class="btn-rate">Hủy đơn</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+<!-- Footer Section Begin -->
+<footer class="footer spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="footer__about">
+                    <div class="footer__about__logo">
+                        <a href="./index.html"><img src="img/logo_2.png" alt=""></a>
+                    </div>
+                    <ul>
+                        <li>Address: Đại học Nông Lâm TPHCM</li>
+                        <li>Phone: +84 123456789</li>
+                        <li>Email: hello@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                <div class="footer__widget">
+                    <h6>Liên kết hữu ích</h6>
+                    <ul>
+                        <li><a href="#">Về chúng tôi</a></li>
+                        <li><a href="#">Mua sắm</a></li>
+                        <li><a href="#">Giao hàng</a></li>
+                        <li><a href="#">Bảo mật</a></li>
+                        <li><a href="./contact.html">Vị trí của chúng tôi</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#">Chúng tôi là ai?</a></li>
+                        <li><a href="#">Dịch vụ</a></li>
+                        <li><a href="#">Dự án</a></li>
+                        <li><a href="#">Kết nối</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="footer__widget">
+                    <h6>Tham gia bản tin của chúng tôi ngay bây giờ</h6>
+                    <p>Nhận thông tin cập nhật qua E-mail về cửa hàng mới nhất của chúng tôi và các ưu đãi đặc biệt.</p>
+                    <form action="#">
+                        <input type="text" placeholder="Nhập vào email của bạn">
+                        <button type="submit" class="site-btn">Đăng ký</button>
+                    </form>
+                    <div class="footer__widget__social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Section End -->
+
+<script>
+    $(document).ready(function () {
+        let t = {delay: 125, overlay: $(".fb-overlay"), widget: $(".fb-widget"), button: $(".fb-button")};
+        setTimeout(function () {
+            $('div.fb-livechat').fadeIn()
+        }, 8 * t.delay), $(".ctrlq").on("click", function (e) {
+            e.preventDefault(), t.overlay.is(":visible") ? (t.overlay.fadeOut(t.delay), t.widget.stop().animate({
+                bottom: 0,
+                opacity: 0
+            }, 2 * t.delay, function () {
+                $(this).hide("slow"), t.button.show()
+            })) : t.button.fadeOut("medium", function () {
+                t.widget.stop().show().animate({bottom: "30px", opacity: 1}, 2 * t.delay), t.overlay.fadeIn(t.delay)
+            })
+        })
+    });
+
+
+    $(document).ready(function () {
+        var f = {delay: 125, overlay: $(".noti-overlay"), widget: $(".noti-widget"), button: $(".noti-button")};
+        setTimeout(function () {
+            $("div.noti-recieve").fadeIn()
+        }, 8 * f.delay), $(".ctrlf").on("click", function (e) {
+            e.preventDefault(), f.overlay.is(":visible") ? (f.overlay.fadeOut(f.delay), f.widget.stop().animate({
+                bottom: 0,
+                opacity: 0
+            }, 2 * f.delay, function () {
+                $(this).hide("slow"), f.button.show()
+            })) : f.button.fadeOut("medium", function () {
+                f.widget.stop().show().animate({bottom: "160px", opacity: 1}, 2 * f.delay), f.overlay.fadeIn(f.delay)
+            })
+        })
+    });
+</script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+
+
+<!--/Footer-->
+<div id="modal1">
+    <div class="modal__overlay">
+
+    </div>
+    <div id="modal__body1">
+        <div id="turn__off" style="cursor: pointer; float:right; padding: 0 6px;">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="card login-form">
+            <div class="card-body">
+                <h3 class="card-title text-center">Đổi mật khẩu</h3>
+
+                <!--Password must contain one lowercase letter, one number, and be at least 7 characters long.-->
+
+                <div class="card-text">
+                    <form>
+                        <div class="alert alert-danger alert-dismissible show" role="alert">
+                            <strong>Xin chào!</strong> Vui lòng điền vào các trường bên dưới để đổi mật khẩu
+                            <input name="id" value="0" hidden="true">
+                            <a class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </a>
+                        </div>
+                        <div class="form-group">
+                            <label>Mật khẩu cũ</label>
+                            <input type="password" name="oldPassword" class="form-control form-control-sm">
+                        </div>
+                        <div class="form-group">
+                            <label>Mật khẩu mới</label>
+                            <input type="password" name="newPassword" class="form-control form-control-sm">
+                        </div>
+                        <div class="form-group">
+                            <label>Nhập lại mật khẩu mới</label>
+                            <input type="password" name="reNewPassword" class="form-control form-control-sm">
+                        </div>
+                        <button type="submit" class="btn btn-block submit-btn">Xác nhận</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Js Plugins -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.nice-select.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery.slicknav.js"></script>
+<script src="js/mixitup.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/account.js"></script>
+
+<script type="text/javascript">
+    function BrowseServer() {
+        var finder = new CKFinder();
+        finder.basePath = "/CKLibraries/ckfinder";
+        finder.selectActionFunction = function (fileUrl) {
+            document.getElementById('avatar').value = fileUrl;
+        };
+        finder.popup();
+    }
+</script>
+<script>
+    function removeCartItem(param) {
+        var txtSearch = param;
+        $.ajax({
+            url: '',
+            type: 'GET',
+            data: {
+                id: txtSearch,
+                user_id: 0
+            },
+            success: function (data) {
+                var row = document.getElementById('contentProduct');
+                row.innerHTML = data;
+
+
+            }
+        });
+    }
+</script>
+<script>
+    $(".nav li").click(function () {
+        if ($(".nav li").removeClass("active")) {
+            $(this).removeClass("active");
+        }
+        $(this).addClass("active");
+    });
+
+    function showChangePassword() {
+        document.getElementById("modal1").style.display = "block";
+    }
+
+    $("#turn__off").click(
+        function close() {
+            document.getElementById("modal1").style.display = "none";
+        });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var readURL = function (input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('.avatar').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $(".file-upload").on('change', function () {
+            readURL(this);
+        });
+    });
+    //-->
+</script>
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+</body>
+
+</html>
