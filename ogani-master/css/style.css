@@ -2215,15 +2215,15 @@ ol {
     position: relative;
 }
 
-.price-range-wrap .range-slider .price-input:after {
-    position: absolute;
-    left: 38px;
-    top: 13px;
-    height: 1px;
-    width: 5px;
-    background: #dd2222;
-    content: "";
-}
+/*.price-range-wrap .range-slider .price-input:after {*/
+/*    position: absolute;*/
+/*    left: 38px;*/
+/*    top: 13px;*/
+/*    height: 1px;*/
+/*    width: 5px;*/
+/*    background: #dd2222;*/
+/*    content: "";*/
+/*}*/
 
 .price-range-wrap .range-slider .price-input input {
     font-size: 16px;
@@ -2713,6 +2713,7 @@ ol {
     display: block;
     margin-bottom: 4px;
 }
+
 .product__item__text h6 {
     margin-bottom: 10px;
 }
@@ -2734,6 +2735,13 @@ ol {
 .product__pagination,
 .blog__pagination {
     padding-top: 10px;
+}
+
+.product__pagination .active_pag {
+    display: inline-block;
+    background: #c43434;
+    border: 1px solid #c43434;
+    color: #ffffff;
 }
 
 .product__pagination a,
@@ -3234,7 +3242,7 @@ a:not([href]):hover {
 
 .shoping__cart__table table tbody tr td.shoping__cart__quantity .pro-qty {
     width: 120px;
-    height: 40px;
+    height: 50px;
 }
 
 .shoping__cart__table table tbody tr td.shoping__cart__quantity .pro-qty input {
@@ -3704,6 +3712,11 @@ a:not([href]):hover {
 
 .blog__sidebar__recent .blog__sidebar__recent__item {
     display: block;
+}
+
+.new-blog-show:hover {
+    cursor: pointer;
+    box-shadow: rgba(17, 12, 46, 0.15) 0 48px 100px 0;
 }
 
 .blog__sidebar__recent .blog__sidebar__recent__item:last-child {
