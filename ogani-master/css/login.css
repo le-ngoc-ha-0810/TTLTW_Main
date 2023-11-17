@@ -58,15 +58,14 @@
     color: white;
     border: none;
     background-color: #5867d7;
-    box-shadow: 0 0 20px #f1f1f1;
+    box-shadow: 0px 0px 20px #f1f1f1;
     font-weight: bolder;
     cursor: pointer;
 }
 .page-login #form-signIn .container #forgot{
     display: flex;
     float: right;
-    margin-bottom: 15px;
-    margin-right: 30px;
+    margin-bottom: 15px ;
 }
 .page-login #form-signIn .container #forgot .fg-left{
     border-right: 1px solid #cdcdcd;
@@ -98,8 +97,8 @@
     border: 2px solid #cdcdcd;
     width: 160px; /* Đã thay đổi chiều rộng để chứa icon và chữ */
     height: 40px;
-    margin: 0 17px 17px 17px;
-    box-shadow: 0 0 5px #e7c6f3;
+    margin: 0px 17px 17px 17px;
+    box-shadow: 0px 0px 5px #e7c6f3;
     display: flex; /* Đã thay đổi thành flex để căn giữa icon và chữ */
     align-items: center; /* Đã thay đổi thành flex-start để căn giữa icon và chữ theo chiều dọc */
 }

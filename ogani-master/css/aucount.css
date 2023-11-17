@@ -653,7 +653,7 @@
     margin: 0;
 }
 .one-order .order-id{
-    padding:15px 0 15px 30px;
+    padding:15px 0px 15px 30px;
 }
 .total{
     padding-left: 50px;
@@ -680,7 +680,7 @@
     padding:7px 0;
 }
 .btn-again:hover{
-    box-shadow: 0 0 5px  #c43434;
+    box-shadow: 0px 0px 5px  #c43434;
 }
 .btn-rate{
     background-color:  #c43434;
@@ -692,7 +692,7 @@
     margin-left: 10px;
 }
 .btn-rate:hover{
-    box-shadow: 0 0 5px #c43434;
+    box-shadow: 0px 0px 5px #c43434;
 }
 .complete, .fa-truck{
     color: #007BFF;
@@ -718,7 +718,6 @@
     width: 300px;
 }
 #cancelOrder textarea{
-    margin-top: 20px;
     height: 100px;
     width: 300px;
 }
