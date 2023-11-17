@@ -1,2 +1,2 @@
-# N32-LTW_Main
+# N32-LTW
 Đồ án LTW
