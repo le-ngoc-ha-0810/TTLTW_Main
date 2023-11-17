@@ -2064,6 +2064,10 @@ ol {
     display: block;
 }
 
+.show-more-product:hover {
+    box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;
+}
+
 .latest-product__item__pic {
     float: left;
     margin-right: 26px;
@@ -2213,16 +2217,6 @@ ol {
 
 .price-range-wrap .range-slider .price-input {
     position: relative;
-}
-
-.price-range-wrap .range-slider .price-input:after {
-    position: absolute;
-    left: 38px;
-    top: 13px;
-    height: 1px;
-    width: 5px;
-    background: #dd2222;
-    content: "";
 }
 
 .price-range-wrap .range-slider .price-input input {
@@ -3704,6 +3698,11 @@ a:not([href]):hover {
 
 .blog__sidebar__recent .blog__sidebar__recent__item {
     display: block;
+}
+
+.show-more-blog:hover {
+    cursor: pointer;
+    box-shadow: rgba(17, 12, 46, 0.15) 0 48px 100px 0;
 }
 
 .blog__sidebar__recent .blog__sidebar__recent__item:last-child {
