@@ -158,14 +158,12 @@
     </div>
     <hr>
     <ul class="app-menu">
-        <li><a class="app-menu__item" href="index.html"><i class='app-menu__icon bx bx-tachometer'></i><span
+        <li><a class="app-menu__item " href="index.html"><i class='app-menu__icon bx bx-tachometer'></i><span
                 class="app-menu__label">Bảng điều khiển</span></a></li>
-        <li><a class="app-menu__item" href="table-data-user.html"><i class='app-menu__icon bx bx-id-card'></i>
-            <span
-                    class="app-menu__label">Quản lý nguời dùng</span></a></li>
-<!--        <li><a class="app-menu__item" href="table-data-customer.html"><i-->
-<!--                class='app-menu__icon bx bx-user-voice'></i><span-->
-<!--                class="app-menu__label">Quản lý khách hàng</span></a></li>-->
+        <li><a class="app-menu__item " href="table-data-user.html"><i class='app-menu__icon bx bx-id-card'></i> <span
+                class="app-menu__label">Quản lý nguời dùng</span></a></li>
+        <!--      <li><a class="app-menu__item" href="table-data-customer.html"><i class='app-menu__icon bx bx-user-voice'></i><span-->
+        <!--              class="app-menu__label">Quản lý khách hàng</span></a></li>-->
         <li><a class="app-menu__item" href="table-data-category.html"><i
                 class='app-menu__icon bx bx bxs-category'></i><span class="app-menu__label">Quản lý danh mục</span></a>
         </li>
@@ -177,9 +175,17 @@
         <li><a class="app-menu__item" href="table-data-blog.html"><i class='app-menu__icon bx bx bxl-blogger'></i><span
                 class="app-menu__label">Quản lý tin tức
           </span></a></li>
-        <li><a class="app-menu__item" href="table-data-discount.html"><i
-                class='app-menu__icon bx bx bxs-discount'></i><span
+        <li><a class="app-menu__item" href="table-data-discount.html"><i class='app-menu__icon bx bx bxs-discount'></i><span
                 class="app-menu__label">Quản lý giảm giá
+          </span></a></li>
+        <li><a class="app-menu__item" href="table-data-contact.html"><i class="app-menu__icon bx bxs-contact"></i><span
+                class="app-menu__label">Quản lý liên hệ
+          </span></a></li>
+        <li><a class="app-menu__item" href="table-data-comment.html"><i class="app-menu__icon bx bxs-chat"></i><span
+                class="app-menu__label">Quản lý bình luận
+          </span></a></li>
+        <li><a class="app-menu__item active" href="table-data-help.html"><i class="app-menu__icon bx bxs-help-circle"></i><span
+                class="app-menu__label">Quản lý trợ giúp
           </span></a></li>
         <!--      <li><a class="app-menu__item" href="table-data-money.html"><i class='app-menu__icon bx bx-dollar'></i><span-->
         <!--            class="app-menu__label">Bảng kê lương</span></a></li>-->
@@ -188,8 +194,8 @@
         <!--      </li>-->
         <!--      <li><a class="app-menu__item" href="page-calendar.html"><i class='app-menu__icon bx bx-calendar-check'></i><span-->
         <!--            class="app-menu__label">Lịch công tác </span></a></li>-->
-        <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Cài
-            đặt hệ thống</span></a></li>
+        <li><a class="app-menu__item" href="table-data-account.html"><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Cài
+            đặt tài khoản</span></a></li>
     </ul>
 </aside>
 <main class="app-content">
@@ -208,14 +214,6 @@
                         <div class="col-sm-2">
                             <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#exampleModalCenter"><i
                                     class="fas fa-folder-plus"></i> Thêm nhà cung cấp</a>
-                        </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc"><i
-                                    class="fas fa-folder-plus"></i> Thêm danh mục</a>
-                        </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#addtinhtrang"><i
-                                    class="fas fa-folder-plus"></i> Thêm tình trạng</a>
                         </div>
                     </div>
                     <form class="row">
@@ -336,91 +334,6 @@ MODAL CHỨC VỤ
 <!--
 MODAL
 -->
-
-
-<!--
-MODAL DANH MỤC
--->
-<div class="modal fade" id="adddanhmuc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-     data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-
-            <div class="modal-body">
-                <div class="row">
-                    <div class="form-group  col-md-12">
-              <span class="thong-tin-thanh-toan">
-                <h5>Thêm mới danh mục </h5>
-              </span>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label class="control-label">Nhập tên danh mục mới</label>
-                        <input class="form-control" type="text" required>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label class="control-label">Danh mục sản phẩm hiện đang có</label>
-                        <ul style="padding-left: 20px;">
-                            <li>Bàn ăn</li>
-                            <li>Bàn thông minh</li>
-                            <li>Tủ</li>
-                            <li>Ghế gỗ</li>
-                            <li>Ghế sắt</li>
-                            <li>Giường người lớn</li>
-                            <li>Giường trẻ em</li>
-                            <li>Bàn trang điểm</li>
-                            <li>Giá đỡ</li>
-                        </ul>
-                    </div>
-                </div>
-                <BR>
-                <button class="btn btn-save" type="button">Lưu lại</button>
-                <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-                <BR>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div>
-<!--
-MODAL
--->
-
-
-<!--
-MODAL TÌNH TRẠNG
--->
-<div class="modal fade" id="addtinhtrang" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-     data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-
-            <div class="modal-body">
-                <div class="row">
-                    <div class="form-group  col-md-12">
-              <span class="thong-tin-thanh-toan">
-                <h5>Thêm mới tình trạng</h5>
-              </span>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label class="control-label">Nhập tình trạng mới</label>
-                        <input class="form-control" type="text" required>
-                    </div>
-                </div>
-                <BR>
-                <button class="btn btn-save" type="button">Lưu lại</button>
-                <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-                <BR>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div>
-<!--
-MODAL
--->
-
 
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/popper.min.js"></script>

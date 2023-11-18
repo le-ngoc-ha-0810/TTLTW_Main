@@ -98,8 +98,8 @@
     border: 2px solid #cdcdcd;
     width: 160px; /* Đã thay đổi chiều rộng để chứa icon và chữ */
     height: 40px;
-    margin: 0 17px 17px 17px;
-    box-shadow: 0 0 5px #e7c6f3;
+    margin: 0px 17px 17px 17px;
+    box-shadow: 0px 0px 5px #e7c6f3;
     display: flex; /* Đã thay đổi thành flex để căn giữa icon và chữ */
     align-items: center; /* Đã thay đổi thành flex-start để căn giữa icon và chữ theo chiều dọc */
 }
