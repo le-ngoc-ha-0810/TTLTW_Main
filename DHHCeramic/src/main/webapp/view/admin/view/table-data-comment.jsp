@@ -1,17 +1,19 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:url value="/view/admin/static" var="url"></c:url>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Danh sách liên hệ | Quản trị Admin</title>
+    <title>Danh sách bình luận | Quản trị Admin</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="${url}/css/main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <!-- or -->
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-
+    <link rel="stylesheet" href=https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css"
           href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -22,72 +24,7 @@
 </head>
 
 <body onload="time()" class="app sidebar-mini rtl">
-<!-- Navbar-->
-<header class="app-header">
-    <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
-                                    aria-label="Hide Sidebar"></a>
-    <!-- Navbar Right Menu-->
-    <ul class="app-nav">
-
-
-        <!-- User Menu-->
-        <li><a class="app-nav__item" href="/index.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
-
-        </li>
-    </ul>
-</header>
-<!-- Sidebar menu-->
-<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-<aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="images/hay.jpg" width="50px"
-                                        alt="User Image">
-        <div>
-            <p class="app-sidebar__user-name"><b>Admin</b></p>
-            <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
-        </div>
-    </div>
-    <hr>
-    <ul class="app-menu">
-        <li><a class="app-menu__item " href="index.html"><i class='app-menu__icon bx bx-tachometer'></i><span
-                class="app-menu__label">Bảng điều khiển</span></a></li>
-        <li><a class="app-menu__item " href="table-data-user.html"><i class='app-menu__icon bx bx-id-card'></i> <span
-                class="app-menu__label">Quản lý nguời dùng</span></a></li>
-        <!--      <li><a class="app-menu__item" href="table-data-customer.html"><i class='app-menu__icon bx bx-user-voice'></i><span-->
-        <!--              class="app-menu__label">Quản lý khách hàng</span></a></li>-->
-        <li><a class="app-menu__item" href="table-data-category.html"><i
-                class='app-menu__icon bx bx bxs-category'></i><span class="app-menu__label">Quản lý danh mục</span></a>
-        </li>
-        <li><a class="app-menu__item" href="table-data-product.html"><i
-                class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
-        </li>
-        <li><a class="app-menu__item" href="table-data-oder.html"><i class='app-menu__icon bx bx-task'></i><span
-                class="app-menu__label">Quản lý đơn hàng</span></a></li>
-        <li><a class="app-menu__item" href="table-data-blog.html"><i class='app-menu__icon bx bx bxl-blogger'></i><span
-                class="app-menu__label">Quản lý tin tức
-          </span></a></li>
-        <li><a class="app-menu__item" href="table-data-discount.html"><i class='app-menu__icon bx bx bxs-discount'></i><span
-                class="app-menu__label">Quản lý giảm giá
-          </span></a></li>
-        <li><a class="app-menu__item active" href="table-data-contact.html"><i class="app-menu__icon bx bxs-contact"></i><span
-                class="app-menu__label">Quản lý liên hệ
-          </span></a></li>
-        <li><a class="app-menu__item" href="table-data-comment.html"><i class="app-menu__icon bx bxs-chat"></i><span
-                class="app-menu__label">Quản lý bình luận
-          </span></a></li>
-        <li><a class="app-menu__item" href="table-data-help.html"><i class="app-menu__icon bx bxs-help-circle"></i><span
-                class="app-menu__label">Quản lý trợ giúp
-          </span></a></li>
-        <!--      <li><a class="app-menu__item" href="table-data-money.html"><i class='app-menu__icon bx bx-dollar'></i><span-->
-        <!--            class="app-menu__label">Bảng kê lương</span></a></li>-->
-        <!--      <li><a class="app-menu__item" href="quan-ly-bao-cao.html"><i-->
-        <!--            class='app-menu__icon bx bx-pie-chart-alt-2'></i><span class="app-menu__label">Báo cáo doanh thu</span></a>-->
-        <!--      </li>-->
-        <!--      <li><a class="app-menu__item" href="page-calendar.html"><i class='app-menu__icon bx bx-calendar-check'></i><span-->
-        <!--            class="app-menu__label">Lịch công tác </span></a></li>-->
-        <li><a class="app-menu__item" href="table-data-account.html"><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Cài
-            đặt tài khoản</span></a></li>
-    </ul>
-</aside>
+<jsp:include page="/view/admin/view/mainbar.jsp"></jsp:include>
 <main class="app-content">
     <div class="app-title">
         <ul class="app-breadcrumb breadcrumb side">
@@ -125,37 +62,80 @@
                         <thead>
                         <tr>
                             <th width="10"><input type="checkbox" id="all"></th>
-                            <th>ID liên hệ</th>
-                            <th>Tên đầy đủ</th>
-                            <th>Email</th>
-                            <th>Tiêu đề</th>
-                            <th>Lời nhắn</th>
+                            <th>ID</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Tên người dùng</th>
+                            <th>Hình ảnh</th>
+                            <th>Xếp hạng</th>
+                            <th>Nội dung</th>
+                            <th width="50">Tính năng</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                            <td>0837</td>
-                            <td>Triệu Thanh Phú</td>
-                            <td>tp@gmail.com</td>
-                            <td>Hài lòng</td>
-                            <td>Tôi rất hài lòng với chất lượng gạch lát nền Mỹ Ý, mong muốn cửa hàng có thêm nhiều mẫu màu mới nữa</td>
+                            <td>1</td>
+                            <td>Gạch lát nền Prime 40x40</td>
+                            <td>thanhphu124</td>
+                            <td><img class="img-card-person" src="${url}/img-anhthe/1.jpg" alt=""></td>
+                            <td>5</td>
+                            <td>Sản phẩm rất tốt, tôi rất hài lòng.  </td>
+                            <td class="table-td-center"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
+                                                                onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
+                            </button>
+                            </td>
                         </tr>
                         <tr>
                             <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                            <td>8265</td>
-                            <td>Nguyễn Thị Ngọc Cẩm</td>
-                            <td>ngocc@gmail.com</td>
-                            <td>Đề xuất cải tiến</td>
-                            <td>Gợi ý thêm mẫu gạch mới và cải thiện dịch vụ.</td>
+                            <td>2</td>
+                            <td>Gạch lát cầu thang 60x90</td>
+                            <td>phuong vi</td>
+                            <td><img class="img-card-person" src="${url}/img-anhthe/1.jpg" alt=""></td>
+                            <td>4</td>
+                            <td>Đẹp nhưng giá hơi cao so với mặt bằng chung.</td>
+                            <td class="table-td-center"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
+                                                                onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
+                            </button>
+                            </td>
                         </tr>
                         <tr>
                             <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                            <td>9835</td>
-                            <td>Đặng Hoàng Phúc</td>
-                            <td>phuc@gmail.com</td>
-                            <td>Phàn nàn</td>
-                            <td>Giao hàng trễ quá, mong cải thiện.</td>
+                            <td>3</td>
+                            <td>Gạch kính lấy sáng 40x40</td>
+                            <td>hahaha</td>
+                            <td><img class="img-card-person" src="${url}/img-anhthe/1.jpg" alt=""></td>
+                            <td>3</td>
+                            <td>Cần cải thiện về chất lượng đóng gói.  </td>
+                            <td class="table-td-center"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
+                                                                onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
+                            </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                            <td>4</td>
+                            <td>Gạch ốp tường 40x60</td>
+                            <td>minh huyy</td>
+                            <td><img class="img-card-person" src="${url}/img-anhthe/1.jpg" alt=""></td>
+                            <td>5</td>
+                            <td>Không có gì để phàn nàn, sản phẩm hoàn hảo.</td>
+                            <td class="table-td-center"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
+                                                                onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
+                            </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                            <td>5</td>
+                            <td>Gạch lát sân vườn 40x40</td>
+                            <td>ngoc diepp</td>
+                            <td><img class="img-card-person" src="${url}/img-anhthe/1.jpg" alt=""></td>
+                            <td>2</td>
+                            <td>Đã gặp vấn đề với một số viên gạch.</td>
+                            <td class="table-td-center"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
+                                                                onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
+                            </button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -165,19 +145,20 @@
     </div>
 </main>
 <!-- Essential javascripts for application to work-->
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/view/client/view/js/jquery-3.2.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/view/client/view/js/popper.min.js"></script>
+<script src="${pageContext.request.contextPath}/view/client/view/js/bootstrap.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="src/jquery.table2excel.js"></script>
-<script src="js/main.js"></script>
+<script src="${pageContext.request.contextPath}/view/client/view/src/jquery.table2excel.js"></script>
+<script src="${pageContext.request.contextPath}/view/client/view/js/main.js"></script>
 <!-- The javascript plugin to display page loading on top-->
-<script src="js/plugins/pace.min.js"></script>
+<script src="${pageContext.request.contextPath}/view/client/view/js/plugins/pace.min.js"></script>
 <!-- Page specific javascripts-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <!-- Data table plugin-->
-<script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/view/client/view/js/plugins/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/view/client/view/js/plugins/dataTables.bootstrap.min.js"></script>
+
 <script type="text/javascript">$('#sampleTable').DataTable();</script>
 <script>
     function deleteRow(r) {
