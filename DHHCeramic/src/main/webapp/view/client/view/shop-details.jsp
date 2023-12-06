@@ -1,3 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:url value="/view/client/static" var="url"></c:url>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -14,71 +17,20 @@
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/style.css" type="text/css">
 </head>
 
 <body>
-<!-- Page Preloder -->
-<div id="preloder">
-    <div class="loader"></div>
-</div>
-
-<!-- Humberger Begin -->
-<div class="humberger__menu__overlay"></div>
-<div class="wrap-menu-desktop">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3">
-                <div class="header__logo">
-                    <a href="./index.html"><img src="img/logo_2.png" alt=""></a>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <nav class="header__menu">
-                    <ul>
-                        <li><a href="./index.html">Trang chủ</a></li>
-                        <li class="active"><a href="./shop-grid.html">Sản phẩm</a></li>
-                        <li><a href="./blog.html">Tin tức</a></li>
-                        <li><a href="./contact.html">Liên hệ</a></li>
-                        <li><a href="./help.html">Hỗ trợ</a></li>
-                    </ul>
-
-                </nav>
-            </div>
-            <div class="col-lg-3">
-                <div class="header__cart">
-                    <ul>
-                        <li><a class="active" href="login.html"><i class="fa fa-user"></i> Đăng nhập</a>
-                            <ul class="header__cart__dropdown">
-                                <li><a href="./account.html"><i class="fa fa-user"></i> Tài khoản</a></li>
-                                <li><a href="#"><i class="fa fa-gear"></i> Cài đặt</a></li>
-                                <li><a href="./shoping-cart.html"><i class="fa fa-receipt"></i> Đơn mua</a></li>
-                                <li><a href="#"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></li>
-                            </ul>
-                        <li><a href="./signup.html"><i class="fa fa-user"></i> Đăng ký</a></li>
-                        <li><a href="./shoping-cart.html"><i class="fa fa-shopping-bag"></i> <span>3</span></a>
-                            <ul class="header__cart__dropdown_cart">
-                                <li>Hãy đăng nhập để xem giỏ hàng <br></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <!--                        <div class="header__cart__price">item: <span>$150.00</span></div>-->
-                </div>
-            </div>
-        </div>
-        <div class="humberger__open">
-            <i class="fa fa-bars"></i>
-        </div>
-    </div>
-</div>
-
+<!-- Header Section Begin -->
+<jsp:include page="/view/client/view/header.jsp"></jsp:include>
+<!-- Header Section End -->
 
 <section class="hero hero-normal">
     <div class="container">
@@ -131,15 +83,15 @@
 <!-- Hero Section End -->
 
 <!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-section set-bg" data-setbg="img/banner2.jpg">
+<section class="breadcrumb-section set-bg" data-setbg="${url}/img/banner2.jpg">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
                     <h2>Chi tiết sản phẩm</h2>
                     <div class="breadcrumb__option">
-                        <a href="./index.html">Trang chủ</a>
-                        <a href="./index.html">Sản phẩm</a>
+                        <a href="${pageContext.request.contextPath}/view/client/view/index.jsp">Trang chủ</a>
+                        <a href="${pageContext.request.contextPath}/view/client/view/index.jsp">Sản phẩm</a>
                         <span>Chi tiết sản phẩm</span>
                     </div>
                 </div>
@@ -157,17 +109,17 @@
                 <div class="product__details__pic">
                     <div class="product__details__pic__item">
                         <img class="product__details__pic__item--large"
-                             src="img/product/details/product-details-1.jpg" alt="">
+                             src="${url}/img/product/details/product-details-1.jpg" alt="">
                     </div>
                     <div class="product__details__pic__slider owl-carousel">
-                        <img data-imgbigurl="img/product/details/product-details-1.jpg"
-                             src="img/product/details/thumb-1.jpg" alt="">
-                        <img data-imgbigurl="img/product/details/product-details-2.jpg"
-                             src="img/product/details/thumb-2.jpg" alt="">
-                        <img data-imgbigurl="img/product/details/product-details-3.jpg"
-                             src="img/product/details/thumb-3.jpg" alt="">
-                        <img data-imgbigurl="img/product/details/product-details-4.jpg"
-                             src="img/product/details/thumb-4.jpg" alt="">
+                        <img data-imgbigurl="${url}/img/product/details/product-details-1.jpg"
+                             src="${url}/img/product/details/thumb-1.jpg" alt="">
+                        <img data-imgbigurl="${url}/img/product/details/product-details-2.jpg"
+                             src="${url}/img/product/details/thumb-2.jpg" alt="">
+                        <img data-imgbigurl="${url}/img/product/details/product-details-3.jpg"
+                             src="${url}/img/product/details/thumb-3.jpg" alt="">
+                        <img data-imgbigurl="${url}/img/product/details/product-details-4.jpg"
+                             src="${url}/img/product/details/thumb-4.jpg" alt="">
                     </div>
                 </div>
             </div>
@@ -191,7 +143,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="./shoping-cart.html" class="primary-btn">Thêm vào giỏ hàng</a>
+                    <a href="${pageContext.request.contextPath}/view/client/view/shoping-cart.jsp" class="primary-btn">Thêm vào giỏ hàng</a>
                     <a class="heart-icon">
                         <i class="fa-solid fa-heart"></i>
                     </a>
@@ -270,7 +222,7 @@
                                     <div class="product__comment-text1">
                                         <div class="product__comment-text1-cmt">
 
-                                            <img src="img/user/user2.jpg" alt=""
+                                            <img src="${url}/img/user/user2.jpg" alt=""
                                                  style="width: 20px;height: 20px;">
                                             <p>Hà</p>
                                         </div>
@@ -296,7 +248,7 @@
                                     <div class="product__comment-text1">
                                         <div class="product__comment-text1-cmt">
 
-                                            <img src="img/user/default.png" alt=""
+                                            <img src="${url}/img/user/default.png" alt=""
                                                  style="width: 20px;height: 20px;">
                                             <p>Minh Huy</p>
                                         </div>
@@ -322,7 +274,7 @@
                                     <div class="product__comment-text1">
                                         <div class="product__comment-text1-cmt">
 
-                                            <img src="img/user/user2.jpg" alt=""
+                                            <img src="${url}/img/user/user2.jpg" alt=""
                                                  style="width: 20px;height: 20px;">
                                             <p>Diệp</p>
                                         </div>
@@ -350,7 +302,7 @@
                                     <div class="product__comment-text1">
                                         <div class="product__comment-text1-cmt">
 
-                                            <img src="img/user/default.png" alt=""
+                                            <img src="${url}/img/user/default.png" alt=""
                                                  style="width: 20px;height: 20px;">
                                             <p>Khang</p>
                                         </div>
@@ -393,7 +345,7 @@
                                         <div style="margin-left:24px;">
                                             <form>
                                                 <div style="display: flex; float: left">
-                                                    <img src="img/user/default.png" alt=""
+                                                    <img src="${url}/img/user/default.png" alt=""
                                                          style="width: 45px;height: 45px; margin-top: 23px">
                                                 </div>
                                                 <div class="row">
@@ -436,7 +388,7 @@
         <div class="row">
             <div class="col-lg-3 col-md-4 col-sm-6 show-product">
                 <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/product/product2.jpg">
+                    <div class="product__item__pic set-bg" data-setbg="${url}/img/product/product/product2.jpg">
                         <ul class="product__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -452,7 +404,7 @@
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 show-product">
                 <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/product/product3.jpg">
+                    <div class="product__item__pic set-bg" data-setbg="${url}/img/product/product/product3.jpg">
                         <ul class="product__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -468,7 +420,7 @@
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 show-product">
                 <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/product/product2.jpg">
+                    <div class="product__item__pic set-bg" data-setbg="${url}/img/product/product/product2.jpg">
                         <ul class="product__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -484,7 +436,7 @@
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 show-product">
                 <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/product/product2.jpg">
+                    <div class="product__item__pic set-bg" data-setbg="${url}/img/product/product/product2.jpg">
                         <ul class="product__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -504,70 +456,18 @@
 <!-- Related Product Section End -->
 
 <!-- Footer Section Begin -->
-<!-- Footer Section Begin -->
-<footer class="footer spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="footer__about">
-                    <div class="footer__about__logo">
-                        <a href="./index.html"><img src="img/logo_2.png" alt=""></a>
-                    </div>
-                    <ul>
-                        <li>Address: Đại học Nông Lâm TPHCM</li>
-                        <li>Phone: +84 123456789</li>
-                        <li>Email: hello@gmail.com</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
-                <div class="footer__widget">
-                    <h6>Liên kết hữu ích</h6>
-                    <ul>
-                        <li><a href="#">Về chúng tôi</a></li>
-                        <li><a href="#">Mua sắm</a></li>
-                        <li><a href="#">Giao hàng</a></li>
-                        <li><a href="#">Bảo mật</a></li>
-                        <li><a href="./contact.html">Vị trí của chúng tôi</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="#">Chúng tôi là ai?</a></li>
-                        <li><a href="#">Dịch vụ</a></li>
-                        <li><a href="#">Dự án</a></li>
-                        <li><a href="#">Kết nối</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-12">
-                <div class="footer__widget">
-                    <h6>Tham gia bản tin của chúng tôi ngay bây giờ</h6>
-                    <p>Nhận thông tin cập nhật qua E-mail về cửa hàng mới nhất của chúng tôi và các ưu đãi đặc biệt.</p>
-                    <form action="#">
-                        <input type="text" placeholder="Nhập vào email của bạn">
-                        <button type="submit" class="site-btn">Đăng ký</button>
-                    </form>
-                    <div class="footer__widget__social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+<jsp:include page="/view/client/view/footer.jsp"></jsp:include>
 <!-- Footer Section End -->
 
 <!-- Js Plugins -->
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.nice-select.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
-<script src="js/jquery.slicknav.js"></script>
-<script src="js/mixitup.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/main.js"></script>
+<script src="${url}/js/jquery-3.3.1.min.js"></script>
+<script src="${url}/js/bootstrap.min.js"></script>
+<script src="${url}/js/jquery.nice-select.min.js"></script>
+<script src="${url}/js/jquery-ui.min.js"></script>
+<script src="${url}/js/jquery.slicknav.js"></script>
+<script src="${url}/js/mixitup.min.js"></script>
+<script src="${url}/js/owl.carousel.min.js"></script>
+<script src="${url}/js/main.js"></script>
 
 
 </body>

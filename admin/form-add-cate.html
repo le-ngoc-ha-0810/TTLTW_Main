@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Thêm khách hàng | Quản trị Admin</title>
+  <title>Thêm loại sản phẩm | Quản trị Admin</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -148,7 +148,7 @@
 <!-- Sidebar menu-->
 <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 <aside class="app-sidebar">
-  <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/hay.jpg" width="50px"
+  <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="images/hay.jpg" width="50px"
                                       alt="User Image">
     <div>
       <p class="app-sidebar__user-name"><b>Admin</b></p>
@@ -157,14 +157,12 @@
   </div>
   <hr>
   <ul class="app-menu">
-    <li><a class="app-menu__item" href="index.html"><i class='app-menu__icon bx bx-tachometer'></i><span
+    <li><a class="app-menu__item " href="index.html"><i class='app-menu__icon bx bx-tachometer'></i><span
             class="app-menu__label">Bảng điều khiển</span></a></li>
-    <li><a class="app-menu__item" href="table-data-user.html"><i class='app-menu__icon bx bx-id-card'></i>
-      <span
-              class="app-menu__label">Quản lý nguời dùng</span></a></li>
-<!--    <li><a class="app-menu__item" href="table-data-customer.html"><i-->
-<!--            class='app-menu__icon bx bx-user-voice'></i><span-->
-<!--            class="app-menu__label">Quản lý khách hàng</span></a></li>-->
+    <li><a class="app-menu__item " href="table-data-user.html"><i class='app-menu__icon bx bx-id-card'></i> <span
+            class="app-menu__label">Quản lý nguời dùng</span></a></li>
+    <!--      <li><a class="app-menu__item" href="table-data-customer.html"><i class='app-menu__icon bx bx-user-voice'></i><span-->
+    <!--              class="app-menu__label">Quản lý khách hàng</span></a></li>-->
     <li><a class="app-menu__item active" href="table-data-category.html"><i
             class='app-menu__icon bx bx bxs-category'></i><span class="app-menu__label">Quản lý danh mục</span></a>
     </li>
@@ -176,9 +174,17 @@
     <li><a class="app-menu__item" href="table-data-blog.html"><i class='app-menu__icon bx bx bxl-blogger'></i><span
             class="app-menu__label">Quản lý tin tức
           </span></a></li>
-    <li><a class="app-menu__item" href="table-data-discount.html"><i
-            class='app-menu__icon bx bx bxs-discount'></i><span
+    <li><a class="app-menu__item" href="table-data-discount.html"><i class='app-menu__icon bx bx bxs-discount'></i><span
             class="app-menu__label">Quản lý giảm giá
+          </span></a></li>
+    <li><a class="app-menu__item" href="table-data-contact.html"><i class="app-menu__icon bx bxs-contact"></i><span
+            class="app-menu__label">Quản lý liên hệ
+          </span></a></li>
+    <li><a class="app-menu__item" href="table-data-comment.html"><i class="app-menu__icon bx bxs-chat"></i><span
+            class="app-menu__label">Quản lý bình luận
+          </span></a></li>
+    <li><a class="app-menu__item" href="table-data-help.html"><i class="app-menu__icon bx bxs-help-circle"></i><span
+            class="app-menu__label">Quản lý trợ giúp
           </span></a></li>
     <!--      <li><a class="app-menu__item" href="table-data-money.html"><i class='app-menu__icon bx bx-dollar'></i><span-->
     <!--            class="app-menu__label">Bảng kê lương</span></a></li>-->
@@ -189,7 +195,6 @@
     <!--            class="app-menu__label">Lịch công tác </span></a></li>-->
     <li><a class="app-menu__item" href="table-data-account.html"><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Cài
             đặt tài khoản</span></a></li>
-
   </ul>
 </aside>
 <main class="app-content">
@@ -226,41 +231,6 @@
     </div>
   </div>
 </main>
-
-
-<!--
-MODAL
--->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-     data-backdrop="static" data-keyboard="false">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-
-      <div class="modal-body">
-        <div class="row">
-          <div class="form-group  col-md-12">
-              <span class="thong-tin-thanh-toan">
-                <h5>Tạo chức vụ mới</h5>
-              </span>
-          </div>
-          <div class="form-group col-md-12">
-            <label class="control-label">Nhập tên chức vụ mới</label>
-            <input class="form-control" type="text" required>
-          </div>
-        </div>
-        <BR>
-        <button class="btn btn-save" type="button">Lưu lại</button>
-        <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-        <BR>
-      </div>
-      <div class="modal-footer">
-      </div>
-    </div>
-  </div>
-</div>
-<!--
-MODAL
--->
 
 
 <!-- Essential javascripts for application to work-->

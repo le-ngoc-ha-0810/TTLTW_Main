@@ -1,6 +1,8 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:url value="/view/client/static" var="url"></c:url>
 <!DOCTYPE html>
 <html lang="zxx">
-
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Ogani Template">
@@ -8,86 +10,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>DHH Ceramic - Trang chủ</title>
-
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/style.css" type="text/css">
 </head>
-
 <body>
-<!-- Page Preloder -->
-<div id="preloder">
-    <div class="loader"></div>
-</div>
-
-<!-- Humberger Begin -->
-<div class="humberger__menu__overlay"></div>
 <!-- Header Section Begin -->
-<header class="header">
-    <div class="wrap-menu-desktop">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo_2.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <nav class="header__menu">
-                        <ul>
-                            <li class="active"><a href="./index.html">Trang chủ</a></li>
-                            <li><a href="./shop-grid.html">Sản phẩm</a></li>
-                            <!--                            <li><a href="#">Pages</a>-->
-                            <!--                                <ul class="header__menu__dropdown">-->
-                            <!--                                    <li><a href="./shop-details.html">Shop Details</a></li>-->
-                            <!--                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>-->
-                            <!--                                    <li><a href="./checkout.html">Check Out</a></li>-->
-                            <!--                                    <li><a href="./blog-details.html">Blog Details</a></li>-->
-                            <!--                                </ul>-->
-                            <!--                            </li>-->
-                            <li><a href="./blog.html">Tin tức</a></li>
-                            <li><a href="./contact.html">Liên hệ</a></li>
-                            <li><a href="./help.html">Hỗ trợ</a></li>
-                        </ul>
-
-                    </nav>
-                </div>
-                <div class="col-lg-3">
-                    <div class="header__cart">
-                        <ul>
-                            <li><a class="active" href="login.html"><i class="fa fa-user"></i> Đăng nhập</a>
-                                <ul class="header__cart__dropdown">
-                                    <li><a href="./account.html"><i class="fa fa-user"></i> Tài khoản</a></li>
-                                    <li><a href="#"><i class="fa fa-gear"></i> Cài đặt</a></li>
-                                    <li><a href="./shoping-cart.html"><i class="fa fa-receipt"></i> Đơn mua</a></li>
-                                    <li><a href="#"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></li>
-                                </ul>
-                            <li><a href="./signup.html"><i class="fa fa-user"></i> Đăng ký</a></li>
-                            <li><a href="./shoping-cart.html"><i class="fa fa-shopping-bag"></i> <span>3</span></a>
-                                <ul class="header__cart__dropdown_cart">
-                                    <li>Hãy đăng nhập để xem giỏ hàng <br></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-<!--            <div class="humberger__open">-->
-<!--                <i class="fa fa-bars"></i>-->
-<!--            </div>-->
-        </div>
-    </div>
-</header>
+<jsp:include page="/view/client/view/header.jsp"></jsp:include>
 <!-- Header Section End -->
 
 <!-- Hero Section Begin -->
@@ -119,9 +58,7 @@
                 <div class="hero__search">
                     <div class="hero__search__form">
                         <form action="#">
-                            <label>
-                                <input type="text" placeholder="Bạn đang cần gì?">
-                            </label>
+                            <input type="text" placeholder="Bạn đang cần gì?">
                             <button type="submit" class="site-btn">Tìm kiếm</button>
                         </form>
                     </div>
@@ -138,13 +75,13 @@
                 <!-- Slideshow container -->
                 <div class="slideshow-container">
                     <div class="slider bg-hero">
-                        <img src="./img/hero/banner2.png" style="width:100%" alt="">
+                        <img src="${url}/img/hero/banner2.png" style="width:100%">
                     </div>
                     <div class="slider bg-hero">
-                        <img src="./img/hero/banner3.png" style="width:100%" alt="">
+                        <img src="${url}/img/hero/banner3.png" style="width:100%">
                     </div>
                     <div class="slider bg-hero">
-                        <img src="./img/hero/banner5.jpg" style="width:100%" alt="">
+                        <img src="${url}/img/hero/banner5.jpg" style="width:100%">
                     </div>
                     <!-- Next and previous buttons -->
                     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -167,7 +104,7 @@
     <div class="container">
         <div class="row g-5">
             <div class="col-lg-6">
-                <img src="img/about.png" alt="" height = 500>
+                <img src="${url}/img/about.png" alt="" height="500px">
             </div>
             <div class="col-lg-6">
                 <div class="section-title">
@@ -203,7 +140,7 @@
                 <section class="categories-product-home">
                     <div class="">
                         <div class="item ">
-                            <div class="cat-1" style="background-image: url(img/cat-1.jpg)" data-aos="fade-up" data-aos-duration="1000" data-aos-offset="0">
+                            <div class="cat-1" style="background-image: url(${url}/img/cat-1.jpg)" data-aos="fade-up" data-aos-duration="1000" data-aos-offset="0">
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-4">
                                         <div class="box-info" data-aos="zoom-in" data-aos-duration="1000" data-aos-offset="100">
@@ -217,34 +154,34 @@
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-4 d-flex align-items-end">
                                         <div class="box-cate" data-aos="zoom-in" data-aos-duration="1000" data-aos-offset="100">
                                             <h2>Gạch ốp cao cấp</h2>
-                                            <a class="more" href="./shop-grid.html">
+                                            <a class="more" href="shop-grid.jsp">
                                                 Bộ sưu tập<i class="fas fa-long-arrow-alt-right ml-2"></i>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="cat-2" style="background: url(img/cart-2.jpg);" data-aos="fade-up" data-aos-duration="1000" data-aos-offset="0">
+                            <div class="cat-2" style="background: url(${url}/img/cart-2.jpg);" data-aos="fade-up" data-aos-duration="1000" data-aos-offset="0">
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-4"></div>
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-4"></div>
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-4 d-flex align-items-end">
                                         <div class="box-cate" data-aos="zoom-in" data-aos-duration="1000" data-aos-offset="100">
                                             <h2>Gạch lát cầu thang</h2>
-                                            <a class="more" href="./shop-grid.html">
+                                            <a class="more" href="shop-grid.jsp">
                                                 Bộ sưu tập<i class="fas fa-long-arrow-alt-right ml-2"></i>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="cat-3" style="background: url(img/cat-3.jpg);" data-aos="fade-up" data-aos-duration="1000" data-aos-offset="0">
+                            <div class="cat-3" style="background: url(${url}/img/cat-3.jpg);" data-aos="fade-up" data-aos-duration="1000" data-aos-offset="0">
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-4"></div>
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-4 d-flex align-items-start justify-content-end">
                                         <div class="box-cate" data-aos="zoom-in" data-aos-duration="1000" data-aos-offset="50">
                                             <h2>Gạch lát nền</h2>
-                                            <a class="more" href="./shop-grid.html">
+                                            <a class="more" href="shop-grid.jsp">
                                                 Bộ sưu tập<i class="fas fa-long-arrow-alt-right ml-2"></i>
                                             </a>
                                         </div>
@@ -260,26 +197,26 @@
                                 </div>
                             </div>
                             <div class="grid-cate">
-                                <div class="cat-4" style="background: url(img/cat-4.jpg);" data-aos="fade-right" data-aos-duration="1000" data-aos-offset="0">
+                                <div class="cat-4" style="background: url(${url}/img/cat-4.jpg);" data-aos="fade-right" data-aos-duration="1000" data-aos-offset="0">
                                     <div class="box-cate" data-aos="zoom-in" data-aos-duration="1000" data-aos-offset="100">
                                         <h2>Gạch lát sân vườn</h2>
-                                        <a class="more" href="./shop-grid.html">
+                                        <a class="more" href="shop-grid.jsp">
                                             Bộ sưu tập<i class="fas fa-long-arrow-alt-right ml-2"></i>
                                         </a>
                                     </div>
                                 </div>
-                                <div class="cat-5" style="background: url(img/cat-5.jpg);" data-aos="fade-right" data-aos-duration="1000" data-aos-offset="0">
+                                <div class="cat-5" style="background: url(${url}/img/cat-5.jpg);" data-aos="fade-right" data-aos-duration="1000" data-aos-offset="0">
                                     <div class="box-cate" data-aos="zoom-in" data-aos-duration="1000" data-aos-offset="100">
                                         <h2>Gạch ốp tường</h2>
-                                        <a class="more" href="/san-pham/?yith_wcan=1&filter_cong-dung=op-tuong&query_type_cong-dung=or">
+                                        <a class="more" href="${url}san-pham/?yith_wcan=1&filter_cong-dung=op-tuong&query_type_cong-dung=or">
                                             Bộ sưu tập<i class="fas fa-long-arrow-alt-right ml-2"></i>
                                         </a>
                                     </div>
                                 </div>
-                                <div class="cat-6" style="background: url(img/cat-6.jpg);" data-aos="fade-left" data-aos-duration="1000" data-aos-offset="0">
+                                <div class="cat-6" style="background: url(${url}/img/cat-6.jpg);" data-aos="fade-left" data-aos-duration="1000" data-aos-offset="0">
                                     <div class="box-cate" data-aos="zoom-in" data-aos-duration="1000" data-aos-offset="100">
                                         <h2>Gạch trang trí</h2>
-                                        <a class="more" href="/danh-muc-san-pham/ngoi/">
+                                        <a class="more" href="${url}/danh-muc-san-pham/ngoi/">
                                             Bộ sưu tập<i class="fas fa-long-arrow-alt-right ml-2"></i>
                                         </a>
                                     </div>
@@ -304,16 +241,16 @@
         </div>
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-6 from-blog-show">
-                <div class="blog__item" onclick="window.location.href='./blog-details.html'">
+                <div class="blog__item" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/blog-details.jsp'">
                     <div class="blog__item__pic">
-                        <img src="img/blog/blog-1.jpg" alt="">
+                        <img src="${url}/img/blog/blog-1.jpg" alt="">
                     </div>
                     <div class="blog__item__text">
                         <ul>
                             <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
                             <li><i class="fa fa-comment-o"></i> 5</li>
                         </ul>
-                        <h5><a href="./blog-details.html">PHÒNG TẮM CHILL CHO ĐỜI THÊM YÊU</a></h5>
+                        <h5><a href="${pageContext.request.contextPath}/view/client/view/blog-details.jsp">PHÒNG TẮM CHILL CHO ĐỜI THÊM YÊU</a></h5>
                         <p>PHÒNG TẮM CHILL CHO ĐỜI THÊM YÊU Phòng tắm không chỉ là nơi sinh hoạt riêng tư mà còn
                             là nơi giúp thư giãn. Do vậy, đầu tư thiết kế không gian này sẽ nâng cao chất lượng
                             cuộc...</p>
@@ -321,16 +258,16 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6 from-blog-show">
-                <div class="blog__item" onclick="window.location.href='./blog-details.html'">
+                <div class="blog__item" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/blog-details.html'">
                     <div class="blog__item__pic">
-                        <img src="img/blog/blog-2.jpg" alt="">
+                        <img src="${url}/img/blog/blog-2.jpg" alt="">
                     </div>
                     <div class="blog__item__text">
                         <ul>
                             <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
                             <li><i class="fa fa-comment-o"></i> 5</li>
                         </ul>
-                        <h5><a href="./blog-details.html">LỰA CHỌN AN TOÀN CHO NGÔI NHÀ CỦA ÔNG BÀ</a></h5>
+                        <h5><a href="${pageContext.request.contextPath}/view/client/view/blog-details.jsp">LỰA CHỌN AN TOÀN CHO NGÔI NHÀ CỦA ÔNG BÀ</a></h5>
                         <p>GẠCH LÁT NỀN PHÒNG NGỦ CHO NGƯỜI LỚN TUỔI Không gian phòng ngủ của ông bà cần phải
                             được cân nhắc và tính toán sao cho hợp lý, phù hợp với sức khỏe và thuận tiện
                             với...</p>
@@ -338,16 +275,16 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6 from-blog-show">
-                <div class="blog__item" onclick="window.location.href='./blog-details.html'">
+                <div class="blog__item" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/blog-details.html'">
                     <div class="blog__item__pic">
-                        <img src="img/blog/blog-3.jpg" alt="">
+                        <img src="${url}/img/blog/blog-3.jpg" alt="">
                     </div>
                     <div class="blog__item__text">
                         <ul>
                             <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
                             <li><i class="fa fa-comment-o"></i> 5</li>
                         </ul>
-                        <h5><a href="./blog-details.html">HÃY ĐỂ NHÀ LÀ NƠI CHỮA LÀNH TÂM HỒN</a></h5>
+                        <h5><a href="${pageContext.request.contextPath}/view/client/view/blog-details.jsp">HÃY ĐỂ NHÀ LÀ NƠI CHỮA LÀNH TÂM HỒN</a></h5>
                         <p>NHÀ LÀ NƠI CHỮA LÀNH TÂM HỒN Khám phá xu hướng và lợi ích của Gạch lát nền vân gỗ
                             trong thiết kế không gian. Bài viết này sẽ tập trung vào khả năng tạo cảm giác ấm áp
                             và bình yên...</p>
@@ -360,71 +297,18 @@
 <!-- Blog Section End -->
 
 <!-- Footer Section Begin -->
-<footer class="footer spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="footer__about">
-                    <div class="footer__about__logo">
-                        <a href="./index.html"><img src="img/logo_2.png" alt=""></a>
-                    </div>
-                    <ul>
-                        <li>Address: Đại học Nông Lâm TPHCM</li>
-                        <li>Phone: +84 123456789</li>
-                        <li>Email: hello@gmail.com</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
-                <div class="footer__widget">
-                    <h6>Liên kết hữu ích</h6>
-                    <ul>
-                        <li><a href="#">Về chúng tôi</a></li>
-                        <li><a href="#">Mua sắm</a></li>
-                        <li><a href="#">Giao hàng</a></li>
-                        <li><a href="#">Bảo mật</a></li>
-                        <li><a href="./contact.html">Vị trí của chúng tôi</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="#">Chúng tôi là ai?</a></li>
-                        <li><a href="#">Dịch vụ</a></li>
-                        <li><a href="#">Dự án</a></li>
-                        <li><a href="#">Kết nối</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-12">
-                <div class="footer__widget">
-                    <h6>Tham gia bản tin của chúng tôi ngay bây giờ</h6>
-                    <p>Nhận thông tin cập nhật qua E-mail về cửa hàng mới nhất của chúng tôi và các ưu đãi đặc biệt.</p>
-                    <form action="#">
-                        <label>
-                            <input type="text" placeholder="Nhập vào email của bạn">
-                        </label>
-                        <button type="submit" class="site-btn">Đăng ký</button>
-                    </form>
-                    <div class="footer__widget__social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+<jsp:include page="/view/client/view/footer.jsp"></jsp:include>
 <!-- Footer Section End -->
 
 <!-- Js Plugins -->
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.nice-select.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
-<script src="js/jquery.slicknav.js"></script>
-<script src="js/mixitup.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/main.js"></script>
+<script src="${url}/js/jquery-3.3.1.min.js"></script>
+<script src="${url}/js/bootstrap.min.js"></script>
+<script src="${url}/js/jquery.nice-select.min.js"></script>
+<script src="${url}/js/jquery-ui.min.js"></script>
+<script src="${url}/js/jquery.slicknav.js"></script>
+<script src="${url}/js/mixitup.min.js"></script>
+<script src="${url}/js/owl.carousel.min.js"></script>
+<script src="${url}/js/main.js"></script>
 
 <script>
     let slideIndex = 1;

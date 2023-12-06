@@ -1,3 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:url value="/view/client/static" var="url"></c:url>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -13,73 +16,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
     <!-- Css Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/style.css" type="text/css">
 </head>
 
 <body>
-<!-- Page Preloder -->
-<div id="preloder">
-    <div class="loader"></div>
-</div>
-
-<!-- Humberger Begin -->
-<div class="humberger__menu__overlay"></div>
 <!-- Header Section Begin -->
-<header class="header">
-    <div class="wrap-menu-desktop">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo_2.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <nav class="header__menu">
-                        <ul>
-                            <li><a href="./index.html">Trang chủ</a></li>
-                            <li><a href="./shop-grid.html">Sản phẩm</a></li>
-                            <li class="active"><a href="./blog.html">Tin tức</a></li>
-                            <li><a href="./contact.html">Liên hệ</a></li>
-                            <li><a href="./help.html">Hỗ trợ</a></li>
-                        </ul>
-
-                    </nav>
-                </div>
-                <div class="col-lg-3">
-                    <div class="header__cart">
-                        <ul>
-                            <li><a class="active" href="login.html"><i class="fa fa-user"></i> Đăng nhập</a>
-                                <ul class="header__cart__dropdown">
-                                    <li><a href="./account.html"><i class="fa fa-user"></i> Tài khoản</a></li>
-                                    <li><a href="#"><i class="fa fa-gear"></i> Cài đặt</a></li>
-                                    <li><a href="./shoping-cart.html"><i class="fa fa-receipt"></i> Đơn mua</a></li>
-                                    <li><a href="#"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></li>
-                                </ul>
-                            <li><a href="./signup.html"><i class="fa fa-user"></i> Đăng ký</a></li>
-                            <li><a href="./shoping-cart.html"><i class="fa fa-shopping-bag"></i> <span>3</span></a>
-                                <ul class="header__cart__dropdown_cart">
-                                    <li>Hãy đăng nhập để xem giỏ hàng <br></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <!--                        <div class="header__cart__price">item: <span>$150.00</span></div>-->
-                    </div>
-                </div>
-            </div>
-            <div class="humberger__open">
-                <i class="fa fa-bars"></i>
-            </div>
-        </div>
-    </div>
-</header>
+<jsp:include page="/view/client/view/header.jsp"></jsp:include>
 <!-- Header Section End -->
 
 <!-- Hero Section Begin -->
@@ -132,14 +81,14 @@
 <!-- Hero Section End -->
 
 <!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-section set-bg section_martop" data-setbg="img/banner2.jpg">
+<section class="breadcrumb-section set-bg section_martop" data-setbg="${url}/img/banner2.jpg">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
                     <h2 style="color: white!important;">Tin tức</h2>
                     <div class="breadcrumb__option">
-                        <a href="./index.html" style="color: white">Trang chủ</a>
+                        <a href="${pageContext.request.contextPath}/view/client/view/index.jsp" style="color: white">Trang chủ</a>
                         <span>Tin tức</span>
                     </div>
                 </div>
@@ -167,7 +116,7 @@
                         <div class="blog__sidebar__recent">
                             <a href="#" class="blog__sidebar__recent__item show-more-blog">
                                 <div class="blog__sidebar__recent__item__pic">
-                                    <img src="img/blog/sidebar/sr-1.jpg" alt="">
+                                    <img src="${url}/img/blog/sidebar/sr-1.jpg" alt="">
                                 </div>
                                 <div class="blog__sidebar__recent__item__text">
                                     <h6>LỰA CHỌN AN TOÀN CHO NGÔI NHÀ CỦA ÔNG BÀ<br/> </h6>
@@ -176,7 +125,7 @@
                             </a>
                             <a href="#" class="blog__sidebar__recent__item show-more-blog">
                                 <div class="blog__sidebar__recent__item__pic">
-                                    <img src="img/blog/sidebar/sr-2.jpg" alt="">
+                                    <img src="${url}/img/blog/sidebar/sr-2.jpg" alt="">
                                 </div>
                                 <div class="blog__sidebar__recent__item__text">
                                     <h6>HÃY ĐỂ NHÀ LÀ NƠI CHỮA LÀNH TÂM HỒN</h6>
@@ -185,7 +134,7 @@
                             </a>
                             <a href="#" class="blog__sidebar__recent__item show-more-blog">
                                 <div class="blog__sidebar__recent__item__pic">
-                                    <img src="img/blog/sidebar/sr-3.jpg" alt="">
+                                    <img src="${url}/img/blog/sidebar/sr-3.jpg" alt="">
                                 </div>
                                 <div class="blog__sidebar__recent__item__text">
                                     <h6>PHÒNG TẮM MỞ PHÓNG KHOÁNG ĐỂ THƯ GIÃN TỐI ĐA</h6>
@@ -200,112 +149,112 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 from-blog-show">
                         <div class="blog__item">
-                            <a class="blog__item__pic" href="./blog-details.html">
-                                <img src="img/blog/blog-2.jpg" alt="">
+                            <a class="blog__item__pic" href="${pageContext.request.contextPath}/view/client/view/blog-details.jsp">
+                                <img src="${url}/img/blog/blog-2.jpg" alt="">
                             </a>
-                            <div class="blog__item__text" onclick="window.location.href='./blog-details.html'">
+                            <div class="blog__item__text" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/blog-details.jsp'">
                                 <ul>
                                     <li><i class="fa fa-calendar-o"></i> 21 tháng 10, 2023</li>
                                     <li><i class="fa fa-comment-o"></i> 5</li>
                                 </ul>
-                                <h5><a href="./blog-details.html">LỰA CHỌN AN TOÀN CHO NGÔI NHÀ CỦA ÔNG BÀ</a></h5>
+                                <h5><a href="${pageContext.request.contextPath}/view/client/view/blog-details.jsp">LỰA CHỌN AN TOÀN CHO NGÔI NHÀ CỦA ÔNG BÀ</a></h5>
                                 <p>GẠCH LÁT NỀN PHÒNG NGỦ CHO NGƯỜI LỚN TUỔI Không gian phòng ngủ của ông bà cần phải
                                     được cân nhắc và tính toán sao cho hợp lý, phù hợp với sức khỏe và thuận tiện
                                     với...</p>
-                                <a href="./blog-details.html" class="blog__btn">Xem thêm</a>
+                                <a href="${pageContext.request.contextPath}/view/client/view/blog-details.jsp" class="blog__btn">Xem thêm</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 from-blog-show">
                         <div class="blog__item">
-                            <a class="blog__item__pic" href="./blog-details.html">
-                                <img src="img/blog/blog-3.jpg" alt="">
+                            <a class="blog__item__pic" href="${pageContext.request.contextPath}/view/client/view/blog-details.jsp">
+                                <img src="${url}/img/blog/blog-3.jpg" alt="">
                             </a>
-                            <div class="blog__item__text" onclick="window.location.href='./blog-details.html'">
+                            <div class="blog__item__text" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/blog-details.jsp'">
                                 <ul>
                                     <li><i class="fa fa-calendar-o"></i> 14 tháng 10, 2023</li>
                                     <li><i class="fa fa-comment-o"></i> 5</li>
                                 </ul>
-                                <h5><a href="./blog-details.html">HÃY ĐỂ NHÀ LÀ NƠI CHỮA LÀNH TÂM HỒN</a></h5>
+                                <h5><a href="${pageContext.request.contextPath}/view/client/view/blog-details.jsp">HÃY ĐỂ NHÀ LÀ NƠI CHỮA LÀNH TÂM HỒN</a></h5>
                                 <p>NHÀ LÀ NƠI CHỮA LÀNH TÂM HỒN Khám phá xu hướng và lợi ích của Gạch lát nền vân gỗ
                                     trong thiết kế không gian. Bài viết này sẽ tập trung vào khả năng tạo cảm giác ấm áp
                                     và bình yên...</p>
-                                <a href="./blog-details.html" class="blog__btn">Xem thêm <span
+                                <a href="${pageContext.request.contextPath}/view/client/view/blog-details.jsp" class="blog__btn">Xem thêm <span
                                         class="arrow_right"></span></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 from-blog-show">
                         <div class="blog__item">
-                            <a class="blog__item__pic" href="./blog-details.html">
-                                <img src="img/blog/blog-5.jpg" alt="">
+                            <a class="blog__item__pic" href="${pageContext.request.contextPath}/view/client/view/blog-details.jsp">
+                                <img src="${url}/img/blog/blog-5.jpg" alt="">
                             </a>
-                            <div class="blog__item__text" onclick="window.location.href='./blog-details.html'">
+                            <div class="blog__item__text" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/blog-details.jsp'">
                                 <ul>
                                     <li><i class="fa fa-calendar-o"></i> 11 tháng 10, 2023</li>
                                     <li><i class="fa fa-comment-o"></i> 5</li>
                                 </ul>
-                                <h5><a href="./blog-details.html">PHÒNG TẮM MỞ PHÓNG KHOÁNG ĐỂ THƯ GIÃN TỐI ĐA</a></h5>
+                                <h5><a href="${pageContext.request.contextPath}/view/client/view/blog-details.jsp">PHÒNG TẮM MỞ PHÓNG KHOÁNG ĐỂ THƯ GIÃN TỐI ĐA</a></h5>
                                 <p>GẠCH ỐP TƯỜNG NHÀ TẮM – PHÒNG TẮM MỞ PHÓNG KHOÁNG ĐỂ THƯ GIÃN TỐI ĐA Phòng tắm hiện
                                     đại ngày nay không đơn thuần là “công trình phụ” khép kín mà thay vào đó </p>
-                                <a href="./blog-details.html" class="blog__btn">Xem thêm <span
+                                <a href="${pageContext.request.contextPath}/view/client/view/blog-details.jsp" class="blog__btn">Xem thêm <span
                                         class="arrow_right"></span></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 from-blog-show">
                         <div class="blog__item">
-                            <a class="blog__item__pic" href="./blog-details.html">
-                                <img src="img/blog/blog-1.jpg" alt="">
+                            <a class="blog__item__pic" href="${pageContext.request.contextPath}/view/client/view/blog-details.jsp">
+                                <img src="${url}/img/blog/blog-1.jpg" alt="">
                             </a>
-                            <div class="blog__item__text" onclick="window.location.href='./blog-details.html'">
+                            <div class="blog__item__text" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/blog-details.jsp'">
                                 <ul>
                                     <li><i class="fa fa-calendar-o"></i> 29 tháng 9, 2023</li>
                                     <li><i class="fa fa-comment-o"></i> 5</li>
                                 </ul>
-                                <h5><a href="./blog-details.html">PHÒNG TẮM CHILL CHO ĐỜI THÊM YÊU</a></h5>
+                                <h5><a href="blog-details.jsp">PHÒNG TẮM CHILL CHO ĐỜI THÊM YÊU</a></h5>
                                 <p>PHÒNG TẮM CHILL CHO ĐỜI THÊM YÊU Phòng tắm không chỉ là nơi sinh hoạt riêng tư mà còn
                                     là nơi giúp thư giãn. Do vậy, đầu tư thiết kế không gian này sẽ nâng cao chất lượng
                                     cuộc...</p>
-                                <a href="./blog-details.html" class="blog__btn">Xem thêm <span
+                                <a href="${pageContext.request.contextPath}/view/client/view/blog-details.jsp" class="blog__btn">Xem thêm <span
                                         class="arrow_right"></span></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 from-blog-show">
                         <div class="blog__item">
-                            <a class="blog__item__pic" href="./blog-details.html">
-                                <img src="img/blog/blog-4.jpg" alt="">
+                            <a class="blog__item__pic" href="${pageContext.request.contextPath}/view/client/view/blog-details.jsp">
+                                <img src="${url}img/blog/blog-4.jpg" alt="">
                             </a>
-                            <div class="blog__item__text" onclick="window.location.href='./blog-details.html'">
+                            <div class="blog__item__text" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/blog-details.jsp'">
                                 <ul>
                                     <li><i class="fa fa-calendar-o"></i> 11 tháng 9, 2023</li>
                                     <li><i class="fa fa-comment-o"></i> 5</li>
                                 </ul>
-                                <h5><a href="./blog-details.html">05 BỀ MẶT GẠCH Ý MỸ: TINH HOA KỸ THUẬT KẾT HỢP THẨM MỸ VÀ SỰ TIỆN
+                                <h5><a href="${pageContext.request.contextPath}/view/client/view/blog-details.jsp">05 BỀ MẶT GẠCH Ý MỸ: TINH HOA KỸ THUẬT KẾT HỢP THẨM MỸ VÀ SỰ TIỆN
                                     DỤNG</a></h5>
                                 <p>TINH HOA KỸ THUẬT KẾT HỢP THẨM MỸ VÀ SỰ TIỆN DỤNG Trong hơn 25 năm hình thành và phát
                                     triển, công nghệ sản xuất từ Italia luôn được GẠCH MEN Ý MỸ áp dụng để tạo nên
                                     những...</p>
-                                <a href="./blog-details.html" class="blog__btn">Xem thêm <span
+                                <a href="${pageContext.request.contextPath}/view/client/view/blog-details.jsp" class="blog__btn">Xem thêm <span
                                         class="arrow_right"></span></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 from-blog-show">
                         <div class="blog__item">
-                            <a class="blog__item__pic" href="./blog-details.html">
-                                <img src="img/blog/blog-6.jpg" alt="">
+                            <a class="blog__item__pic" href="${pageContext.request.contextPath}/view/client/view/blog-details.jsp">
+                                <img src="${url}/img/blog/blog-6.jpg" alt="">
                             </a>
-                            <div class="blog__item__text" onclick="window.location.href='./blog-details.html'">
+                            <div class="blog__item__text" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/blog-details.jsp'">
                                 <ul>
                                     <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
                                     <li><i class="fa fa-comment-o"></i> 5</li>
                                 </ul>
-                                <h5><a href="./blog-details.html">THAY GỖ CHĂM SÓC CHO CON</a></h5>
+                                <h5><a href="${pageContext.request.contextPath}/view/client/view/blog-details.jsp">THAY GỖ CHĂM SÓC CHO CON</a></h5>
                                 <p>THAY GỖ CHĂM SÓC CHO CON Trong quá trình xây dựng và trang trí phòng ngủ cho trẻ, lựa
                                     chọn vật liệu phù hợp để bảo vệ sức khỏe và tạo nên không...</p>
-                                <a href="./blog-details.html" class="blog__btn">Xem thêm<span
+                                <a href="${pageContext.request.contextPath}/view/client/view/blog-details.jsp" class="blog__btn">Xem thêm<span
                                         class="arrow_right"></span></a>
                             </div>
                         </div>
@@ -326,69 +275,18 @@
 <!-- Blog Section End -->
 
 <!-- Footer Section Begin -->
-<footer class="footer spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="footer__about">
-                    <div class="footer__about__logo">
-                        <a href="./index.html"><img src="img/logo_2.png" alt=""></a>
-                    </div>
-                    <ul>
-                        <li>Address: Đại học Nông Lâm TPHCM</li>
-                        <li>Phone: +84 123456789</li>
-                        <li>Email: hello@gmail.com</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
-                <div class="footer__widget">
-                    <h6>Liên kết hữu ích</h6>
-                    <ul>
-                        <li><a href="#">Về chúng tôi</a></li>
-                        <li><a href="#">Mua sắm</a></li>
-                        <li><a href="#">Giao hàng</a></li>
-                        <li><a href="#">Bảo mật</a></li>
-                        <li><a href="./contact.html">Vị trí của chúng tôi</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="#">Chúng tôi là ai?</a></li>
-                        <li><a href="#">Dịch vụ</a></li>
-                        <li><a href="#">Dự án</a></li>
-                        <li><a href="#">Kết nối</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-12">
-                <div class="footer__widget">
-                    <h6>Tham gia bản tin của chúng tôi ngay bây giờ</h6>
-                    <p>Nhận thông tin cập nhật qua E-mail về cửa hàng mới nhất của chúng tôi và các ưu đãi đặc biệt.</p>
-                    <form action="#">
-                        <input type="text" placeholder="Nhập vào email của bạn">
-                        <button type="submit" class="site-btn">Đăng ký</button>
-                    </form>
-                    <div class="footer__widget__social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+<jsp:include page="/view/client/view/footer.jsp"></jsp:include>
 <!-- Footer Section End -->
 
 <!-- Js Plugins -->
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.nice-select.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
-<script src="js/jquery.slicknav.js"></script>
-<script src="js/mixitup.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/main.js"></script>
+<script src="${url}/js/jquery-3.3.1.min.js"></script>
+<script src="${url}/js/bootstrap.min.js"></script>
+<script src="${url}/js/jquery.nice-select.min.js"></script>
+<script src="${url}/js/jquery-ui.min.js"></script>
+<script src="${url}/js/jquery.slicknav.js"></script>
+<script src="${url}/js/mixitup.min.js"></script>
+<script src="${url}/js/owl.carousel.min.js"></script>
+<script src="${url}/js/main.js"></script>
 
 
 </body>

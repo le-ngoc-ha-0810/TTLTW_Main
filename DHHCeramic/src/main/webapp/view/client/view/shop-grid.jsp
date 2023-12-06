@@ -1,3 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:url value="/view/client/static" var="url"></c:url>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -14,102 +17,20 @@
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="${url}/css/style.css" type="text/css">
 </head>
 
 <body>
-<!-- Page Preloder -->
-<div id="preloder">
-    <div class="loader"></div>
-</div>
 
-<!-- Humberger Begin -->
-<div class="humberger__menu__overlay"></div>
 <!-- Header Section Begin -->
-<header class="header">
-<!--    <div class="header__top">-->
-<!--        <div class="container">-->
-<!--            <div class="row">-->
-<!--                <div class="col-lg-6 col-md-6">-->
-<!--                    <div class="header__top__left">-->
-<!--                        <ul>-->
-<!--                            <li><i class="fa fa-envelope"></i> hello@gmail.com</li>-->
-<!--                            <li>SĐT: 0123456789</li>-->
-<!--                        </ul>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-lg-6">-->
-<!--                    <div class="header__top__right">-->
-<!--                        <div class="header__top__right__social">-->
-<!--                            <a href="#"><i class="fa fa-facebook"></i></a>-->
-<!--                            <a href="#"><i class="fa fa-twitter"></i></a>-->
-<!--                        </div>-->
-<!--                        <div class="header__top__right__language">-->
-<!--                            <img src="img/language1.png" alt="">-->
-<!--                            <div>Việt Nam</div>-->
-<!--                        </div>-->
-<!--                        <div class="header__top__right__auth">-->
-<!--                            <a class="active" href="signup.html"><i class="fa fa-user"></i> Đăng ký</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-    <div class="wrap-menu-desktop">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo_2.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <nav class="header__menu">
-                        <ul>
-                            <li><a href="./index.html">Trang chủ</a></li>
-                            <li class="active"><a href="./shop-grid.html">Sản phẩm</a></li>
-                            <li><a href="./blog.html">Tin tức</a></li>
-                            <li><a href="./contact.html">Liên hệ</a></li>
-                            <li><a href="./help.html">Hỗ trợ</a></li>
-                        </ul>
-
-                    </nav>
-                </div>
-                <div class="col-lg-3">
-                    <div class="header__cart">
-                        <ul>
-                            <li><a class="active" href="login.html"><i class="fa fa-user"></i> Đăng nhập</a>
-                                <ul class="header__cart__dropdown">
-                                    <li><a href="./account.html"><i class="fa fa-user"></i> Tài khoản</a></li>
-                                    <li><a href="#"><i class="fa fa-gear"></i> Cài đặt</a></li>
-                                    <li><a href="./shoping-cart.html"><i class="fa fa-receipt"></i> Đơn mua</a></li>
-                                    <li><a href="#"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></li>
-                                </ul>
-                            <li><a href="./signup.html"><i class="fa fa-user"></i> Đăng ký</a></li>
-                            <li><a href="./shoping-cart.html"><i class="fa fa-shopping-bag"></i> <span>3</span></a>
-                                <ul class="header__cart__dropdown_cart">
-                                    <li>Hãy đăng nhập để xem giỏ hàng <br></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <!--                        <div class="header__cart__price">item: <span>$150.00</span></div>-->
-                    </div>
-                </div>
-            </div>
-            <div class="humberger__open">
-                <i class="fa fa-bars"></i>
-            </div>
-        </div>
-    </div>
-</header>
+<jsp:include page="/view/client/view/header.jsp"></jsp:include>
 <!-- Header Section End -->
 
 <!-- Hero Section Begin -->
@@ -166,225 +87,7 @@
 <section class="product spad">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-5">
-                <div class="sidebar">
-                    <div class="sidebar__item">
-                        <h4>Tất cả loại gạch</h4>
-                        <ul>
-                            <li><a href="#">Gạch giá rẻ</a></li>
-                            <li><a href="#">Gạch lát nền</a></li>
-                            <li><a href="#">Gạch ốp tường</a></li>
-                            <li><a href="#">Gạch lát sân vườn</a></li>
-                            <li><a href="#">Gạch giả gỗ</a></li>
-                            <li><a href="#">Gạch ốp lát cao cấp</a></li>
-                            <li><a href="#">Gạch tranh thảm</a></li>
-                            <li><a href="#">Gạch trang trí</a></li>
-                            <li><a href="#">Gạch vỉa hè</a></li>
-                            <li><a href="#">Gạch kính lấy sáng</a></li>
-                            <li><a href="#">Gạch lát cầu thang</a></li>
-                        </ul>
-                    </div>
-                    <div class="sidebar__item">
-                        <h4>Giá </h4>
-                        <div class="price-range-wrap">
-                            <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                 data-min="10" data-max="540">
-                                <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                            </div>
-                            <div class="range-slider">
-                                <div class="price-input">
-                                    <input type="text" id="minamount">
-                                    <input type="text" id="maxamount">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--                    <div class="sidebar__item sidebar__item__color&#45;&#45;option">-->
-                    <!--                        <h4>Colors</h4>-->
-                    <!--                        <div class="sidebar__item__color sidebar__item__color&#45;&#45;white">-->
-                    <!--                            <label for="white">-->
-                    <!--                                White-->
-                    <!--                                <input type="radio" id="white">-->
-                    <!--                            </label>-->
-                    <!--                        </div>-->
-                    <!--                        <div class="sidebar__item__color sidebar__item__color&#45;&#45;gray">-->
-                    <!--                            <label for="gray">-->
-                    <!--                                Gray-->
-                    <!--                                <input type="radio" id="gray">-->
-                    <!--                            </label>-->
-                    <!--                        </div>-->
-                    <!--                        <div class="sidebar__item__color sidebar__item__color&#45;&#45;red">-->
-                    <!--                            <label for="red">-->
-                    <!--                                Red-->
-                    <!--                                <input type="radio" id="red">-->
-                    <!--                            </label>-->
-                    <!--                        </div>-->
-                    <!--                        <div class="sidebar__item__color sidebar__item__color&#45;&#45;black">-->
-                    <!--                            <label for="black">-->
-                    <!--                                Black-->
-                    <!--                                <input type="radio" id="black">-->
-                    <!--                            </label>-->
-                    <!--                        </div>-->
-                    <!--                        <div class="sidebar__item__color sidebar__item__color&#45;&#45;blue">-->
-                    <!--                            <label for="blue">-->
-                    <!--                                Blue-->
-                    <!--                                <input type="radio" id="blue">-->
-                    <!--                            </label>-->
-                    <!--                        </div>-->
-                    <!--                        <div class="sidebar__item__color sidebar__item__color&#45;&#45;green">-->
-                    <!--                            <label for="green">-->
-                    <!--                                Green-->
-                    <!--                                <input type="radio" id="green">-->
-                    <!--                            </label>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
-                    <div class="sidebar__item">
-                        <h4>Kích thước</h4>
-
-                        <div class="sidebar__item__size">
-                            <label for="large">
-                                15x60cm
-                                <input type="radio" >
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="medium">
-                                15x80cm
-                                <input type="radio" >
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="small">
-                                20x90cm
-                                <input type="radio" >
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="tiny">
-                                20x40cm
-                                <input type="radio">
-                            </label>
-                        </div>
-
-                        <div class="sidebar__item__size">
-                            <label for="large">
-                                30x40cm
-                                <input type="radio" >
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="medium">
-                                30x60cm
-                                <input type="radio" >
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="small">
-                                40x40cm
-                                <input type="radio" >
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="tiny">
-                                40x80cm
-                                <input type="radio">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="large">
-                                50x50cm
-                                <input type="radio" id="large">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="medium">
-                                60x90cm
-                                <input type="radio" id="medium">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="small">
-                                60x60cm
-                                <input type="radio" id="small">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="tiny">
-                                80x80cm
-                                <input type="radio" id="tiny">
-                            </label>
-                        </div>
-                    </div>
-                    <div class="sidebar__item">
-                        <div class="latest-product__text">
-                            <h4>Sản phẩm mới</h4>
-                            <div class="latest-product__slider owl-carousel">
-                                <div class="latest-prdouct__slider__item">
-                                    <a href="#" class="latest-product__item show-more-product">
-                                        <div class="latest-product__item__pic">
-                                            <img src="img/latest-product/lp-1.jpg" alt="">
-                                        </div>
-                                        <div class="latest-product__item__text">
-                                            <h6>Gạch lát cầu thang 40x90</h6>
-                                            <span>300.000 VND</span>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="latest-product__item show-more-product">
-                                        <div class="latest-product__item__pic">
-                                            <img src="img/latest-product/lp-2.jpg" alt="">
-                                        </div>
-                                        <div class="latest-product__item__text">
-                                            <h6>Gạch con sâu lát vỉa hè</h6>
-                                            <span>165.000 VND</span>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="latest-product__item show-more-product">
-                                        <div class="latest-product__item__pic">
-                                            <img src="img/latest-product/lp-3.jpg" alt="">
-                                        </div>
-                                        <div class="latest-product__item__text">
-                                            <h6>Gạch ốp tường 30x60 Catalan</h6>
-                                            <span>200.000 VND</span>
-                                        </div>
-                                    </a>
-
-                                </div>
-                                <div class="latest-prdouct__slider__item">
-                                    <a href="#" class="latest-product__item show-more-product">
-                                        <div class="latest-product__item__pic">
-                                            <img src="img/latest-product/lp-1.jpg" alt="">
-                                        </div>
-                                        <div class="latest-product__item__text">
-                                            <h6>Gạch lát cầu thang 40x90</h6>
-                                            <span>300.000 VND</span>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="latest-product__item show-more-product">
-                                        <div class="latest-product__item__pic">
-                                            <img src="img/latest-product/lp-2.jpg" alt="">
-                                        </div>
-                                        <div class="latest-product__item__text">
-                                            <h6>Gạch con sâu lát vỉa hè</h6>
-                                            <span>165.000 VND</span>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="latest-product__item show-more-product">
-                                        <div class="latest-product__item__pic">
-                                            <img src="img/latest-product/lp-3.jpg" alt="">
-                                        </div>
-                                        <div class="latest-product__item__text">
-                                            <h6>Gạch ốp tường 30x60 Catalan</h6>
-                                            <span>200.000 VND</span>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <jsp:include page="/view/client/view/left-bar.jsp"></jsp:include>
             <div class="col-lg-9 col-md-7">
                 <div class="product__discount">
                     <div class="section-title product__discount__title">
@@ -392,10 +95,10 @@
                     </div>
                     <div class="row">
                         <div class="product__discount__slider owl-carousel">
-                            <div class="col-lg-4 show-product" onclick="window.location.href='shop-details.html'">
+                            <div class="col-lg-4 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
                                 <div class="product__discount__item">
                                     <div class="product__discount__item__pic set-bg"
-                                         data-setbg="img/product/discount/product22.jpg">
+                                         data-setbg="${url}/img/product/discount/product22.jpg">
                                         <div class="product__discount__percent">-20%</div>
                                         <ul class="product__item__pic__hover">
                                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
@@ -410,7 +113,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 show-product" onclick="window.location.href='shop-details.html'">
+                            <div class="col-lg-4 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
                                 <div class="product__discount__item">
                                     <div class="product__discount__item__pic set-bg"
                                          data-setbg="img/product/discount/product14.jpg">
@@ -428,10 +131,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 show-product" onclick="window.location.href='shop-details.html'">
+                            <div class="col-lg-4 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
                                 <div class="product__discount__item">
                                     <div class="product__discount__item__pic set-bg"
-                                         data-setbg="img/product/discount/product15.jpg">
+                                         data-setbg="${url}/img/product/discount/product15.jpg">
                                         <div class="product__discount__percent">-20%</div>
                                         <ul class="product__item__pic__hover">
                                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
@@ -446,10 +149,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 show-product" onclick="window.location.href='shop-details.html'">
+                            <div class="col-lg-4 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
                                 <div class="product__discount__item">
                                     <div class="product__discount__item__pic set-bg"
-                                         data-setbg="img/product/discount/product16.jpg">
+                                         data-setbg="${url}/img/product/discount/product16.jpg">
                                         <div class="product__discount__percent">-20%</div>
                                         <ul class="product__item__pic__hover">
                                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
@@ -464,10 +167,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 show-product" onclick="window.location.href='shop-details.html'">
+                            <div class="col-lg-4 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
                                 <div class="product__discount__item">
                                     <div class="product__discount__item__pic set-bg"
-                                         data-setbg="img/product/discount/product17.jpg">
+                                         data-setbg="${url}/img/product/discount/product17.jpg">
                                         <div class="product__discount__percent">-20%</div>
                                         <ul class="product__item__pic__hover">
                                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
@@ -482,10 +185,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 show-product" onclick="window.location.href='shop-details.html'">
+                            <div class="col-lg-4 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
                                 <div class="product__discount__item">
                                     <div class="product__discount__item__pic set-bg"
-                                         data-setbg="img/product/discount/product18.jpg">
+                                         data-setbg="${url}/img/product/discount/product18.jpg">
                                         <div class="product__discount__percent">-20%</div>
                                         <ul class="product__item__pic__hover">
                                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
@@ -528,7 +231,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='shop-details.html'">
+                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="img/product/product1.1.jpg">
                                 <ul class="product__item__pic__hover">
@@ -544,7 +247,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='shop-details.html'">
+                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="img/product/product/product2.jpg">
                                 <ul class="product__item__pic__hover">
@@ -560,7 +263,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='shop-details.html'">
+                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="img/product/product/product4.jpg">
                                 <ul class="product__item__pic__hover">
@@ -576,7 +279,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='shop-details.html'">
+                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="img/product/product/product3.jpg">
                                 <ul class="product__item__pic__hover">
@@ -592,7 +295,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='shop-details.html'">
+                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="img/product/product/product5.jpg">
                                 <ul class="product__item__pic__hover">
@@ -608,7 +311,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='shop-details.html'">
+                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="img/product/product/product6.jpg">
                                 <ul class="product__item__pic__hover">
@@ -624,7 +327,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='shop-details.html'">
+                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="img/product/product/product7.jpg">
                                 <ul class="product__item__pic__hover">
@@ -640,7 +343,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='shop-details.html'">
+                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="img/product/product/product8.jpg">
                                 <ul class="product__item__pic__hover">
@@ -656,7 +359,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='shop-details.html'">
+                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="img/product/product/product9.jpg">
                                 <ul class="product__item__pic__hover">
@@ -672,7 +375,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='shop-details.html'">
+                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="img/product/product/product10.jpg">
                                 <ul class="product__item__pic__hover">
@@ -688,7 +391,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='shop-details.html'">
+                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="img/product/product/product11.jpg">
                                 <ul class="product__item__pic__hover">
@@ -705,7 +408,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='shop-details.html'">
+                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="img/product/product/product12.jpg">
                                 <ul class="product__item__pic__hover">
@@ -735,70 +438,19 @@
 <!-- Product Section End -->
 
 <!-- Footer Section Begin -->
-<!-- Footer Section Begin -->
-<footer class="footer spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="footer__about">
-                    <div class="footer__about__logo">
-                        <a href="./index.html"><img src="img/logo_2.png" alt=""></a>
-                    </div>
-                    <ul>
-                        <li>Address: Đại học Nông Lâm TPHCM</li>
-                        <li>Phone: +84 123456789</li>
-                        <li>Email: hello@gmail.com</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
-                <div class="footer__widget">
-                    <h6>Liên kết hữu ích</h6>
-                    <ul>
-                        <li><a href="#">Về chúng tôi</a></li>
-                        <li><a href="#">Mua sắm</a></li>
-                        <li><a href="#">Giao hàng</a></li>
-                        <li><a href="#">Bảo mật</a></li>
-                        <li><a href="./contact.html">Vị trí của chúng tôi</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="#">Chúng tôi là ai?</a></li>
-                        <li><a href="#">Dịch vụ</a></li>
-                        <li><a href="#">Dự án</a></li>
-                        <li><a href="#">Kết nối</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-12">
-                <div class="footer__widget">
-                    <h6>Tham gia bản tin của chúng tôi ngay bây giờ</h6>
-                    <p>Nhận thông tin cập nhật qua E-mail về cửa hàng mới nhất của chúng tôi và các ưu đãi đặc biệt.</p>
-                    <form action="#">
-                        <input type="text" placeholder="Nhập vào email của bạn">
-                        <button type="submit" class="site-btn">Đăng ký</button>
-                    </form>
-                    <div class="footer__widget__social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+<jsp:include page="/view/client/view/footer.jsp"></jsp:include>
 <!-- Footer Section End -->
 
 <!-- Js Plugins -->
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.nice-select.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
-<script src="js/jquery.slicknav.js"></script>
-<script src="js/mixitup.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/main.js"></script>
+<script src="${url}/js/jquery-3.3.1.min.js"></script>
+<script src="${url}/js/bootstrap.min.js"></script>
+<script src="${url}/js/jquery.nice-select.min.js"></script>
+<script src="${url}/js/jquery-ui.min.js"></script>
+<script src="${url}/js/jquery.slicknav.js"></script>
+<script src="${url}/js/mixitup.min.js"></script>
+<script src="${url}/js/owl.carousel.min.js"></script>
+<script src="${url}/js/main.js"></script>
+
 
 
 </body>
