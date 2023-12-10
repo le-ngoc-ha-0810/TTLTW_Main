@@ -1,4 +1,5 @@
 package com.fit.nlu.DHHCeramic.controller.client;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +12,7 @@ import java.io.IOException;
 public class LandingPageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/view/client/view/index.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/view/client/view/landingPage.jsp");
         dispatcher.forward(request, response);
     }
 
