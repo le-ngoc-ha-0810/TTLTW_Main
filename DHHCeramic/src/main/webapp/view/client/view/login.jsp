@@ -1,6 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:url value="/view/client/static" var="url"></c:url>
+<%
+    String alert = (String) request.getAttribute("alert");
+%>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -38,19 +41,32 @@
 <section class="page-login">
     <div id="form-signIn">
         <div id="form-bg">
-            <img id="image-bg" src="${url}/img/banner-login.jpg" width="100%" height="620px">
+            <img id="image-bg" src="${url}/img/banner-login.jpg" width="100%" height="680px">
         </div>
         <div class="container">
             <div class="title">
                 <h3>Đăng nhập</h3>
             </div>
-            <form class="form_input_group">
-                <div class="input-group-control user">
-                    <input type="text" id="user" required placeholder="Tên đăng nhập hoặc Email">
+            <form class="form_input_group" onsubmit="checkForm()" action="${pageContext.request.contextPath}/login" method="post">
+                <%
+                    if (alert != null) {
+                %>
+                <p class="alert alert-danger" role="alert">
+                    <%= alert %>
+                </p>
+                <%
+                    }
+                %>
+                <div class="input-group-control">
+                    <input type="text" id="user1" name="username" required placeholder="Tên đăng nhập hoặc Email">
+                    <small></small>
                 </div>
-                <div class="input-group-control pass">
-                    <input type="password" id="password" required placeholder="Mật khẩu">
+                <div class="input-group-control">
+                    <input type="password" id="password1"  name="password" required placeholder="Mật khẩu">
+                    <small></small>
                 </div>
+                <div class="g-recaptcha" style="margin-top: 16px;"
+                     data-sitekey="6LfgknkhAAAAABXAQugTItLaoMe6aDZIIM-gtNQ0"></div>
                 <div id="forgot">
                     <div class="fg-left">
                         <a href="${pageContext.request.contextPath}/view/client/view/forgotpass.jsp">Quên mật khẩu</a>
@@ -68,7 +84,9 @@
                     <button class="right"><a class="fab fa-google"></a>Google</button>
                 </div>
                 <div id="sign_up">
-                    <p>Bạn chưa có tài khoản? <a href="${pageContext.request.contextPath}/view/client/view/signup.jsp">Đăng ký tại đây</a></p>
+                    <p>Bạn chưa có tài khoản? <a
+                            href="${pageContext.request.contextPath}/view/client/view/register.jsp">Đăng ký tại đây</a>
+                    </p>
                 </div>
             </form>
 
@@ -81,7 +99,96 @@
 <!-- Footer Section Begin -->
 <jsp:include page="/view/client/view/footer.jsp"></jsp:include>
 <!-- Footer Section End -->
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script>
+    const form = document.getElementsByClassName('form_input_group');
+    const email = document.getElementById('email');
+    const username = document.getElementById('username');
+    const password = document.getElementById('password');
+    const re_password = document.getElementById('re-password');
+    const email1 = document.getElementById('user1');
+    const password1 = document.getElementById('password1');
 
+
+    //Show input error message
+
+    function showError(input, message) {
+        const formControl = input.parentElement;
+        formControl.className = 'input-group-control error';
+        const small = formControl.querySelector('small');
+        small.style.display = 'block';
+        small.innerText = message;
+
+    }
+
+    function showSuccess(input) {
+        const formControl = input.parentElement;
+        formControl.className = 'input-group-control success';
+
+    }
+
+    //Email
+
+    function isValidEmail(email) {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<script>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+    function isValidVietnamesePhone(phone) {
+        return /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(phone);
+    }
+
+    var count = 0, count1 = 0;
+
+    function checkForm() {
+        if (email.value === '') {
+            showError(email, 'Vui lòng nhập email');
+        } else if (!isValidEmail(email.value)) {
+            showError(email, 'Email không tồn tại');
+        } else {
+            showSuccess(email);
+            count++;
+        }
+        if (phone.value === '') {
+            showError(phone, 'Vui lòng nhập số điện thoại');
+        } else if (!isValidVietnamesePhone(phone.value)) {
+            showError(phone, 'Email không tồn tại');
+        } else {
+            showSuccess(phone);
+            count++;
+        }
+        if (password.value === '') {
+            showError(password, 'Vui lòng nhập mật khẩu');
+        } else {
+            showSuccess(password);
+            count++;
+        }
+        if (re_password.value !== password.value || re_password === '') {
+            showError(re_password, 'Xác nhận mật khẩu sai');
+        } else {
+            count++;
+        }
+
+        if (email1.value === '') {
+            showError(email1, 'Vui lòng nhập email');
+        } else if (!isValidEmail(email1.value)) {
+            showError(email1, 'Email không tồn tại');
+        } else {
+            showSuccess(email1);
+            count1++;
+        }
+        if (password1.value === '') {
+            showError(password1, 'Vui lòng nhập mật khẩu');
+        } else {
+            showSuccess(password1);
+            count1++;
+        }
+
+
+    }
+
+
+</script>
 <!-- Js Plugins -->
 <script src="${url}/js/jquery-3.3.1.min.js"></script>
 <script src="${url}/js/bootstrap.min.js"></script>

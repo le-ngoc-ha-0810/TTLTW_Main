@@ -32,16 +32,16 @@
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul style="margin-right: 15px !important;">
-                            <li><a class="active" href="${pageContext.request.contextPath}view/client/view/login.jsp"><i
+                            <li><a class="active" href="${pageContext.request.contextPath}/view/client/view/login.jsp"><i
                                     class="fa fa-user"></i> Đăng nhập</a>
                                 <ul class="header__cart__dropdown">
                                     <li><a href="${pageContext.request.contextPath}/view/client/view/account.jsp"><i
                                             class="fa fa-user"></i> Tài khoản</a></li>
                                     <li><a href="#"><i class="fa fa-gear"></i> Cài đặt</a></li>
                                     <li><a href="#"><i class="fa fa-receipt"></i> Đơn mua</a></li>
-                                    <li><a href="#"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></li>
+                                    <li><a href="${pageContext.request.contextPath }/logout"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></li>
                                 </ul>
-                            <li><a href="${pageContext.request.contextPath}/view/client/view/signup.jsp"><i class="fa fa-user"></i> Đăng ký</a></li>
+                            <li><a href="${pageContext.request.contextPath}/view/client/view/register.jsp"><i class="fa fa-user"></i> Đăng ký</a></li>
                             <li><a href="${pageContext.request.contextPath}/view/client/view/shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span>3</span></a>
                                 <ul class="header__cart__dropdown_cart">
                                     <li>Hãy đăng nhập để xem giỏ hàng <br></li>
