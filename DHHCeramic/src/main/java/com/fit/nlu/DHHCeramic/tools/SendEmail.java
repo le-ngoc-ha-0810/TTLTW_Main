@@ -10,8 +10,8 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 public class SendEmail {
-    private final static String username = "21130340@st.hcmuaf.edu.vn";
-    private final static String password = "Ngocha822";
+    private final static String username = "dhhceramic@gmail.com";
+    private final static String password = "lyqtayuqdrwmrkwv";
     public String getRandom() {
         //tạo code đăng ký
         Random rd = new Random();
