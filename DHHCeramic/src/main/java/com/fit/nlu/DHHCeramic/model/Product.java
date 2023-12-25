@@ -1,90 +1,125 @@
 package com.fit.nlu.DHHCeramic.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Product extends BaseModel implements Serializable {
+    private int id;
     private String name;
-    private Float price;
-    private int saleID;
-    private int cateID;
+    private long price;
+    private long saleId;
+    private Category category;
     private int stock;
-    private String description;
+    private String des;
     private String image;
     private int isLike;
     private String size;
     private String manufacture;
 
-    public Product(String name, Float price, int saleID, int cateID, int stock, String description, String image, int isLike, String size, String manufacture) {
+    public Product() {
+        super();
+    }
+
+    public Product(int id, String name, long price, long saleId, Category category, int stock, String des, String image, int isLike, String size, String manufacture) {
+        this.id = id;
         this.name = name;
         this.price = price;
-        this.saleID = saleID;
-        this.cateID = cateID;
+        this.saleId = saleId;
+        this.category = category;
         this.stock = stock;
-        this.description = description;
+        this.des = des;
         this.image = image;
         this.isLike = isLike;
         this.size = size;
         this.manufacture = manufacture;
     }
 
+    @Override
+    public int getId() {
+        return id;
+    }
+
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
-    public Float getPrice() {
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public long getPrice() {
         return price;
     }
-    public void setPrice(Float price) {
+
+    public void setPrice(long price) {
         this.price = price;
     }
-    public int getSaleID() {
-        return saleID;
+
+    public long getSaleId() {
+        return saleId;
     }
-    public void setSaleID(int saleID) {
-        this.saleID = saleID;
+
+    public void setSaleId(long saleId) {
+        this.saleId = saleId;
     }
-    public int getCateID() {
-        return cateID;
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
     }
-    public void setCateID(int cateID) {
-        this.cateID = cateID;
-    }
+
     public int getStock() {
         return stock;
     }
+
     public void setStock(int stock) {
         this.stock = stock;
     }
-    public String getDescription() {
-        return description;
+
+    public String getDes() {
+        return des;
     }
-    public void setDescription(String description) {
-        this.description = description;
+
+    public void setDes(String des) {
+        this.des = des;
     }
+
     public String getImage() {
         return image;
     }
+
     public void setImage(String image) {
         this.image = image;
     }
-    public int getIsLike() {
+
+    public int getIsLiked() {
         return isLike;
     }
-    public void setIsLike(int isLike) {
+
+    public void setIsLiked(int isLiked) {
         this.isLike = isLike;
     }
+
     public String getSize() {
         return size;
     }
+
     public void setSize(String size) {
         this.size = size;
     }
+
     public String getManufacture() {
         return manufacture;
     }
+
     public void setManufacture(String manufacture) {
         this.manufacture = manufacture;
     }

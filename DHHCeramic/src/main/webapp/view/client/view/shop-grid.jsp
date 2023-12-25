@@ -1,6 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:url value="/view/client/static" var="url"></c:url>
+<%@ page buffer="64kb" %>
+<%
+    request.setCharacterEncoding("UTF-8");
+    response.setCharacterEncoding("UTF-8");
+%>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -62,8 +67,8 @@
 
                 <div class="hero__search">
                     <div class="hero__search__form">
-                        <form action="#">
-                            <input type="text" placeholder="Bạn đang cần gì?">
+                        <form action="${pageContext.request.contextPath }/product/searchByName" method="get">
+                            <input oninput="searchByName(this)" type="text" placeholder="Bạn đang cần gì?">
                             <button type="submit" class="site-btn">Tìm kiếm</button>
                         </form>
                     </div>
@@ -95,7 +100,8 @@
                     </div>
                     <div class="row">
                         <div class="product__discount__slider owl-carousel">
-                            <div class="col-lg-4 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
+                            <div class="col-lg-4 show-product"
+                                 onclick="window.location.href='${pageContext.request.contextPath}/product/detail'">
                                 <div class="product__discount__item">
                                     <div class="product__discount__item__pic set-bg"
                                          data-setbg="${url}/img/product/discount/product22.jpg">
@@ -113,7 +119,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
+                            <div class="col-lg-4 show-product"
+                                 onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
                                 <div class="product__discount__item">
                                     <div class="product__discount__item__pic set-bg"
                                          data-setbg="img/product/discount/product14.jpg">
@@ -131,7 +138,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
+                            <div class="col-lg-4 show-product"
+                                 onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
                                 <div class="product__discount__item">
                                     <div class="product__discount__item__pic set-bg"
                                          data-setbg="${url}/img/product/discount/product15.jpg">
@@ -149,7 +157,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
+                            <div class="col-lg-4 show-product"
+                                 onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
                                 <div class="product__discount__item">
                                     <div class="product__discount__item__pic set-bg"
                                          data-setbg="${url}/img/product/discount/product16.jpg">
@@ -167,7 +176,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
+                            <div class="col-lg-4 show-product"
+                                 onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
                                 <div class="product__discount__item">
                                     <div class="product__discount__item__pic set-bg"
                                          data-setbg="${url}/img/product/discount/product17.jpg">
@@ -185,7 +195,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
+                            <div class="col-lg-4 show-product"
+                                 onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
                                 <div class="product__discount__item">
                                     <div class="product__discount__item__pic set-bg"
                                          data-setbg="${url}/img/product/discount/product18.jpg">
@@ -231,208 +242,61 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="img/product/product1.1.jpg">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <span>Gạch lát nền</span>
-                                <h6><a href="#">Gạch lát nền Prime 60x60 32011</a></h6>
-                                <h5>160.000 VND</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="img/product/product/product2.jpg">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <span>Gạch lát nền</span>
-                                <h6><a href="#">Gạch lát nền Prime 60x60 TP29156K</a></h6>
-                                <h5>160.000 VND</h5>
+                    <c:forEach items="${productList}" var="p">
+
+                        <div class="col-lg-4 col-md-6 col-sm-6 show-product"
+                             onclick="window.location.href='${pageContext.request.contextPath}/product/detail?id=${p.id}'">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="${p.image}">
+                                    <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <span>${p.category.name}</span>
+                                    <h6><a href="#">${p.name}</a></h6>
+                                    <h5>${p.price} VND</h5>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="img/product/product/product4.jpg">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <span>Gạch lát nền</span>
-                                <h6><a href="#">Gạch ốp tường 30x60 Catalan men 36115</a></h6>
-                                <h5>125.000 VND</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="img/product/product/product3.jpg">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <span>Gạch nhà tắm</span>
-                                <h6><a href="#">Gạch nhà tắm 30x30</a></h6>
-                                <h5>125.000 VND</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="img/product/product/product5.jpg">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <span>Gạch ốp tường</span>
-                                <h6><a href="#">Gạch ốp tường 30x60 Catalan đá 3201</a></h6>
-                                <h5>200.000 VND</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="img/product/product/product6.jpg">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <span>Gạch ốp tường</span>
-                                <h6><a href="#">Gạch ốp tường Prime 30x60 XĐ7107</a></h6>
-                                <h5>127.000 VND</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="img/product/product/product7.jpg">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <span>Gạch sân vuờn</span>
-                                <h6><a href="#">Gạch sân vườn giá rẻ 40x40 PH4415</a></h6>
-                                <h5>95.000 VND</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="img/product/product/product8.jpg">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <span>Gạch lát nền</span>
-                                <h6><a href="#">Gạch sân vườn giá rẻ 40x40 PH4424</a></h6>
-                                <h5>105.000 VND</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="img/product/product/product9.jpg">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <span>Gạch lát nền</span>
-                                <h6><a href="#">Đá đồng chất Ý Mỹ lát sân vườn 30x60 N366017</a></h6>
-                                <h5>220.000 VND</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="img/product/product/product10.jpg">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <span>Gạch lát nền</span>
-                                <h6><a href="#">Gạch sân vườn giá rẻ 40x40 SH490</a></h6>
-                                <h5>95.000 VND</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="img/product/product/product11.jpg">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">
-                                    <span>Gạch lát nền</span>
-                                    Gạch giả gỗ Trung Quốc 15x80 1507</a></h6>
-                                <h5>220.000 VND</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 show-product" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/shop-details.jsp'">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="img/product/product/product12.jpg">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <span>Gạch lát nền</span>
-                                <h6><a href="#">Đá đồng chất vân gỗ Trung Quốc 15x90 159K308</a></h6>
-                                <h5> 260.000 VND</h5>
-                            </div>
-                        </div>
-                    </div>
+                    </c:forEach>
                 </div>
-                <div class="product__pagination">
-                    <a href="#" class="active_pag">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#"><i class="fa fa-long-arrow-right"></i></a>
-                </div>
+                <ul class="pagination">
+                    <c:if test="${currentPage != 1}">
+                        <li class="page-item"><a class="page-link"  href="?page=${currentPage-1}">&laquo;</a></li>
+                    </c:if>
+
+                    <c:set var="startPage" value="${currentPage - 5}" />
+                    <c:if test="${startPage lt 1}">
+                        <c:set var="startPage" value="1" />
+                    </c:if>
+
+                    <c:set var="endPage" value="${startPage + 9}" />
+                    <c:if test="${endPage gt numOfPages}">
+                        <c:set var="endPage" value="${numOfPages}" />
+                    </c:if>
+
+                    <c:forEach begin="${startPage}" end="${endPage}" var="i">
+                        <c:choose>
+                            <c:when test="${currentPage eq i}">
+                                <li class="page-item active"><a class="page-link">${i}</a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="page-item"><a class="page-link" href="?page=${i}">${i}</a></li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+
+                    <c:if test="${currentPage lt numOfPages}">
+                        <li class="page-item"><a class="page-link" href="?page=${currentPage+1}">&raquo;</a></li>
+                    </c:if>
+                </ul>
+
             </div>
         </div>
+    </div>
     </div>
 </section>
 <!-- Product Section End -->
@@ -440,7 +304,118 @@
 <!-- Footer Section Begin -->
 <jsp:include page="/view/client/view/footer.jsp"></jsp:include>
 <!-- Footer Section End -->
+<script>
+    function searchByCategory(param) {
+        $.ajax({
+            url: '/DHHCeramic/product/category',
+            type: 'GET',
+            data: {
+                cate_id: param
+            },
+            success: function (data) {
+                document.getElementById('list_pro').style.display = 'none';
+                var row = document.getElementById('contentProduct');
+                row.innerHTML = data;
 
+            }
+        });
+    }
+
+    function searchByBrand(param) {
+        $.ajax({
+            url: '/DHHCeramic/productSearchByBrand',
+            type: 'GET',
+            data: {
+                brands: param
+            },
+            success: function (data) {
+                document.getElementById('list_pro').style.display = 'none';
+                var row = document.getElementById('contentProduct');
+                row.innerHTML = data;
+
+
+            }
+        });
+    }
+
+    function searchByRating(param) {
+        $.ajax({
+            url: '/DHHCeramic/searchByRating',
+            type: 'GET',
+            data: {
+                rating: param
+            },
+            success: function (data) {
+                document.getElementById('list_pro').style.display = 'none';
+                var row = document.getElementById('contentProduct');
+                row.innerHTML = data;
+
+
+            }
+        });
+    }
+
+    function searchByPrice(param1, param2, param3) {
+        $.ajax({
+            url: '/DHHCeramic/productSearchByPrice',
+            type: 'GET',
+            data: {
+                brands: param1,
+                priceFrom: param2,
+                priceTo: param3
+            },
+            success: function (data) {
+                document.getElementById('list_pro').style.display = 'none';
+                var row = document.getElementById('contentProduct');
+                row.innerHTML = data;
+
+
+            }
+        });
+    }
+
+    function cartRemove(param) {
+        var txtSearch = param.value;
+        $.ajax({
+            url: '/DHHCeramic/cart/remove',
+            type: 'GET',
+            data: {
+                pId: txtSearch
+            },
+            success: function (data) {
+                var row = document.getElementById('removeCart');
+                row.innerHTML = data;
+            }
+        });
+    }
+
+    function searchByName(param) {
+        var txtSearch = param.value;
+        $.ajax({
+            url: '/DHHCeramic/product/searchByName',
+            type: 'GET',
+            data: {
+                name: txtSearch
+            },
+            success: function (data) {
+                document.getElementById('list_pro').style.display = 'none';
+                var row = document.getElementById('contentProduct');
+                row.innerHTML = data;
+
+
+            }
+        });
+    }
+</script>
+<script>
+    $(".nav li").click(function () {
+        if ($(".nav li").removeClass("active")) {
+            $(this).removeClass("active");
+        }
+        $(this).addClass("active");
+    });
+
+</script>
 <!-- Js Plugins -->
 <script src="${url}/js/jquery-3.3.1.min.js"></script>
 <script src="${url}/js/bootstrap.min.js"></script>
@@ -450,7 +425,6 @@
 <script src="${url}/js/mixitup.min.js"></script>
 <script src="${url}/js/owl.carousel.min.js"></script>
 <script src="${url}/js/main.js"></script>
-
 
 
 </body>

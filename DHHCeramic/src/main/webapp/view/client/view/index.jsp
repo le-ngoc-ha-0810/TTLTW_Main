@@ -54,16 +54,16 @@
                     </div>
                     <ul>
                         <li><a href="#">Gạch giá rẻ</a></li>
-                        <li><a href="#">Gạch lát nền</a></li>
-                        <li><a href="#">Gạch ốp tường</a></li>
-                        <li><a href="#">Gạch lát sân vườn</a></li>
-                        <li><a href="#">Gạch giả gỗ</a></li>
-                        <li><a href="#">Gạch ốp lát cao cấp</a></li>
-                        <li><a href="#">Gạch tranh thảm</a></li>
-                        <li><a href="#">Gạch trang trí</a></li>
-                        <li><a href="#">Gạch vỉa hè</a></li>
-                        <li><a href="#">Gạch kính lấy sáng</a></li>
-                        <li><a href="#">Gạch lát cầu thang</a></li>
+                        <li><a href="${pageContext.request.contextPath}/products?cateId=1">Gạch lát nền</a></li>
+                        <li><a href="${pageContext.request.contextPath}/products?cateId=2">Gạch ốp tường</a></li>
+                        <li><a href="${pageContext.request.contextPath}/products?cateId=3">Gạch lát sân vườn</a></li>
+                        <li><a href="${pageContext.request.contextPath}/products?cateId=4">Gạch giả gỗ</a></li>
+                        <li><a href="${pageContext.request.contextPath}/products?cateId=5">Gạch ốp lát cao cấp</a></li>
+                        <li><a href="${pageContext.request.contextPath}/products?cateId=6">Gạch tranh thảm</a></li>
+                        <li><a href="${pageContext.request.contextPath}/products?cateId=7">Gạch trang trí</a></li>
+                        <li><a href="${pageContext.request.contextPath}/products?cateId=8">Gạch vỉa hè</a></li>
+                        <li><a href="${pageContext.request.contextPath}/products?cateId=9">Gạch kính lấy sáng</a></li>
+                        <li><a href="${pageContext.request.contextPath}/products?cateId=10">Gạch lát cầu thang</a></li>
                     </ul>
                 </div>
             </div>
@@ -253,57 +253,23 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-6 from-blog-show">
-                <div class="blog__item" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/blog-details.jsp'">
-                    <div class="blog__item__pic">
-                        <img src="${url}/img/blog/blog-1.jpg" alt="">
-                    </div>
-                    <div class="blog__item__text">
-                        <ul>
-                            <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                            <li><i class="fa fa-comment-o"></i> 5</li>
-                        </ul>
-                        <h5><a href="${pageContext.request.contextPath}/view/client/view/blog-details.jsp">PHÒNG TẮM CHILL CHO ĐỜI THÊM YÊU</a></h5>
-                        <p>PHÒNG TẮM CHILL CHO ĐỜI THÊM YÊU Phòng tắm không chỉ là nơi sinh hoạt riêng tư mà còn
-                            là nơi giúp thư giãn. Do vậy, đầu tư thiết kế không gian này sẽ nâng cao chất lượng
-                            cuộc...</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 from-blog-show">
-                <div class="blog__item" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/blog-details.html'">
-                    <div class="blog__item__pic">
-                        <img src="${url}/img/blog/blog-2.jpg" alt="">
-                    </div>
-                    <div class="blog__item__text">
-                        <ul>
-                            <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                            <li><i class="fa fa-comment-o"></i> 5</li>
-                        </ul>
-                        <h5><a href="${pageContext.request.contextPath}/view/client/view/blog-details.jsp">LỰA CHỌN AN TOÀN CHO NGÔI NHÀ CỦA ÔNG BÀ</a></h5>
-                        <p>GẠCH LÁT NỀN PHÒNG NGỦ CHO NGƯỜI LỚN TUỔI Không gian phòng ngủ của ông bà cần phải
-                            được cân nhắc và tính toán sao cho hợp lý, phù hợp với sức khỏe và thuận tiện
-                            với...</p>
+            <c:forEach var="blog" items="${listBlogs}" begin="0" end="2">
+                <div class="col-lg-4 col-md-4 col-sm-6 from-blog-show">
+                    <div class="blog__item" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/blog-details.jsp'">
+                        <div class="blog__item__pic">
+                            <img src="${blog.image}" alt="">
+                        </div>
+                        <div class="blog__item__text">
+                            <ul>
+                                <li><i class="fa fa-calendar-o"></i> ${blog.date}</li>
+                                <li><i class="fa fa-comment-o"></i> ${blog.blogCate}</li>
+                            </ul>
+                            <h5><a href="${pageContext.request.contextPath}/view/client/view/blog-details.jsp">${blog.title}</a></h5>
+                            <p>${blog.des}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 from-blog-show">
-                <div class="blog__item" onclick="window.location.href='${pageContext.request.contextPath}/view/client/view/blog-details.html'">
-                    <div class="blog__item__pic">
-                        <img src="${url}/img/blog/blog-3.jpg" alt="">
-                    </div>
-                    <div class="blog__item__text">
-                        <ul>
-                            <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                            <li><i class="fa fa-comment-o"></i> 5</li>
-                        </ul>
-                        <h5><a href="${pageContext.request.contextPath}/view/client/view/blog-details.jsp">HÃY ĐỂ NHÀ LÀ NƠI CHỮA LÀNH TÂM HỒN</a></h5>
-                        <p>NHÀ LÀ NƠI CHỮA LÀNH TÂM HỒN Khám phá xu hướng và lợi ích của Gạch lát nền vân gỗ
-                            trong thiết kế không gian. Bài viết này sẽ tập trung vào khả năng tạo cảm giác ấm áp
-                            và bình yên...</p>
-                    </div>
-                </div>
-            </div>
+            </c:forEach>
         </div>
     </div>
 </section>
