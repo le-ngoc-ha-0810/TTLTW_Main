@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:url value="/view/admin/static" var="url"></c:url>
+<%@ page buffer="64kb" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/client/view/css/main.css">
+    <link rel="stylesheet" type="text/css" href="${url}/css/main.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <!-- or -->
@@ -154,133 +155,75 @@
                                     class="fas fa-folder-plus"></i> Thêm nhà cung cấp</a>
                         </div>
                     </div>
-                    <form class="row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Mã sản phẩm</label>
-                            <input class="form-control" type="text">
-                        </div>
+                    <form class="row" action="add" method="post">
+                        <input type="hidden" name="user"
+                               value="${sessionScope.account.username}"/>
                         <div class="form-group col-md-6">
                             <label class="control-label">Tên sản phẩm</label>
-                            <input class="form-control" type="text" required ">
+                            <input class="form-control" type="text" name="name" required>
                         </div>
                         <div class="form-group col-md-6">
-                            <label class="control-label">Mã giảm</label>
-                            <input class="form-control" type="text" ">
+                            <label class="control-label">Giá giảm</label>
+                            <input class="form-control" type="text" name="saleId">
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label">Kích thước</label>
-                            <input class="form-control" type="text" ">
+                            <input class="form-control" type="text" name="size">
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label">Mô tả</label>
-                            <input class="form-control" type="text">
+                            <input class="form-control" type="text" name="des" >
                         </div>
                         <div class="form-group  col-md-6">
                             <label class="control-label">Số lượng</label>
-                            <input class="form-control" type="number" required>
+                            <input class="form-control" type="text" name="stock" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label">Giá bán</label>
-                            <input class="form-control" type="text">
+                            <input class="form-control" type="text" name="price">
                         </div>
-                        <div class="form-group col-md-3">
-                            <label for="exampleSelect1" class="control-label">Loại sản phẩm</label>
-                            <select class="form-control" id="exampleSelect1">
-                                <option>-- Chọn Loại sản phẩm --</option>
-                                <option>Gạch giá rẻ</option>
-                                <option>Gạch lát nền</option>
-                                <option>Gạch ốp tường</option>
-                                <option>Gạch sân vườn, sân thượng</option>
-                                <option>Gạch tranh cảnh</option>
-                                <option>Gạch giả gỗ</option>
-                                <option>Gac vỉa hè</option>
-                                <option>Gạch lát cầu thang</option>
-                                <option>Giá kính lấy sáng</option>
-                            </select>
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Tên loại gạch</label>
+                            <input type="text" name="category" list="categories"/>
+                            <datalist id="categories">
+                                <c:forEach var="category" items="${categories}">
+                                <option value="${category.name}">
+                                    </c:forEach>
+                            </datalist>
                         </div>
-                        <div class="form-group col-md-3 ">
-                            <label for="exampleSelect1" class="control-label">Nguồn gốc</label>
-                            <select class="form-control" id="exampleSelect1">
-                                <option>-- Chọn nguồn gốc --</option>
-                                <option>Việt Nam</option>
-                                <option>Trung Quốc</option>
-                                <option>Mỹ</option>
-                                <option>Úc</option>
-                            </select>
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Nguồn gốc</label>
+                            <input class="form-control" type="text" name="manufacture">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Trạng thái</label>
+                            <input class="form-control" type="text" name="status">
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="control-label">Ảnh sản phẩm</label>
-                            <div id="myfileupload">
-                                <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);"/>
-                            </div>
-                            <div id="thumbbox">
-                                <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none"/>
-                                <a class="removeimg" href="javascript:"></a>
-                            </div>
-                            <div id="boxchoice">
-                                <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn
-                                    ảnh</a>
-                                <p style="clear:both"></p>
-                            </div>
-
+                            <input type="button" value="Tải ảnh lên"
+                                   onclick="BrowseServer();" class="btn btn-controls"/>
+                            <input type="text" name="image" id="image">
                         </div>
-                        <div class="form-group col-md-12">
-                            <label class="control-label">Mô tả sản phẩm</label>
-                            <textarea class="form-control" name="mota" id="mota"></textarea>
-                            <script>CKEDITOR.replace('mota');</script>
-                        </div>
+                        <button class="btn btn-save" type="submit">Lưu lại</button>
+                        <a class="btn btn-cancel" href="${pageContext.request.contextPath}/Admin/blog/list">Hủy bỏ</a>
                     </form>
                 </div>
-                <button class="btn btn-save" type="button">Lưu lại</button>
-                <a class="btn btn-cancel" href="${pageContext.request.contextPath}/view/client/view/table-data-product.jsp">Hủy bỏ</a>
+
             </div>
         </div>
     </div>
 </main>
 
 
-<!--
-MODAL CHỨC VỤ
--->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-     data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-
-            <div class="modal-body">
-                <div class="row">
-                    <div class="form-group  col-md-12">
-              <span class="thong-tin-thanh-toan">
-                <h5>Thêm mới nhà cung cấp</h5>
-              </span>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label class="control-label">Nhập tên chức vụ mới</label>
-                        <input class="form-control" type="text" required>
-                    </div>
-                </div>
-                <BR>
-                <button class="btn btn-save" type="button">Lưu lại</button>
-                <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-                <BR>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div>
-<!--
-MODAL
--->
-
-<script src="${pageContext.request.contextPath}/view/client/view/js/jquery-3.2.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/view/client/view/js/popper.min.js"></script>
-<script src="${pageContext.request.contextPath}/view/client/view/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/view/client/view/js/main.js"></script>
-<script src="${pageContext.request.contextPath}/view/client/view/js/plugins/pace.min.js"></script>
+<script src="${url}/js/jquery-3.2.1.min.js"></script>
+<script src="${url}/js/popper.min.js"></script>
+<script src="${url}/js/bootstrap.min.js"></script>
+<script src="${url}/js/main.js"></script>
+<script src="${url}/js/plugins/pace.min.js"></script>
 <script>
     const inpFile = document.getElementById("inpFile");
-    const loadFile = document.getElementById("loadFile");
+    const loadFile = document.getElementById("loadFile")
+    4;
     const previewContainer = document.getElementById("imagePreview");
     const previewContainer = document.getElementById("imagePreview");
     const previewImage = previewContainer.querySelector(".image-preview__image");

@@ -1,6 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:url value="/view/client/static" var="url"></c:url>
+<%@ page buffer="64kb" %>
+<%
+    String alert = (String) request.getAttribute("alert");
+%>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -31,23 +35,6 @@
 <!-- Header Section Begin -->
 <jsp:include page="/view/client/view/header.jsp"></jsp:include>
 <!-- Header Section End -->
-
-<script>
-    function cartRemove(param) {
-        var txtSearch = param.value;
-        $.ajax({
-            url: '',
-            type: 'GET',
-            data: {
-                pId: txtSearch
-            },
-            success: function (data) {
-                var row = document.getElementById('removeCart');
-                row.innerHTML = data;
-            }
-        });
-    }
-</script>
 <script>
     $(document).ready(
         function () {
@@ -107,10 +94,12 @@
             <div class="module-inner">
                 <div class="side-bar">
                     <div class="user-info">
+                        <c:url value="${sessionScope.account.avatar }"
+                               var="imgUrl"></c:url>
                         <img class="img-profile img-circle img-responsive center-block"
-                             src="https://lh3.googleusercontent.com/a/default-user=s96-c" alt="">
+                             src="${imgUrl}" alt="">
                         <ul class="meta list list-unstyled">
-                            <li class="name">user123</li>
+                            <li class="name">${sessionScope.account.username}</li>
                         </ul>
                     </div>
                     <nav class="side-menu">
@@ -128,20 +117,29 @@
                         </ul>
                     </nav>
                 </div>
+<%--                Ho so--%>
                 <div class="content-panel">
                     <div id="information">
                         <h2 class="title">Hồ sơ</h2>
-                        <form class="form-horizontal">
-                            <input name="role" value="2" hidden="true">
-                            <input name="id" value="0" hidden="true">
+                        <form class="form-horizontal" action="${pageContext.request.contextPath}/member/myAccount"
+                              method="post">
+                            <input name="role" value="${sessionScope.account.roleId }" hidden="true">
+                            <input name="id" value="${sessionScope.account.id }" hidden="true">
                             <fieldset class="fieldset">
                                 <h3 class="fieldset-title">Thông tin cá nhân</h3>
-
+                                <%
+                                    if (alert != null) {
+                                %>
+                                <p class="alert alert-danger" role="alert">
+                                    <%= alert %>
+                                </p>
+                                <%
+                                    }
+                                %>
                                 <div class="form-group avatar">
                                     <figure class="figure col-md-2 col-sm-3 col-xs-12">
 
-                                        <img class="img-rounded img-responsive avatar" name="image"
-                                             src="https://lh3.googleusercontent.com/a/default-user=s96-c"
+                                        <img class="img-rounded img-responsive avatar" name="image" src="${imgUrl}"
                                              alt="">
                                     </figure>
 
@@ -149,14 +147,14 @@
                                         <input type="button" value="Tải ảnh lên"
                                                onclick="BrowseServer();" class="btn btn-controls"/>
                                         <input type="text" name="avatar" id="avatar" hidden="true"
-                                               value="https://lh3.googleusercontent.com/a/default-user=s96-c">
+                                               value="${sessionScope.account.avatar}">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-2 col-sm-3 col-xs-12 control-label">Tên đăng nhập</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
                                         <input type="text" class="form-control" name="username"
-                                               value="user123">
+                                               value="${sessionScope.account.username}">
                                     </div>
                                 </div>
 
@@ -164,21 +162,21 @@
                                     <label class="col-md-2 col-sm-3 col-xs-12 control-label">Họ tên</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
                                         <input type="text" class="form-control" name="name"
-                                               value="">
+                                               value="${sessionScope.account.fullname}">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-2 col-sm-3 col-xs-12 control-label">Địa chỉ</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
                                         <input type="text" class="form-control" name="address"
-                                               value="">
+                                               value="${sessionScope.account.address}">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-2 col-sm-3 col-xs-12 control-label">Số điện thoại</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
                                         <input type="text" class="form-control" name="phone"
-                                               value="">
+                                               value="${sessionScope.account.phoneNumber}">
                                     </div>
                                 </div>
                             </fieldset>
@@ -188,7 +186,7 @@
                                     <label class="col-md-2  col-sm-3 col-xs-12 control-label">Email</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
                                         <input type="email" class="form-control" name="email"
-                                               value="abc@gmail.com">
+                                               value="${sessionScope.account.email}">
                                         <p class="help-block">Đây là Email của bạn</p>
                                     </div>
                                 </div>
@@ -196,7 +194,7 @@
                                     <label class="col-md-2  col-sm-3 col-xs-12 control-label">Facebook</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
                                         <input type="text" class="form-control" name="facebook"
-                                               value="">
+                                               value="${sessionScope.account.facebook}">
                                         <p class="help-block">Tên Facebook của bạn</p>
                                     </div>
                                 </div>
@@ -204,7 +202,7 @@
                                     <label class="col-md-2  col-sm-3 col-xs-12 control-label">Mật khẩu</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
                                         <input type="password" class="form-control" name="password"
-                                               value="">
+                                               value="${sessionScope.account.password}">
                                         <input type="button" id="changePasswordBtn" class="change__password-btn"
                                                style="margin-top: 6px;" onclick="showChangePassword()"
                                                value="Thay đổi mật khẩu">
@@ -222,42 +220,86 @@
                     <!--Đơn mua-->
                     <div id="order" style="display: none">
                         <h2 class="title">Đơn hàng</h2>
-                        <div class="one-order">
-                            <div class="row order-header">
-                                <div class="col-md-8 col-sm-12 order-id">
-                                    <strong>Đơn hàng:</strong>
-                                    <span>#12</span>
-                                </div>
-                                <div class="col-md-4 col-sm-12 order-id">
-                                    <span class="fas fa-truck"></span>
-                                    <span class="complete">Đang xử lí</span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-2 product-img">
-                                    <img src="${url}/images/shop/pants/7milionShort.jpg">
-                                </div>
-                                <div class="col-md-10 product-info">
-                                    <h4>Gạch lát cầu thang</h4>
-                                    <p>x10</p>
-                                    <span class="base-price">300.000đ</span>
-                                    <span class="discount">280.000đ</span>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-md-8 total">
-                                    <span><i class="fas fa-donate"></i></span>
-                                    <span class="total-price">Tổng tiền: <strong>2.800.000đ</strong></span>
-                                </div>
-                                <div class="col-md-4 total">
-                                    <span><button class="btn-again" type="button">Liên hệ</button></span>
-                                    <span><button class="btn-rate" type="button" data-toggle="modal"
-                                                  data-target="#cancelOrder">Hủy đơn hàng</button></span>
+                        <%--                                                <div class="one-order">--%>
+                        <%--                                                    <div class="row order-header">--%>
+                        <%--                                                        <div class="col-md-8 col-sm-12 order-id">--%>
+                        <%--                                                            <strong>Đơn hàng:</strong>--%>
+                        <%--                                                            <span>#ID3721534</span>--%>
+                        <%--                                                        </div>--%>
+                        <%--                                                        <div class="col-md-4 col-sm-12 order-id">--%>
+                        <%--                                                            <span class="fas fa-truck"></span>--%>
+                        <%--                                                            <span class="complete">Đang xử lí</span>--%>
+                        <%--                                                        </div>--%>
+                        <%--                                                    </div>--%>
+                        <%--                                                    <div class="row">--%>
+                        <%--                                                        <div class="col-md-2 product-img">--%>
+                        <%--                                                            <img src="${url}/images/shop/pants/7milionShort.jpg">--%>
+                        <%--                                                        </div>--%>
+                        <%--                                                        <div class="col-md-10 product-info">--%>
+                        <%--                                                            <h4>Quần short 7millions Essentials+ / Màu đen</h4>--%>
+                        <%--                                                            <p>x1</p>--%>
+                        <%--                                                            <span class="base-price">300.000đ</span>--%>
+                        <%--                                                            <span class="discount">280.000đ</span>--%>
+                        <%--                                                        </div>--%>
+                        <%--                                                    </div>--%>
+                        <%--                                                    <hr>--%>
+                        <%--                                                    <div class="row">--%>
+                        <%--                                                        <div class="col-md-8 total">--%>
+                        <%--                                                            <span><i class="fas fa-donate"></i></span>--%>
+                        <%--                                                            <span class="total-price">Tổng tiền: <strong>280.000đ</strong></span>--%>
+                        <%--                                                        </div>--%>
+                        <%--                                                        <div class="col-md-4 total">--%>
+                        <%--                                                            <span><button class="btn-again" type="button">Liên hệ</button></span>--%>
+                        <%--                                                            <span><button class="btn-rate" type="button" data-toggle="modal"--%>
+                        <%--                                                                          data-target="#cancelOrder">Hủy đơn hàng</button></span>--%>
 
+                        <%--                                                        </div>--%>
+                        <%--                                                    </div>--%>
+                        <%--                                                </div>--%>
+                        <c:forEach items="${listCartItem}" var="cartItem">
+                            <div class="one-order">
+                                <div class="row order-header">
+                                    <div class="col-md-8 col-sm-12 order-id">
+                                        <strong>Đơn hàng: ${cartItem.id}</strong>
+
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 order-id">
+                                        <span class="fas fa-truck"></span>
+                                        <c:if test="${cartItem.status == null}">
+                                            <span class="complete">Đang xử lí</span>
+                                        </c:if>
+                                        <c:if test="${cartItem.status != null}">
+                                            <span class="complete">${cartItem.status}</span>
+                                        </c:if>
+                                    </div>
+                                </div>
+                                <div id="contentProduct">
+                                    <input type="hidden" name="user_id" value="${sessionScope.account.id}">
+
+                                    <div class="row">
+                                        <div id="cartItem_id" value="${cartItem.id}">
+                                        </div>
+                                        <div class="col-md-2 product-img">
+                                            <c:url value="${cartItem.product.image}"
+                                                   var="imgUrl"></c:url>
+                                            <img src="${imgUrl}">
+                                        </div>
+                                        <div class="col-md-10 product-info">
+                                            <h4>${cartItem.product.name}</h4>
+                                            <div class="quantityAndRemove">
+                                                <p>x${cartItem.quantity}</p>
+                                                <button class="btn-remove removeInAccount"
+                                                        onclick="return removeCartItem(document.getElementById('cartItem_id').getAttribute('value'))">
+                                                  <i class="fas fa-trash-alt"></i>  Huỷ Đơn </button>
+                                            </div>
+                                            <span class="base-price">${cartItem.product.price}đ</span>
+                                            <span class="discount">${cartItem.product.saleId}đ</span>
+                                        </div>
+                                    </div>
+                                    <hr>
                                 </div>
                             </div>
-                        </div>
+                        </c:forEach>
                     </div>
 
                     <!--Thông báo -->
@@ -274,7 +316,8 @@
                                         <h5>**RA MẮT SẢN PHẨM MỚI**</h5>
                                         <div class="mb-2">
                                             Ghé thăm cửa hàng để xem những sản phẩm mới cũng như nhận những ưu đãi
-                                            hấp dẫn từ...
+                                            hấp
+                                            dẫn từ...
                                         </div>
                                     </div>
                                 </div>
@@ -391,6 +434,7 @@
                             </div>
                         </div>
                     </div>
+
                     <!--Modal-->
                     <div class="modal fade" id="cancelOrder" tabindex="-1" role="dialog"
                          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -468,7 +512,7 @@
 </script>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 
-
+<%--đổi mk--%>
 <!--/Footer-->
 <div id="modal1">
     <div class="modal__overlay">
@@ -485,10 +529,10 @@
                 <!--Password must contain one lowercase letter, one number, and be at least 7 characters long.-->
 
                 <div class="card-text">
-                    <form>
+                    <form action="${pageContext.request.contextPath}/member/change-password" method="post">
                         <div class="alert alert-danger alert-dismissible show" role="alert">
                             <strong>Xin chào!</strong> Vui lòng điền vào các trường bên dưới để đổi mật khẩu
-                            <input name="id" value="0" hidden="true">
+                            <input name="id" value="${sessionScope.account.id }" hidden="true">
                             <a class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </a>
@@ -524,6 +568,7 @@
 <script src="${url}/js/owl.carousel.min.js"></script>
 <script src="${url}/js/main.js"></script>
 <script src="${url}/js/account.js"></script>
+<script src="${pageContext.request.contextPath}/CKLibraries/ckfinder/ckfinder.js"></script>
 
 <script type="text/javascript">
     function BrowseServer() {
@@ -539,17 +584,18 @@
     function removeCartItem(param) {
         var txtSearch = param;
         $.ajax({
-            url: '',
+            url:  '/DHHCeramic/myAccount/remove-ordered-item',
             type: 'GET',
             data: {
                 id: txtSearch,
-                user_id: 0
+                user_id: ${sessionScope.account.id},
+                timestamp: new Date().getTime() // Thêm timestamp hoặc tham số ngẫu nhiên
             },
             success: function (data) {
+                console.log("Received data:", data); // Thêm dòng này để kiểm tra giá trị của data
                 var row = document.getElementById('contentProduct');
+                row.innerHTML = '';
                 row.innerHTML = data;
-
-
             }
         });
     }
