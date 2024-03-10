@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/client/view/css/main.css">
+    <link rel="stylesheet" type="text/css" href="${url}/css/main.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <!-- or -->
@@ -148,62 +148,48 @@
             <div class="tile">
                 <h3 class="tile-title">Tạo mới tin tức</h3>
                 <div class="tile-body">
-                    <form class="row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Mã tin tức </label>
-                            <input class="form-control" type="number">
-                        </div>
+                    <form class="row" role="form" action="${pageContext.request.contextPath}/Admin/blog/add"
+                          method="post">
+                        <input type="hidden" name="user"
+                               value="${sessionScope.account.username}">
                         <div class="form-group col-md-6">
                             <label class="control-label">Tiêu đề tin tức</label>
-                            <input class="form-control" type="text" required>
+                            <input class="form-control" type="text" name="title" required>
                         </div>
                         <div class="form-group  col-md-6">
                             <label class="control-label">Ngày tạo tin tức</label>
-                            <input class="form-control" type="date" required>
+                            <input class="form-control" type="date" name="date" required>
                         </div>
                         <div class="form-group col-md-6 ">
-                            <label for="exampleSelect1" class="control-label">Loại tin tức</label>
-                            <select class="form-control" id="exampleSelect1">
-                                <option>Sức khỏe</option>
-                                <option>Đời sống</option>
-                                <option>Tâm lý</option>
-                            </select>
+                            <label class="control-label">Loại tin tức</label>
+                            <input class="form-control" type="text" name="blogCate" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="control-label">Ảnh sản phẩm</label>
-                            <div id="myfileupload">
-                                <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);"/>
-                            </div>
-                            <div id="thumbbox">
-                                <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none"/>
-                                <a class="removeimg" href="javascript:"></a>
-                            </div>
-                            <div id="boxchoice">
-                                <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn
-                                    ảnh</a>
-                                <p style="clear:both"></p>
-                            </div>
-
+                            <input type="button" value="Tải ảnh lên"
+                                   onclick="BrowseServer();" class="btn btn-controls"/>
+                            <input class="form-control" type="text" name="image" id="avatar">
                         </div>
                         <div class="form-group col-md-12">
                             <label class="control-label">Mô tả tin tức</label>
-                            <textarea class="form-control" name="mota" id="mota"></textarea>
-                            <script>CKEDITOR.replace('mota');</script>
+                            <textarea class="form-control" name="des" id="mota"></textarea>
+                            <script>CKEDITOR.replace('des');</script>
                         </div>
+
+                        <button class="btn btn-save" type="submit">Lưu lại</button>
+                        <a class="btn btn-cancel"
+                           href="${pageContext.request.contextPath}/Admin/blog/list">Hủy bỏ</a>
                     </form>
                 </div>
-                <button class="btn btn-save" type="button">Lưu lại</button>
-                <a class="btn btn-cancel" href="table-data-blog.jsp">Hủy bỏ</a>
             </div>
         </div>
     </div>
 </main>
 
-<script src="${pageContext.request.contextPath}/view/client/view/js/jquery-3.2.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/view/client/view/js/popper.min.js"></script>
-<script src="${pageContext.request.contextPath}/view/client/view/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/view/client/view/js/main.js"></script>
-<script src="${pageContext.request.contextPath}/view/client/view/js/plugins/pace.min.js"></script>
+<script src="${url}/js/jquery-3.2.1.min.js"></script>
+<script src="${url}/js/popper.min.js"></script>
+<script src="${url}/js/bootstrap.min.js"></script>
+<script src="${url}/js/main.js"></script>
+<script src="${url}/js/plugins/pace.min.js"></script>
 <script>
     const inpFile = document.getElementById("inpFile");
     const loadFile = document.getElementById("loadFile");
