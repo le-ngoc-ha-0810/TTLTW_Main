@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-lg-2">
                     <div class="header__logo">
-                        <a href="${pageContext.request.contextPath}/index.jsp"><img src="${url}/img/logo_2.png" alt=""></a>
+                        <a href="${pageContext.request.contextPath}/welcome"><img src="${url}/img/logo_2.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6" style="margin-left: 70px">
