@@ -53,17 +53,9 @@
                         <span>Tất cả sản phẩm</span>
                     </div>
                     <ul>
-                        <li><a href="#">Gạch giá rẻ</a></li>
-                        <li><a href="${pageContext.request.contextPath}/products?cateId=1">Gạch lát nền</a></li>
-                        <li><a href="${pageContext.request.contextPath}/products?cateId=2">Gạch ốp tường</a></li>
-                        <li><a href="${pageContext.request.contextPath}/products?cateId=3">Gạch lát sân vườn</a></li>
-                        <li><a href="${pageContext.request.contextPath}/products?cateId=4">Gạch giả gỗ</a></li>
-                        <li><a href="${pageContext.request.contextPath}/products?cateId=5">Gạch ốp lát cao cấp</a></li>
-                        <li><a href="${pageContext.request.contextPath}/products?cateId=6">Gạch tranh thảm</a></li>
-                        <li><a href="${pageContext.request.contextPath}/products?cateId=7">Gạch trang trí</a></li>
-                        <li><a href="${pageContext.request.contextPath}/products?cateId=8">Gạch vỉa hè</a></li>
-                        <li><a href="${pageContext.request.contextPath}/products?cateId=9">Gạch kính lấy sáng</a></li>
-                        <li><a href="${pageContext.request.contextPath}/products?cateId=10">Gạch lát cầu thang</a></li>
+                        <c:forEach items="${pCate}" var="cate">
+                            <li><a href="<c:url value="/product/list"/>">${cate.name}</a></li>
+                        </c:forEach>
                     </ul>
                 </div>
             </div>

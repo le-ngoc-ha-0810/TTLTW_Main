@@ -94,7 +94,7 @@ public class UserDaoImpl extends JDBCConnection implements UserDao {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+//             TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
