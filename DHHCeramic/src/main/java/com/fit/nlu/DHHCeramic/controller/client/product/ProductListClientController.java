@@ -1,6 +1,7 @@
 package com.fit.nlu.DHHCeramic.controller.client.product;
 
 
+import com.fit.nlu.DHHCeramic.model.Category;
 import com.fit.nlu.DHHCeramic.model.Product;
 import com.fit.nlu.DHHCeramic.services.CategoryService;
 import com.fit.nlu.DHHCeramic.services.ProductService;
@@ -26,6 +27,9 @@ public class ProductListClientController extends HttpServlet {
 //        String type = request.getParameter("type");
         List<Product> productList;
         List<Product> productSale;
+        List<Category> categoryList;
+        List<Product> products = productService.getAll();
+        request.setAttribute("products",products.size());
         int currentPage = 1;
         int productsPerPage = 12;
         if (request.getParameter("page") != null)
@@ -34,6 +38,7 @@ public class ProductListClientController extends HttpServlet {
 //        if (type==null) {
         productList = productService.getProductByPage(currentPage, productsPerPage);
         productSale = productService.getProductBySale();
+        categoryList = cateService.getAll();
 /*
         } else if(type.equals("desc")){
             productList = productService.getProductByDESC(currentPage, productsPerPage);
@@ -52,6 +57,7 @@ public class ProductListClientController extends HttpServlet {
 
         request.setAttribute("productList", productList);
         request.setAttribute("productSale", productSale);
+        request.setAttribute("categoryList", categoryList);
         int numOfProduct = productService.numOfProducts();
         int numOfPages = numOfProduct / productsPerPage;
         if (numOfPages % productsPerPage > 0) {
