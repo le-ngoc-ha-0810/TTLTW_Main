@@ -13,17 +13,9 @@
         <div class="sidebar__item">
             <h4>Tất cả loại gạch</h4>
             <ul>
-                <li><a style="cursor: pointer;" onclick="return searchByCategory(1)">Gạch giá rẻ</a></li>
-                <li><a style="cursor: pointer;" onclick="return searchByCategory(1)">Gạch lát nền</a></li>
-                <li><a style="cursor: pointer;" onclick="return searchByCategory(2)">Gạch ốp tường</a></li>
-                <li><a style="cursor: pointer;" onclick="return searchByCategory(3)">Gạch lát sân vườn</a></li>
-                <li><a style="cursor: pointer;" onclick="return searchByCategory(4)">Gạch giả gỗ</a></li>
-                <li><a style="cursor: pointer;" onclick="return searchByCategory(5)">Gạch ốp lát cao cấp</a></li>
-                <li><a style="cursor: pointer;" onclick="return searchByCategory(6)">Gạch tranh thảm</a></li>
-                <li><a style="cursor: pointer;" onclick="return searchByCategory(7)">Gạch trang trí</a></li>
-                <li><a style="cursor: pointer;" onclick="return searchByCategory(8)">Gạch vỉa hè</a></li>
-                <li><a style="cursor: pointer;" onclick="return searchByCategory(9)">Gạch kính lấy sáng</a></li>
-                <li><a style="cursor: pointer;" onclick="return searchByCategory(10)">Gạch lát cầu thang</a></li>
+                <c:forEach items="${categoryList}" var="category">
+                    <li><a style="cursor: pointer;" onclick="return searchByCategory(${category.id})">${category.name}</a></li>
+                </c:forEach>
             </ul>
         </div>
         <%--        <div class="sidebar__item">--%>
