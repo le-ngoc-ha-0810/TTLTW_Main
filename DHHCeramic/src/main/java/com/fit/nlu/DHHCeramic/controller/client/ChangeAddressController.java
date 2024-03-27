@@ -24,7 +24,9 @@ public class ChangeAddressController extends HttpServlet {
         user.setAddress(request.getParameter("newAddress"));
         Pattern pattern = Pattern.compile("^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$");
         Matcher match = pattern.matcher(request.getParameter("newPhone"));
+
 //returns a boolean value
+
         boolean isValid = false;
         isValid = (match.find() && match.group().equals(request.getParameter("newPhone")));
         if (isValid) {
