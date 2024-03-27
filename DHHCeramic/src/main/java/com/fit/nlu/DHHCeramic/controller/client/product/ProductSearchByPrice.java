@@ -37,7 +37,7 @@ public class ProductSearchByPrice extends HttpServlet {
         PrintWriter out = response.getWriter();
         for (Product p : productSearchByPrice) {
             out.println("<div class=\"col-lg-4 col-md-6 col-sm-6 show-product\"");
-            out.println("     onclick=\"window.location.href='${pageContext.request.contextPath}/product/detail?id=${p.id}'\">");
+            out.println("     onclick=\"window.location.href='${pageContext.request.contextPath}/product/detail?id=" + p.getId()+ "'\">");
             out.println("    <div class=\"product__item\">");
             out.println("        <div class=\"product__item__pic set-bg\" data-setbg=\"" + p.getImage() + "\">");
             out.println("            <ul class=\"product__item__pic__hover\">");
