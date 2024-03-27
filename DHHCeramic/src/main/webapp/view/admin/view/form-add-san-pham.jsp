@@ -184,7 +184,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label">Tên loại gạch</label>
-                            <input type="text" name="category" list="categories"/>
+                            <input class="form-control" type="text" name="category" list="categories"/>
                             <datalist id="categories">
                                 <c:forEach var="category" items="${categories}">
                                 <option value="${category.name}">
@@ -197,7 +197,11 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label">Trạng thái</label>
-                            <input class="form-control" type="text" name="status">
+                            <select class="form-control" name="your_input_name">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+<%--                            <input class="form-control" type="text" name="status">--%>
                         </div>
                         <div class="form-group col-md-12">
                             <input type="button" value="Tải ảnh lên"

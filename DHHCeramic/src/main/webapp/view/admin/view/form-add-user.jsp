@@ -192,11 +192,19 @@
                         </div>
                         <div class="form-group  col-md-4">
                             <label class="control-label">Quyền</label>
-                            <input class="form-control" type="text" name="roleId" required>
+                            <select class="form-control" name="your_input_name">
+                                <option value="0">1</option>
+                                <option value="1">2</option>
+                            </select>
+<%--                            <input class="form-control" type="text" name="roleId" required>--%>
                         </div>
                         <div class="form-group  col-md-4">
                             <label class="control-label">Trạng Thái</label>
-                            <input class="form-control" type="text" name="status" value="1" required>
+                            <select class="form-control" name="your_input_name">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+<%--                            <input class="form-control" type="text" name="status" value="1" required>--%>
                         </div>
                         <div class="form-group col-md-12">
                             <input type="button" value="Tải ảnh lên"
