@@ -138,7 +138,7 @@
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
-                                    <h6><span>159</span> Sản phẩm có sẵn</h6>
+                                    <h6><span>${products}</span> Sản phẩm có sẵn</h6>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-3">
