@@ -1,3 +1,7 @@
+<%@ page import="java.util.Date" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Map" %>
+<%@page import="java.sql.Timestamp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:url value="/view/client/static" var="url"></c:url>
@@ -142,35 +146,74 @@
                 </tr>
                 </thead>
                 <tbody>
+
                 <c:forEach items="${sessionScope.cart}" var="map">
-                    <tr>
-                        <c:url value="${map.value.product.image }"
-                               var="imgUrl"></c:url>
-                        <td class="cart_product">
-                            <input type="checkbox" class="checkbox-filter" name="brands">
-                            <a href=""><img src="${imgUrl}" alt=""></a>
-                        </td>
-                        <td class="cart_description">
-                            <h4><a href="">${map.value.product.name}</a></h4>
-                        </td>
-                        <td class="cart_price">
-                            <p>${map.value.size}</p>
-                        </td>
-                        <td class="cart_price">
-                            <p>${map.value.product.price}đ</p>
-                        </td>
-                        <td class="cart_quantity">
-                                ${map.value.quantity}
-                        </td>
-                        <td class="cart_total">
-                            <p class="cart_total_price">${map.value.product.price * map.value.quantity }đ</p>
-                        </td>
-                        <td class="cart_delete">
-                            <a class="cart_quantity_delete"
-                               href="${pageContext.request.contextPath}/cart/remove?pId=${map.value.product.id}"><i
-                                    class="fa fa-times"></i></a>
-                        </td>
-                    </tr>
+                    <c:choose>
+                        <c:when test="${not empty map.value and not empty map.value.product}">
+                            <tr>
+                                <!-- Các thông tin sản phẩm -->
+                                <td class="cart_product">
+                                    <!-- Hình ảnh sản phẩm -->
+                                    <a href=""><img src="${map.value.product.image}" alt=""></a>
+                                </td>
+                                <td class="cart_description">
+                                    <!-- Tên sản phẩm -->
+                                    <h4><a href="">${map.value.product.name}</a></h4>
+                                </td>
+                                <td class="cart_price">
+                                    <!-- Size sản phẩm -->
+                                    <p>${map.value.size}</p>
+                                </td>
+                                <td class="cart_price">
+                                    <!-- Đơn giá -->
+                                    <p id="price_${map.key}">${map.value.product.price}đ</p>
+                                </td>
+                                <td>
+                                    <!-- Số lượng -->
+                                    <!-- Bổ sung kiểm tra tính hợp lệ của số lượng trước khi sử dụng -->
+                                    <c:if test="${map.value.quantity > 0}">
+                                        <div class="d-flex mb-4" style="max-width: 300px">
+                                            <!-- Nút giảm số lượng -->
+                                            <button class="btn btn-dark px-3 me-2"
+                                                    onclick="updateItemCart(${map.key}, -1)"
+                                                    style="height: 40px">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                            <!-- Input hiển thị số lượng -->
+                                            <div class="form-outline">
+                                                <input id="quantity_${map.key}" min="1" name="quantity"
+                                                       value="${map.value.quantity}" type="number"
+                                                       class="form-control minicart-quantity ${map.key}" readonly>
+                                            </div>
+                                            <!-- Nút tăng số lượng -->
+                                            <button class="btn btn-dark px-3 ms-2"
+                                                    onclick="updateItemCart(${map.key}, 1)"
+                                                    style="height: 40px">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </c:if>
+                                </td>
+                                <td class="cart_total">
+                                    <!-- Tính tổng tiền -->
+                                    <p id="total_price_${map.key}"
+                                       class="cart_total_price">${map.value.product.price * map.value.quantity}đ</p>
+                                </td>
+                                <td class="cart_delete">
+                                    <!-- Xóa sản phẩm khỏi giỏ hàng -->
+                                    <a class="cart_quantity_delete"
+                                       href="${pageContext.request.contextPath}/cart/remove?pId=${map.value.product.id}"><i
+                                            class="fa fa-times"></i></a>
+                                </td>
+                            </tr>
+                        </c:when>
+                        <c:otherwise>
+                            <!-- Xử lý graceful khi không tìm thấy sản phẩm -->
+                            <tr>
+                                <td colspan="6">Sản phẩm không tồn tại hoặc đã bị xóa</td>
+                            </tr>
+                        </c:otherwise>
+                    </c:choose>
                 </c:forEach>
                 </tbody>
             </table>
@@ -188,94 +231,15 @@
                         <div class="payment__type-right-change">
                             <div type="button" class="launch" data-toggle="modal" data-target="#staticBackdrop">THAY ĐỔI
                             </div>
-                            <!-- Modal -->
-<%--                            <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false"--%>
-<%--                                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">--%>
-<%--                                <div class="modal-dialog">--%>
-<%--                                    <div class="modal-content">--%>
-<%--                                        <div class="modal-body">--%>
-<%--                                            <div class="text-right"><i class="fas fa-times-circle text-close"--%>
-<%--                                                                       data-dismiss="modal"></i></div>--%>
-<%--                                            <div class="tabs mt-3">--%>
-<%--                                                <ul class="nav nav-tabs" id="myTab" role="tablist">--%>
-<%--                                                    <li class="nav-item" role="presentation"><a class="nav-link active"--%>
-<%--                                                                                                id="visa-tab"--%>
-<%--                                                                                                data-toggle="tab"--%>
-<%--                                                                                                href="#visa" role="tab"--%>
-<%--                                                                                                aria-controls="visa"--%>
-<%--                                                                                                aria-selected="true">--%>
-<%--                                                        <img src="${url}/images/home/visa.jpg" width="80"> </a></li>--%>
-<%--                                                    <li class="nav-item" role="presentation"><a class="nav-link"--%>
-<%--                                                                                                id="paypal-tab"--%>
-<%--                                                                                                data-toggle="tab"--%>
-<%--                                                                                                href="#paypal"--%>
-<%--                                                                                                role="tab"--%>
-<%--                                                                                                aria-controls="paypal"--%>
-<%--                                                                                                aria-selected="false">--%>
-<%--                                                        <img src="${url}/images/home/Paypal.png" width="80"> </a></li>--%>
-<%--                                                </ul>--%>
-<%--                                                <div class="tab-content" id="myTabContent">--%>
-<%--                                                    <div class="tab-pane fade" id="visa" role="tabpanel"--%>
-<%--                                                         aria-labelledby="visa-tab">--%>
-<%--                                                        <div class="mt-4 mx-4">--%>
-<%--                                                            <div class="text-center">--%>
-<%--                                                                <h5>Credit card</h5>--%>
-<%--                                                            </div>--%>
-<%--                                                            <div class="form mt-3">--%>
-<%--                                                                <div class="inputbox"><input type="text" name="name"--%>
-<%--                                                                                             class="form-control"--%>
-<%--                                                                                             required="required"> <span>Cardholder Name</span>--%>
-<%--                                                                </div>--%>
-<%--                                                                <div class="inputbox"><input type="text" name="name"--%>
-<%--                                                                                             min="1" max="999"--%>
-<%--                                                                                             class="form-control"--%>
-<%--                                                                                             required="required"> <span>Card Number</span>--%>
-<%--                                                                    <i class="fa fa-eye"></i></div>--%>
-<%--                                                                <div class="d-flex flex-row">--%>
-<%--                                                                    <div class="inputbox"><input type="text" name="name"--%>
-<%--                                                                                                 min="1" max="999"--%>
-<%--                                                                                                 class="form-control"--%>
-<%--                                                                                                 required="required">--%>
-<%--                                                                        <span>Expiration Date</span></div>--%>
-<%--                                                                    <div class="inputbox"><input type="text" name="name"--%>
-<%--                                                                                                 min="1" max="999"--%>
-<%--                                                                                                 class="form-control"--%>
-<%--                                                                                                 required="required">--%>
-<%--                                                                        <span>CVV</span></div>--%>
-<%--                                                                </div>--%>
-<%--                                                                <div class="px-5 pay">--%>
-<%--                                                                    <button class="btn btn-success btn-block">Add card--%>
-<%--                                                                    </button>--%>
-<%--                                                                </div>--%>
-<%--                                                            </div>--%>
-<%--                                                        </div>--%>
-<%--                                                    </div>--%>
-<%--                                                    <div class="tab-pane fade  show active" id="paypal" role="tabpanel"--%>
-<%--                                                         aria-labelledby="paypal-tab">--%>
-<%--                                                        <div class="px-5 mt-5">--%>
-<%--                                                            <div class="inputbox"><input type="text" name="name"--%>
-<%--                                                                                         class="form-control"--%>
-<%--                                                                                         required="required"> <span>Paypal Email Address</span>--%>
-<%--                                                            </div>--%>
-<%--                                                            <div class="pay px-5">--%>
-<%--                                                                <button class="btn btn-primary btn-block">Add paypal--%>
-<%--                                                                </button>--%>
-<%--                                                            </div>--%>
-<%--                                                        </div>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <form class="container" style="display: flex" action="${pageContext.request.contextPath}/member/order" method="post">
+            <form class="container" style="display: flex" action="${pageContext.request.contextPath}/member/order"
+                  method="post">
                 <div class="col-lg-7">
                     <div class="chose_area">
                         <div class="heading" style="margin-left: 10px">
@@ -301,10 +265,11 @@
                                 <b style="margin-bottom:5px; margin-left: 10px">Khuyến mãi</b>
                                 <p class="number_of_discount">Có thể chọn mã giảm giá hoặc mã freeship</p>
                             </div>
-                            <input style="margin-left:15px" type="text" name="discount" class="name" placeholder="Nhập mã khuyến mãi">
+                            <input style="margin-left:15px" type="text" id="discount" name="discount" class="name"
+                                   placeholder="Nhập mã khuyến mãi">
+                            <button type="button" onclick="applyDiscountCode()">Nhập</button>
                             <a><i class="fas fa-tag"></i> Chọn mã khuyến mãi</a>
                         </div>
-
                         <div class="checkout__input">
                             <b style="margin-bottom:5px; margin-left: 10px">Lưu ý</b>
                             <input type="text" name="note" placeholder="hàng dễ vỡ,..." style="margin-left: 10px">
@@ -325,7 +290,7 @@
                         <div class="checkout_calculate">
                             <div class="temp_price">
                                 <p>Tạm tính</p>
-                                <p>${total}đ</p>
+                                <p id="total_price">${total}đ</p>
                             </div>
                             <div class="discount_checkout">
                                 <p>Giảm giá</p>
@@ -334,7 +299,7 @@
                             <div class="filter-price-range-filter__range-line-checkout"></div>
                             <div class="sum_price">
                                 <p style="font-size: 24px;">Tổng cộng:</p>
-                                <p class="no_product" style="font-size: 24px;">${total}</p>
+                                <p id="total_dc" class="no_product" style="font-size: 24px;">${total}</p>
                             </div>
                             <p class="vat">(Đã bao gồm thuế VAT nếu có)</p>
                         </div>
@@ -397,7 +362,6 @@
 <!-- Footer Section Begin -->
 <jsp:include page="/view/client/view/footer.jsp"></jsp:include>
 <!-- Footer Section End -->
-
 <!-- Js Plugins -->
 <script src="${url}/js/jquery-3.3.1.min.js"></script>
 <script src="${url}/js/bootstrap.min.js"></script>
@@ -407,6 +371,7 @@
 <script src="${url}/js/mixitup.min.js"></script>
 <script src="${url}/js/owl.carousel.min.js"></script>
 <script src="${url}/js/main.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
     $("#turn__off").click(
@@ -418,6 +383,80 @@
         document.getElementById("modal1").style.display = "block";
     }
 </script>
+
+<script>
+    function updateItemCart(idItem, type = 0) {
+        let inputQuantityEle = document.getElementById('quantity_' + idItem);
+        let totalPriceEle = document.getElementById('total_price_' + idItem);
+        let sumTotalEle = document.getElementById('total_price');
+        let sumTotal = document.getElementById('total_dc');
+        let quantity = inputQuantityEle.value;
+
+        $.ajax({
+            dataType: 'json',
+            type: 'POST',
+            data: {
+                "action": "update-cart",
+                "id_item": idItem,
+                "quantity": quantity * 1 + type
+            },
+            url: "<%=request.getContextPath()%>/cart/update",
+            success: function (data) {
+                if (data.success) {
+                    inputQuantityEle.value = quantity * 1 + type;
+
+                    // Tính toán giá tiền mới
+                    let newTotalPrice = data.new_price;
+
+                    // Cập nhật giá tiền mới vào thẻ HTML
+                    totalPriceEle.textContent = newTotalPrice + 'đ';
+
+                    let newSumTotal = data.newSumPrice;
+                    sumTotalEle.textContent = newSumTotal + 'đ';
+
+                    sumTotal.textContent = newSumTotal + 'đ';
+                } else {
+                    swal("Có lỗi xảy ra khi cập nhật giỏ hàng!", {
+                        buttons: false,
+                        timer: 1000,
+                        icon: "error",
+                    });
+                }
+            }
+        });
+    }
+
+</script>
+
 </body>
 
 </html>
+<!-- Price -->
+<%--    <c:choose>--%>
+<%--        <!-- Kiểm tra xem sản phẩm có khuyến mãi không -->--%>
+<%--        <c:when test="${map.value.product.dateStart ne null || map.value.product.dateEnd ne null}">--%>
+<%--            <!-- Lấy thời gian hiện tại -->--%>
+<%--            <c:set var="serverTime" value="${now}"/>--%>
+<%--            <!-- Chuyển đổi thời gian hiện tại thành Timestamp -->--%>
+<%--            <c:set var="timestamp" value="${fn:toDate(serverTime.time)}"/>--%>
+<%--            <!-- Chuyển đổi thời gian bắt đầu và kết thúc khuyến mãi thành Timestamp -->--%>
+<%--            <c:set var="dateStart" value="${fn:toDate(map.value.product.dateStart)}"/>--%>
+<%--            <c:set var="dateEnd" value="${fn:toDate(map.value.product.dateEnd)}"/>--%>
+
+<%--            <!-- Kiểm tra xem sản phẩm đang trong thời gian khuyến mãi -->--%>
+<%--            <c:if test="${dateEnd.time gt timestamp.time and dateStart.time lt timestamp.time}">--%>
+<%--                <!-- Hiển thị giá giảm giá cùng với giá gốc -->--%>
+<%--                <p class="text-start text-md-center">--%>
+<%--                    <strong>${map.value.product.priceDiscount}₫</strong>--%>
+<%--                    <strong style="text-decoration: line-through;font-weight: normal;">${map.value.product.price}₫</strong>--%>
+<%--                </p>--%>
+<%--            </c:if>--%>
+<%--        </c:when>--%>
+<%--        <!-- Nếu không có khuyến mãi, chỉ hiển thị giá gốc -->--%>
+<%--        <c:otherwise>--%>
+<%--            <p class="text-start text-md-center">--%>
+<%--                <strong>${map.value.product.price}₫</strong>--%>
+<%--            </p>--%>
+<%--        </c:otherwise>--%>
+<%--    </c:choose>--%>
+<!-- Price -->
