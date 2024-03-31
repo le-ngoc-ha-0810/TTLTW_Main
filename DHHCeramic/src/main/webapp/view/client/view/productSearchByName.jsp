@@ -129,7 +129,7 @@
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
                                 <div class="filter__sort">
-                                    <span>Sắp xếp</span>
+                                    <span>Sắp xếp</span>`
                                     <select>
                                         <option value="0">Mặc định</option>
                                         <option value="0">Mặc định</option>
