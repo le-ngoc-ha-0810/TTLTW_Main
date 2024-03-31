@@ -117,4 +117,3 @@ public class Discount extends BaseModel {
         this.updateDate = updateDate;
     }
 }
-
