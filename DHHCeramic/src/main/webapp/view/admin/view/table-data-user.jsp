@@ -111,6 +111,31 @@
                                 <td>${account.facebook}</td>
                                 <td>${account.status}</td>
                                 <td>${account.phoneNumber}</td>
+<%--                                If (${account.roleId} == 1) {--%>
+<%--                                <td>Role 1</td>--%>
+<%--                                }--%>
+<%--                                else if (${account.roleId} == 2) {--%>
+<%--                                <td>Role 2</td>--%>
+<%--                                }--%>
+<%--                                <td>--%>
+<%--&lt;%&ndash;                                        If ${account.roleId} == 1 {&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                        Role 1&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                        }&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                        else if (${account.roleId} == 2) {&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                        Role 2&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                        }&ndash;%&gt;--%>
+<%--                            <%--%>
+<%--                                if (account.getRoleId() == 1) {--%>
+<%--                            %>--%>
+<%--                            Role 1--%>
+<%--                            <%--%>
+<%--                            } else if (account.getRoleId() == 2) {--%>
+<%--                            %>--%>
+<%--                            Role 2--%>
+<%--                            <%--%>
+<%--                                }--%>
+<%--                            %>--%>
+<%--                                </td>--%>
                                 <td>${account.roleId}</td>
                                 <td class="table-td-center">
                                     <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"

@@ -168,7 +168,11 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label">Trạng thái</label>
-                            <input class="form-control" type="number" name="status" required>
+                            <select class="form-control" name="your_input_name">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+<%--                            <input class="form-control" type="number" name="status" required>--%>
                         </div>
 
                         <button class="btn btn-save" type="submit">Lưu lại</button>
