@@ -192,15 +192,15 @@
                         </div>
                         <div class="form-group  col-md-4">
                             <label class="control-label">Quyền</label>
-                            <select class="form-control" name="your_input_name">
-                                <option value="0">1</option>
-                                <option value="1">2</option>
+                            <select class="form-control" name="roleId">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
                             </select>
 <%--                            <input class="form-control" type="text" name="roleId" required>--%>
                         </div>
                         <div class="form-group  col-md-4">
                             <label class="control-label">Trạng Thái</label>
-                            <select class="form-control" name="your_input_name">
+                            <select class="form-control" name="status">
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                             </select>

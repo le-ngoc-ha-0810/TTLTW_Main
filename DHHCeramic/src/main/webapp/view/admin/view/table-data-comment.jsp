@@ -78,6 +78,7 @@
                         <tbody>
                         <c:forEach items="${commentList}" var="c">
                             <tr>
+                                <td width="10"><input type="checkbox" name="check1" value="1"></td>
                                 <td>${c.id}</td>
                                 <td>${c.username}</td>
                                 <c:url value="${c.avatar }" var="imgUrl"></c:url>
