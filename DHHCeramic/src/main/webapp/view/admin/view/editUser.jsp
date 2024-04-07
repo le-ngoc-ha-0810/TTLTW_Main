@@ -163,7 +163,7 @@
                                value="${sessionScope.account.username}">
                         <div class="form-group col-md-4">
                             <label class="control-label">Tên người dùng</label>
-                            <input class="form-control" type="text" name="username"    value="${user.username}" required>
+                            <input class="form-control" type="text" name="username" value="${user.username}" required>
                         </div>
                         <div class="form-group  col-md-4">
                             <label class="control-label">Mật khẩu</label>
@@ -191,11 +191,19 @@
                         </div>
                         <div class="form-group  col-md-4">
                             <label class="control-label">Quyền</label>
-                            <input class="form-control" type="text" name="roleId" value="${user.roleId}" required>
+<%--                            <input class="form-control" type="text" name="roleId" value="${user.roleId}" required>--%>
+                            <select class="form-control" name="roleId" value="${user.roleId}" required>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                            </select>
                         </div>
                         <div class="form-group  col-md-4">
                             <label class="control-label">Trạng Thái</label>
-                            <input class="form-control" type="text" name="status" value="${user.status}" required>
+<%--                            <input class="form-control" type="text" name="status" value="${user.status}" required>--%>
+                            <select class="form-control" name="status" value="${user.status}" required>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
                         </div>
                         <div class="form-group col-md-12">
                             <input type="button" value="Tải ảnh lên"
