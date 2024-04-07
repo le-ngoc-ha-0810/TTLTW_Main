@@ -197,7 +197,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label">Trạng thái</label>
-                            <select class="form-control" name="your_input_name">
+                            <select class="form-control" name="status">
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                             </select>
@@ -209,7 +209,7 @@
                             <input type="text" name="image" id="image">
                         </div>
                         <button class="btn btn-save" type="submit">Lưu lại</button>
-                        <a class="btn btn-cancel" href="${pageContext.request.contextPath}/Admin/blog/list">Hủy bỏ</a>
+                        <a class="btn btn-cancel" href="${pageContext.request.contextPath}/Admin/product/list">Hủy bỏ</a>
                     </form>
                 </div>
 

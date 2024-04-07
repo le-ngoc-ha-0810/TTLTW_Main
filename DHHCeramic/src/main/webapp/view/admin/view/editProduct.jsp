@@ -189,12 +189,16 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label">Trạng thái</label>
-                            <input class="form-control" type="text" name="status" value="${product.status}">
+<%--                            <input class="form-control" type="text" name="status" value="${product.status}">--%>
+                            <select class="form-control" name="status" value="${product.status}" required>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
                         </div>
+
                         <div class="form-group col-md-6">
                             <label class="control-label">Tên loại gạch</label>
-                            <input type="text" name="category" class="form-control"
-                                   value="${product.category.name}" list="categories">
+                            <input type="text" name="category" class="form-control" list="categories" >
                             <datalist id="categories">
                                 <c:forEach var="category" items="${categories}">
                                 <option value="${category.name}">
