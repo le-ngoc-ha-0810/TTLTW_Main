@@ -168,6 +168,39 @@ public class UserDaoImpl extends JDBCConnection implements UserDao {
         }
         return null;
     }
+    public User getByEmail(String email) {
+        String sql = "SELECT * FROM users WHERE email = ?";
+        Connection con = JDBCConnection.getJDBCConnection();
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                User user = new User();
+
+                user.setId(rs.getInt("id"));
+                user.setEmail(rs.getString("email"));
+                user.setFullname(rs.getString("fullname"));
+                user.setFacebook(rs.getString("facebook"));
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                user.setAvatar(rs.getString("avatar"));
+                user.setAddress(rs.getString("address"));
+                user.setPhoneNumber(rs.getString("phoneNumber"));
+                user.setStatus(rs.getInt("status"));
+                user.setRoleId(rs.getInt("roleId")); // Thay đổi ở đây
+
+                return user;
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     @Override
     public List<User> getAll() {
