@@ -109,13 +109,13 @@ public class ProductDaoImpl implements ProductDao {
                 product.setStock(rs.getInt("stock"));
                 product.setSaleId(rs.getLong("saleId"));
                 product.setImage(rs.getString("image"));
-                String description = rs.getString("des").replace("\n", "<br>"); // Đổi ký tự xuống dòng (\n) thành thẻ <br> để hiển thị xuống dòng trên giao diện
-                product.setDes(description);
+                product.setDes(rs.getString("des"));
                 product.setCategory(category);
                 product.setIsLiked(rs.getInt("isLike"));
                 product.setStatus(rs.getInt("status"));
                 product.setManufacture(rs.getString("manufacture"));
                 product.setSize(rs.getString("size"));
+//                product.setStatus(rs.getInt("status"));
                 return product;
 
             }
@@ -131,7 +131,7 @@ public class ProductDaoImpl implements ProductDao {
     public List<Product> getAll() {
 
         List<Product> productList = new ArrayList<Product>();
-        String sql = "SELECT products.id, products.name AS p_name, products.price,products.stock,products.saleId, products.image, products.des , categories.cateName AS c_name, categories.id AS c_id,products.isLike, products.manufacture, products.size"
+        String sql = "SELECT products.id, products.name AS p_name, products.price,products.stock,products.saleId, products.image, products.des , categories.cateName AS c_name, categories.id AS c_id,products.isLike, products.manufacture, products.size, products.status"
                 + " FROM products INNER JOIN categories " + "ON products.cateId= categories.id";
         Connection conn = JDBCConnection.getJDBCConnection();
 
@@ -148,12 +148,12 @@ public class ProductDaoImpl implements ProductDao {
                 product.setStock(rs.getInt("stock"));
                 product.setSaleId(rs.getLong("saleId"));
                 product.setImage(rs.getString("image"));
-                String description = rs.getString("des").replace("\n", "<br>"); // Đổi ký tự xuống dòng (\n) thành thẻ <br> để hiển thị xuống dòng trên giao diện
-                product.setDes(description);
+                product.setDes(rs.getString("des"));
                 product.setCategory(category);
                 product.setIsLiked(rs.getInt("isLike"));
                 product.setManufacture(rs.getString("manufacture"));
                 product.setSize(rs.getString("size"));
+                product.setStatus(rs.getInt("status"));
                 productList.add(product);
             }
             conn.close();
@@ -185,8 +185,7 @@ public class ProductDaoImpl implements ProductDao {
                 product.setStock(rs.getInt("stock"));
                 product.setSaleId(rs.getLong("saleId"));
                 product.setImage(rs.getString("image"));
-                String description = rs.getString("des").replace("\n", "<br>"); // Đổi ký tự xuống dòng (\n) thành thẻ <br> để hiển thị xuống dòng trên giao diện
-                product.setDes(description);
+                product.setDes(rs.getString("des"));
 
                 Category category = new Category();
                 category.setId(rs.getInt("c_id"));
@@ -225,8 +224,7 @@ public class ProductDaoImpl implements ProductDao {
                 product.setStock(rs.getInt("stock"));
                 product.setSaleId(rs.getLong("saleId"));
                 product.setImage(rs.getString("image"));
-                String description = rs.getString("des").replace("\n", "<br>"); // Đổi ký tự xuống dòng (\n) thành thẻ <br> để hiển thị xuống dòng trên giao diện
-                product.setDes(description);
+                product.setDes(rs.getString("des"));
                 product.setCategory(category);
                 product.setIsLiked(rs.getInt("isLike"));
                 product.setManufacture(rs.getString("manufacture"));
@@ -264,8 +262,7 @@ public class ProductDaoImpl implements ProductDao {
                 product.setStock(rs.getInt("stock"));
                 product.setSaleId(rs.getLong("saleId"));
                 product.setImage(rs.getString("image"));
-                String description = rs.getString("des").replace("\n", "<br>"); // Đổi ký tự xuống dòng (\n) thành thẻ <br> để hiển thị xuống dòng trên giao diện
-                product.setDes(description);
+                product.setDes(rs.getString("des"));
                 product.setCategory(category);
 
                 product.setCategory(category);
@@ -304,8 +301,7 @@ public class ProductDaoImpl implements ProductDao {
                 product.setStock(rs.getInt("stock"));
                 product.setSaleId(rs.getLong("saleId"));
                 product.setImage(rs.getString("image"));
-                String description = rs.getString("des").replace("\n", "<br>"); // Đổi ký tự xuống dòng (\n) thành thẻ <br> để hiển thị xuống dòng trên giao diện
-                product.setDes(description);
+                product.setDes(rs.getString("des"));
                 product.setCategory(category);
                 product.setIsLiked(rs.getInt("isLike"));
                 product.setManufacture(rs.getString("manufacture"));
@@ -347,8 +343,7 @@ public class ProductDaoImpl implements ProductDao {
                 product.setStock(rs.getInt("stock"));
                 product.setSaleId(rs.getLong("saleId"));
                 product.setImage(rs.getString("image"));
-                String description = rs.getString("des").replace("\n", "<br>"); // Đổi ký tự xuống dòng (\n) thành thẻ <br> để hiển thị xuống dòng trên giao diện
-                product.setDes(description);
+                product.setDes(rs.getString("des"));
                 product.setCategory(category);
                 product.setIsLiked(rs.getInt("isLike"));
                 product.setManufacture(rs.getString("manufacture"));
@@ -391,8 +386,7 @@ public class ProductDaoImpl implements ProductDao {
                 product.setStock(rs.getInt("stock"));
                 product.setSaleId(rs.getLong("saleId"));
                 product.setImage(rs.getString("image"));
-                String description = rs.getString("des").replace("\n", "<br>"); // Đổi ký tự xuống dòng (\n) thành thẻ <br> để hiển thị xuống dòng trên giao diện
-                product.setDes(description);
+                product.setDes(rs.getString("des"));
                 product.setCategory(category);
                 product.setIsLiked(rs.getInt("isLike"));
                 product.setManufacture(rs.getString("manufacture"));
@@ -535,8 +529,7 @@ public class ProductDaoImpl implements ProductDao {
                 product.setStock(rs.getInt("stock"));
                 product.setSaleId(rs.getLong("saleId"));
                 product.setImage(rs.getString("image"));
-                String description = rs.getString("des").replace("\n", "<br>"); // Đổi ký tự xuống dòng (\n) thành thẻ <br> để hiển thị xuống dòng trên giao diện
-                product.setDes(description);
+                product.setDes(rs.getString("des"));
                 product.setCategory(category);
 
                 product.setCategory(category);
@@ -577,8 +570,7 @@ public class ProductDaoImpl implements ProductDao {
                 product.setStock(rs.getInt("stock"));
                 product.setSaleId(rs.getLong("saleId"));
                 product.setImage(rs.getString("image"));
-                String description = rs.getString("des").replace("\n", "<br>"); // Đổi ký tự xuống dòng (\n) thành thẻ <br> để hiển thị xuống dòng trên giao diện
-                product.setDes(description);
+                product.setDes(rs.getString("des"));
                 product.setCategory(category);
 
                 product.setCategory(category);

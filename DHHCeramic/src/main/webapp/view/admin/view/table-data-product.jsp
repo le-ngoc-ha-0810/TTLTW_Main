@@ -88,6 +88,7 @@
                             <th>Mô tả</th>
                             <th>Giá tiền</th>
                             <th>Nguồn gốc</th>
+                            <th>Trạng thái</th>
                             <th>Chức năng</th>
                         </tr>
                         </thead>
@@ -105,6 +106,7 @@
                                 <td>${pro.des}</td>
                                 <td>${pro.price}</td>
                                 <td>${pro.manufacture}</td>
+                                <td>${pro.status == 0 ? 'Còn hàng' : 'Hết hàng'}</td>
                                 <td class="table-td-center">
                                     <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
                                             onclick="confirmDelete(${pro.id})"><i class="fas fa-trash-alt"></i>
