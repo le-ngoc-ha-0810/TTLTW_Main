@@ -74,14 +74,14 @@ public class RegisterController extends HttpServlet {
 //        boolean isSuccess = service.register(username, SecurityUtils.hash(password), email);
 //
 //        if (isSuccess) {
-            SendEmail sm = new SendEmail();
-            String code = sm.getRandom();
-            System.out.println("Code from getRandom(): " + code); // In giá trị ra console
-            User user = new User(email, username, code, password);
-            SendEmail.sendMail(email, "DHH-Email of verification", "Welcome to DHH Ceramic. Here is your verification code: " + user.getCode() + " .Thanks !");
-            HttpSession session = req.getSession();
-            session.setAttribute("authcode", user);
-            resp.sendRedirect(req.getContextPath() + "/redirect");
+        SendEmail sm = new SendEmail();
+        String code = sm.getRandom();
+        System.out.println("Code from getRandom(): " + code); // In giá trị ra console
+        User user = new User(email, username, code, password);
+        SendEmail.sendMail(email, "DHH-Email of verification", "Welcome to DHH Ceramic. Here is your verification code: " + user.getCode() + " .Thanks !");
+        HttpSession session = req.getSession();
+        session.setAttribute("authcode", user);
+        resp.sendRedirect(req.getContextPath() + "/redirect");
 //        } else {
 //            alertMsg = "System error!";
 //            req.setAttribute("alert", alertMsg);
