@@ -83,6 +83,7 @@
                             <th width="10"><input type="checkbox" id="all"></th>
                             <th>Mã loại sản phẩm</th>
                             <th>Tên loại sản phẩm</th>
+                            <th>Trạng thái</th>
                             <th width="100">Chức năng</th>
                         </tr>
                         </thead>
@@ -92,6 +93,7 @@
                                 <td width="10"><input type="checkbox" name="check1" value="1"></td>
                                 <td>${cate.id}</td>
                                 <td>${cate.name}</td>
+                                <td>${cate.status == 0 ? 'Còn hàng' : 'Hết hàng'}</td>
                                 <td class="table-td-center">
                                     <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
                                             onclick="confirmDelete(${cate.id})"><i class="fas fa-trash-alt"></i>

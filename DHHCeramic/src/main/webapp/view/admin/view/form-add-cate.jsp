@@ -164,15 +164,20 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label">Tên loại sản phẩm</label>
-                            <input class="form-control" type="text" name="name" required>
+                            <input class="form-control" type="text" name="category" list="categories">
+                            <datalist id="categories">
+                                <c:forEach var="category" items="${categories}">
+                                <option value="${category.name}">
+                                    </c:forEach>
+                            </datalist>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label">Trạng thái</label>
-                            <select class="form-control" name="your_input_name">
+                            <select class="form-control" name="status">
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                             </select>
-<%--                            <input class="form-control" type="number" name="status" required>--%>
+                            <%--                            <input class="form-control" type="number" name="status" required>--%>
                         </div>
 
                         <button class="btn btn-save" type="submit">Lưu lại</button>

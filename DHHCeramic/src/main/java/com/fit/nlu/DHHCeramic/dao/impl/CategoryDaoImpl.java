@@ -105,6 +105,7 @@ public class CategoryDaoImpl extends JDBCConnection implements CategoryDao {
 
                 category.setId(rs.getInt("id"));
                 category.setName(rs.getString("cateName"));
+                category.setStatus(rs.getInt("status"));
                 categories.add(category);
             }
 
