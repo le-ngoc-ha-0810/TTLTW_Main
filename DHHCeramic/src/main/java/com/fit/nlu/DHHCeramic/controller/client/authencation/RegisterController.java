@@ -64,8 +64,8 @@ public class RegisterController extends HttpServlet {
             req.getRequestDispatcher(Constant.Path.REGISTER).forward(req, resp);
             return;
         }
-        if (password.length() < 6) {
-            alertMsg = "Mật khẩu phải có ít nhất 6 kí tự!";
+        if (password.length() < 8 || !password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")) {
+            alertMsg = "Mật khẩu phải chứa ít nhất 8 ký tự, bao gồm ít nhất một ký tự chữ cái viết thường, một ký tự chữ cái viết hoa, một số và một ký tự đặc biệt!";
             req.setAttribute("alert", alertMsg);
             req.getRequestDispatcher(Constant.Path.REGISTER).forward(req, resp);
             return;

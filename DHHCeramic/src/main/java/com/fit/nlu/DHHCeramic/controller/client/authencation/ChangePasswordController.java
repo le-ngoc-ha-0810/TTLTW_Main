@@ -19,7 +19,6 @@ public class ChangePasswordController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/view/client/view/account.jsp").forward(request, response);
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -28,17 +27,25 @@ public class ChangePasswordController extends HttpServlet {
         String rePass = request.getParameter("reNewPassword");
         int id = Integer.parseInt(request.getParameter("id"));
         String alert = "";
+
+        // Password policy regex pattern
+        String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+
         if (userService.get(id).getPassword().equals(SecurityUtils.hash(oldPassword))) {
-            if (newPassword.equals(rePass)) {
+            // Check if new password adheres to the password policy
+            if (!newPassword.matches(passwordRegex)) {
+                alert = "The new password must contain at least 8 characters, including at least one lowercase letter, one uppercase letter, one number, and one special character.";
+            } else if (!newPassword.equals(rePass)) {
+                alert = "New password and re-new password not match";
+            } else {
                 userService.changePassword(id, SecurityUtils.hash(newPassword));
                 alert = "Change password success";
-            } else {
-                alert = "New password and re-new password not match";
             }
         } else {
             alert = "Old password not match";
         }
-        request.setAttribute("id", id);
+
+        // Redirect to account page with a success or error message
         response.sendRedirect(request.getContextPath() + "/member/myAccount?id=" + id + "&alert=" + alert);
     }
 }
