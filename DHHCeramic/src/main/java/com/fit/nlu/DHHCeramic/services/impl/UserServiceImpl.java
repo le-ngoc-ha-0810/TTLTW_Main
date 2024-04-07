@@ -31,6 +31,9 @@ public class UserServiceImpl implements UserService {
     public User get(String username) {
         return userDao.get(username);
     }
+    public User getByEmail(String email){
+        return userDao.getByEmail(email);
+    }
 
     @Override
     public User get(int id) {
@@ -48,8 +51,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(String username, String password) {
-        User user = this.get(username);
+    public User login(String usernameOrEmail, String password) {
+        User user = null;
+        user = userDao.get(usernameOrEmail);
+        if (user == null) {
+            user = userDao.getByEmail(usernameOrEmail);
+        }
         if (user != null && SecurityUtils.hash(password).equals(user.getPassword())) {
             return user;
         }

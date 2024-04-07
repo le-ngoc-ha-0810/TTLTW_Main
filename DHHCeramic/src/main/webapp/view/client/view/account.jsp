@@ -202,7 +202,7 @@
                                     <label class="col-md-2  col-sm-3 col-xs-12 control-label">Mật khẩu</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
                                         <input type="password" class="form-control" name="password"
-                                               value="${sessionScope.account.password}">
+                                               value="${sessionScope.account.password}" readonly>
                                         <input type="button" id="changePasswordBtn" class="change__password-btn"
                                                style="margin-top: 6px;" onclick="showChangePassword()"
                                                value="Thay đổi mật khẩu">
