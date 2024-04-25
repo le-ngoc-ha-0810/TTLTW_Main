@@ -1,10 +1,11 @@
 package com.fit.nlu.DHHCeramic.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Log extends BaseModel implements Serializable {
+public class Log extends BaseModel {
     private int id;
     private String ip;
     private int level;
@@ -162,4 +163,5 @@ public class Log extends BaseModel implements Serializable {
                 ", status=" + status +
                 '}';
     }
+
 }
