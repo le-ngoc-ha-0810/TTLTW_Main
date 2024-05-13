@@ -34,7 +34,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="tile">
+            <div class="tile" style="width: 1540px;">
                 <div class="tile-body">
                     <div class="row element-button">
                         <div class="col-sm-2">
@@ -58,7 +58,7 @@
                                     class="fas fa-file-pdf"></i> Xuất PDF</a>
                         </div>
                         <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
+                            <a id="deleteSelected" class="btn btn-delete btn-sm" type="button" title="Xóa"><i
                                     class="fas fa-trash-alt"></i> Xóa tất cả </a>
                         </div>
                     </div>
@@ -67,36 +67,42 @@
                            id="sampleTable">
                         <thead>
                         <tr>
-                            <th width="10"><input type="checkbox" id="all"></th>
-                            <th>Mã log</th>
-                            <th>Địa chỉ IP</th>
+                            <th width="10"><input type="checkbox" name="check1" id="all"></th>
+                            <th>Mã Log</th>
+                            <th>IP</th>
                             <th>Level</th>
-                            <th>Resource</th>
-                            <th>PreValue</th>
+                            <th>Address</th>
+                            <th>Previous Value</th>
                             <th>Value</th>
+                            <th>Status</th>
+                            <th>Người tạo</th>
+                            <th>Ngày tạo</th>
                             <th width="50">Tính năng</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${commentList}" var="c">
+                        <c:forEach items="${logList}" var="c">
                             <tr>
-                                <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                                <td width="10"><input type="checkbox" name="check1" value="${c.id}"></td>
                                 <td>${c.id}</td>
-                                <td>${c.username}</td>
-                                <c:url value="${c.avatar }" var="imgUrl"></c:url>
-                                <td><img src="${imgUrl}" alt=""
-                                         style="width:30px; height: 30px;margin: 0 auto;display: block"></td>
-                                <td span class="${c.rating eq 1? "badge bg-danger" : c.rating == 0 ? "badge bg-info": ""}">${c.rating}</td>
-<%--                                <c:if test="${c.ststus == 1}">--%>
-<%--                                    <td span class="badge bg-danger">${c.rating}</td>--%>
-
-<%--                                </c:if>--%>
-                                <td>${c.content}</td>
-                                <td>${c.time}</td>
+                                <td>${c.ip}</td>
+                                <td>${c.level}</td>
+                                <td>${c.address}</td>
+                                <td>${c.prevalue}</td>
+                                <td>${c.value}</td>
+                                <td>${c.status}</td>
+                                <td>${c.createdBy}</td>
+                                <td>${c.createdDate}</td>
                                 <td class="table-td-center">
-                                    <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                                            onclick="confirmDelete(${account.id})"><i class="fas fa-trash-alt"></i>
+                                    <button class="btn btn-primary btn-sm trash delete-log" data-id="${c.id}"
+                                            type="button" title="Xóa"><i class="fas fa-trash-alt"></i>
                                     </button>
+                                    <a href="${pageContext.request.contextPath}/Admin/log/edit?id=${c.id}">
+                                        <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"
+                                                id="show-emp"
+                                                data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i>
+                                        </button>
+                                    </a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -122,21 +128,41 @@
 <script type="text/javascript" src="${url}/js/plugins/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="${url}/js/plugins/dataTables.bootstrap.min.js"></script>
 
-<script type="text/javascript">$('#sampleTable').DataTable();</script>
+<%--<script type="text/javascript">$('#sampleTable').DataTable();</script>--%>
 <script>
-    function confirmDelete(userId) {
-        swal({
-            title: "Cảnh báo",
-            text: "Bạn có chắc chắn muốn xóa người dùng này?",
-            buttons: ["Hủy bỏ", "Đồng ý"],
-        }).then((willDelete) => {
-            if (willDelete) {
-                window.location.href = "${pageContext.request.contextPath}/Admin/comment/delete?id=" + userId;
-            }
+    $(function () {
+        $("#sampleTable").DataTable({
+            "columnDefs": [
+                {
+                    "targets": 7,
+                    "render": function (data, type, row, meta) {
+                        if (data == 0) {
+                            return '<i class="fas fa-times text-danger"></i>'; // Biểu tượng X đỏ
+                        } else if (data == 1) {
+                            return '<i class="fas fa-check text-success"></i>'; // Biểu tượng tích xanh
+                        }
+                    }
+                },
+                {
+                    "targets": 3, // Cột "Level"
+                    "render": function (data, type, row, meta) {
+                        if (data == 0) {
+                            return '<span class="badge bg-info">Info</span>'; // Màu nền xanh biển
+                        } else if (data == 1) {
+                            return '<span class="badge bg-secondary">Error</span>'; // Màu nền xám
+                        } else if (data == 2) {
+                            return '<span class="badge bg-warning">Warning</span>'; // Màu nền vàng
+                        } else if (data == 3) {
+                            return '<span class="badge bg-danger">Danger</span>'; // Màu nền đỏ
+                        } else {
+                            return data;
+                        }
+                    }
+                }
+            ]
         });
-    }
-
-    oTable = $('#sampleTable').dataTable();
+    });
+    // oTable = $('#sampleTable').dataTable();
     $('#all').click(function (e) {
         $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
         e.stopImmediatePropagation();
@@ -228,6 +254,97 @@
         $("#ModalUP").modal({backdrop: false, keyboard: false})
     });
 </script>
+<%--xóa dùng method delete--%>
+<script>
+    $(document).ready(function () {
+        // Sử dụng delegated event cho các nút xóa
+        $(document).on('click', '.delete-log', function (e) {
+            e.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
+
+            var deleteUserButton = $(this); // Lưu trữ phần tử .delete-user ban đầu
+            var logId = $(this).data('id'); // Lấy id người dùng từ thuộc tính data-id
+
+            // Hiển thị hộp thoại xác nhận trước khi xóa
+            if (confirm("Bạn có chắc chắn muốn xóa log này không?")) {
+                // Gửi yêu cầu AJAX để xóa người dùng
+                $.ajax({
+                    url: '${pageContext.request.contextPath}/Admin/log/delete?id=' + logId,
+                    type: 'DELETE', // Sử dụng phương thức DELETE
+                    success: function (response) {
+                        // Xóa dòng chứa nút xóa được nhấn
+                        deleteUserButton.closest('tr').remove();
+                        // Hiển thị thông báo hoặc thực hiện các hành động khác
+                        alert("Xóa log thành công");
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error deleting user:", error);
+                        // Xử lý lỗi nếu cần
+                    }
+                });
+            }
+        });
+    });
+
+
+
+
+    // Khai báo biến toàn cục để lưu trạng thái của các dòng đã chọn
+    var selectedLogs = [];
+
+    $(document).ready(function() {
+        // Hàm để cập nhật trạng thái của các dòng đã chọn khi trang được tải lại hoặc khi checkbox thay đổi
+        function updateSelectedLogs() {
+            selectedLogs = [];
+            $('input[name="check1"]:checked').each(function() {
+                selectedLogs.push($(this).val());
+            });
+        }
+
+        // Xử lý sự kiện khi checkbox được chọn hoặc bỏ chọn
+        $(document).on('change', 'input[name="check1"]', function() {
+            updateSelectedLogs();
+        });
+
+        // Xử lý sự kiện khi nút xóa được nhấn
+        $('#deleteSelected').click(function (e) {
+            e.preventDefault();
+
+            if (selectedLogs.length === 0) {
+                alert("Vui lòng chọn ít nhất một log để xóa.");
+                return;
+            }
+
+            if (confirm("Bạn có chắc chắn muốn xóa những log đã chọn không?")) {
+                $.ajax({
+                    url: '${pageContext.request.contextPath}/Admin/log/deleteSelected',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(selectedLogs),
+                    success: function (response) {
+                        alert("Xóa log đã chọn thành công");
+                        // Xóa các dòng từ bảng mà không cần tải lại trang
+                        selectedLogs.forEach(function(logId) {
+                            $('input[name="check1"][value="' + logId + '"]').closest('tr').remove();
+                        });
+                        // Sau khi xóa thành công, cập nhật lại trạng thái của các dòng đã chọn
+                        updateSelectedLogs();
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error deleting logs:", error);
+                        alert("Đã xảy ra lỗi khi xóa log.");
+                    }
+                });
+            }
+        });
+
+        // Cập nhật trạng thái của các dòng đã chọn khi trang được tải lại
+        updateSelectedLogs();
+    });
+
+
+
+</script>
+
 </body>
 
 </html>
