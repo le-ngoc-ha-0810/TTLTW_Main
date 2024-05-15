@@ -73,14 +73,16 @@
                                     class="fas fa-file-pdf"></i> Xuất PDF</a>
                         </div>
                         <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
-                                    class="fas fa-trash-alt"></i> Xóa tất cả </a>
+                            <a  id="deleteSelected" class="btn btn-delete btn-sm" type="button" title="Xóa"><i
+                              class="fas fa-trash-alt"></i> Xóa đã chọn </a>
                         </div>
                     </div>
                     <table class="table table-hover table-bordered" id="sampleTable">
                         <thead>
                         <tr>
-                            <th width="10"><input type="checkbox" id="all"></th>
+                            <td width="10"><input type="checkbox" name="check1"></td>
+                            <input type="hidden" name="user"
+                                   value="${sessionScope.account.username}">
                             <th>Mã loại sản phẩm</th>
                             <th>Tên loại sản phẩm</th>
                             <th>Trạng thái</th>
@@ -90,12 +92,12 @@
                         <tbody>
                         <c:forEach items="${cateList}" var="cate">
                             <tr>
-                                <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                                <td width="10"><input type="checkbox" name="check1"  value="${cate.id}"></td>
                                 <td>${cate.id}</td>
                                 <td>${cate.name}</td>
-                                <td>${cate.status == 0 ? 'Còn hàng' : 'Hết hàng'}</td>
+                                <td>${cate.status}</td>
                                 <td class="table-td-center">
-                                    <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
+                                    <button class="btn btn-primary btn-sm trash delete-cate" data-id="${cate.id}" type="button" title="Xóa"
                                             onclick="confirmDelete(${cate.id})"><i class="fas fa-trash-alt"></i>
                                     </button>
                                     <a href="${pageContext.request.contextPath}/Admin/cate/edit?id=${cate.id}">
@@ -116,7 +118,6 @@
 </main>
 
 
-
 <!-- Essential javascripts for application to work-->
 <script src="${url}/js/jquery-3.2.1.min.js"></script>
 <script src="${url}/js/popper.min.js"></script>
@@ -133,7 +134,23 @@
 <script type="text/javascript" src="${url}/js/plugins/dataTables.bootstrap.min.js"></script>
 
 <script type="text/javascript">
-    $('#sampleTable').DataTable();
+    // $('#sampleTable').DataTable();
+    $(function () {
+        $("#sampleTable").DataTable({
+            "columnDefs": [
+                {
+                    "targets": 3,
+                    "render": function (data, type, row, meta) {
+                        if (data == 0) {
+                            return '<i class="fas fa-times text-danger"></i>'; // Biểu tượng X đỏ
+                        } else if (data == 1) {
+                            return '<i class="fas fa-check text-success"></i>'; // Biểu tượng tích xanh
+                        }
+                    }
+                }
+            ]
+        });
+    });
 
     //Thời Gian
     function time() {
@@ -178,23 +195,91 @@
 </script>
 <script>
 
-    function confirmDelete(userId) {
-        swal({
-            title: "Cảnh báo",
-            text: "Bạn có chắc chắn muốn xóa người dùng này?",
-            buttons: ["Hủy bỏ", "Đồng ý"],
-        }).then((willDelete) => {
-            if (willDelete) {
-                window.location.href = "${pageContext.request.contextPath}/Admin/cate/delete?id=" + userId;
+    <%--xóa dùng method delete--%>
+    $(document).ready(function () {
+        // Sử dụng delegated event cho các nút xóa
+        $(document).on('click', '.delete-cate', function (e) {
+            e.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
+            var username = '${sessionScope.account.username}'; // Lấy thông tin người dùng từ phiên
+            var deleteUserButton = $(this); // Lưu trữ phần tử .delete-user ban đầu
+            var logId = $(this).data('id'); // Lấy id người dùng từ thuộc tính data-id
+            console.log(username);
+            // Hiển thị hộp thoại xác nhận trước khi xóa
+            if (confirm("Bạn có chắc chắn muốn xóa cate này không?")) {
+                // Gửi yêu cầu AJAX để xóa người dùng
+                $.ajax({
+                    url: '${pageContext.request.contextPath}/Admin/cate/delete?id=' + logId + '&username=' + username,
+                    type: 'DELETE', // Sử dụng phương thức DELETE
+                    success: function (response) {
+                        // Xóa dòng chứa nút xóa được nhấn
+                        deleteUserButton.closest('tr').remove();
+                        // Hiển thị thông báo hoặc thực hiện các hành động khác
+                        alert("Xóa cate thành công");
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error deleting user:", error);
+                        // Xử lý lỗi nếu cần
+                    }
+                });
             }
         });
-    }
-
-    oTable = $('#sampleTable').dataTable();
-    $('#all').click(function (e) {
-        $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
-        e.stopImmediatePropagation();
     });
+
+
+    // Khai báo biến toàn cục để lưu trạng thái của các dòng đã chọn
+    var selectedLogs = [];
+    $(document).ready(function() {
+        // Hàm để cập nhật trạng thái của các dòng đã chọn khi trang được tải lại hoặc khi checkbox thay đổi
+        function updateSelectedLogs() {
+            selectedLogs = [];
+            $('input[name="check1"]:checked').each(function() {
+                selectedLogs.push($(this).val());
+            });
+        }
+
+        // Xử lý sự kiện khi checkbox được chọn hoặc bỏ chọn
+        $(document).on('change', 'input[name="check1"]', function() {
+            updateSelectedLogs();
+        });
+
+        // Xử lý sự kiện khi nút xóa được nhấn
+        $('#deleteSelected').click(function (e) {
+            e.preventDefault();
+
+            if (selectedLogs.length === 0) {
+                alert("Vui lòng chọn ít nhất một cate để xóa.");
+                return;
+            }
+
+            if (confirm("Bạn có chắc chắn muốn xóa những cate đã chọn không?")) {
+                // Gửi yêu cầu AJAX với dữ liệu là mảng các ID đã chọn
+                $.ajax({
+                    url: '${pageContext.request.contextPath}/Admin/cate/deleteSelected',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(selectedLogs),
+                    success: function (response) {
+                        alert("Xóa cate đã chọn thành công");
+                        // Xóa các dòng từ bảng mà không cần tải lại trang
+                        selectedLogs.forEach(function(logId) {
+                            $('input[name="check1"][value="' + logId + '"]').closest('tr').remove();
+                        });
+                        // Sau khi xóa thành công, cập nhật lại trạng thái của các dòng đã chọn
+                        updateSelectedLogs();
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error deleting logs:", error);
+                        alert("Đã xảy ra lỗi khi xóa log.");
+                    }
+                });
+            }
+        });
+
+        // Cập nhật trạng thái của các dòng đã chọn khi trang được tải lại
+        updateSelectedLogs();
+    });
+
+
 </script>
 </body>
 
