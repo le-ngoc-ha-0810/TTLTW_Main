@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
     <link rel="stylesheet" type="text/css"
           href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
     <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
 
 </head>
@@ -36,7 +35,17 @@
     <div class="row">
         <div class="col-md-12">
             <div class="tile">
-                <h3 class="tile-title">Tạo mới đơn hàng</h3>
+                <h3 class="tile-title">Thay đổi trạng thái đơn hàng</h3>
+                <% String error = (String) session.getAttribute("error");
+                    if (error != null && !error.isEmpty()) {
+                %>
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
+                </div>
+                <%
+                        session.removeAttribute("error"); // Xóa thông điệp lỗi sau khi đã hiển thị
+                    }
+                %>
                 <div class="tile-body">
                     <form class="row" action="${pageContext.request.contextPath}/Admin/order/edit"
                           method="post">
@@ -46,35 +55,37 @@
                         </div>
                         <div class="form-group  col-md-4">
                             <label class="control-label">Tên khách hàng</label>
-                            <input class="form-control" type="text" name="fullname" value="${cartItem.order.buyer.fullname}" >
+                            <input class="form-control" type="text" name="fullname" value="${cartItem.buyer.fullname}" >
                         </div>
                         <div class="form-group  col-md-4">
-                            <label class="control-label">Tên sản phẩm</label>
-                            <input class="form-control" type="text" name="product_name" value="${cartItem.product.name}" >
+                            <label class="control-label">Tổng tiền</label>
+                            <input class="form-control" type="number" name="total"  value="${cartItem.total}">
                         </div>
                         <div class="form-group  col-md-4">
-                            <label class="control-label">Số lượng</label>
-                            <input class="form-control" type="number" name="quantity"  value="${cartItem.quantity}">
+                            <label class="control-label">Ghi chú</label>
+                            <input class="form-control" type="text" name="note"  value="${cartItem.note}">
                         </div>
                         <div class="form-group  col-md-4">
-                            <label class="control-label">Đơn giá</label>
-                            <input class="form-control" type="number" name="unitPrice"  value="${cartItem.unitPrice}">
+                            <label class="control-label">Địa chỉ</label>
+                            <input class="form-control" type="text" name="address"  value="${cartItem.address}">
+                        </div>
+                        <div class="form-group  col-md-4">
+                            <label class="control-label">Số điện thoại</label>
+                            <input class="form-control" type="number" name="phone"  value="${cartItem.phoneNumber}">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="status" class="control-label">Tình trạng</label>
-                            <input type="text" name="status" class="form-control"
-                                   value="${cartItem.status}" list="status">
-                            <datalist id="status">
-                                    <option value="Đã xác nhận">
-                                    <option value="Đang giao hàng">
-                                    <option value="Đã giao hàng">
-                            </datalist>
+                            <select id="status" name="status" class="form-control">
+                                <option value="Đang xử lý" ${cartItem.status == 'Đang xử lý' ? 'selected' : ''}>Đang xử lý</option>
+                                <option value="Đã xác nhận" ${cartItem.status == 'Đã xác nhận' ? 'selected' : ''}>Đã xác nhận</option>
+                                <option value="Chuẩn bị hàng" ${cartItem.status == 'Chuẩn bị hàng' ? 'selected' : ''}>Người bán đang chuẩn bị hàng</option>
+                                <option value="Đã hủy" ${cartItem.status == 'Đã hủy' ? 'selected' : ''}>Đã hủy</option>
+                                <option value="Đã bàn giao cho đơn vị vận chuyển GHTK" ${cartItem.status == 'Đã bàn giao cho đơn vị vận chuyển GHTK' ? 'selected' : ''}>Đã bàn giao cho đơn vị vận chuyển GHTK</option>
+                                <option value="Đang giao hàng" ${cartItem.status == 'Đang giao hàng' ? 'selected' : ''}>Đang giao hàng</option>
+                                <option value="Đã giao hàng" ${cartItem.status == 'Đã giao hàng' ? 'selected' : ''}>Đã giao hàng</option>
+                                <option value="Đã hoàn trả" ${cartItem.status == 'Đã hoàn trả' ? 'selected' : ''}>Đã hoàn trả</option>
+                            </select>
                         </div>
-                        <div class="form-group  col-md-4">
-                            <label class="control-label">Ghi chú đơn hàng</label>
-                            <input class="form-control" name="note" value="${cartItem.order.note}">
-                        </div>
-
                         <button class="btn btn-save" type="submit">Lưu lại</button>
                         <a class="btn btn-cancel" href="${pageContext.request.contextPath}/Admin/order/list">Hủy bỏ</a>
                     </form>
