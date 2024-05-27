@@ -4,7 +4,7 @@
 <%@ page buffer="64kb" %>
 <!DOCTYPE html>
 <html lang="en">
-
+<meta charset="UTF-8">
 <head>
     <title>Danh sách đơn hàng | Quản trị Admin</title>
     <meta charset="utf-8">
@@ -80,32 +80,31 @@
                             <th width="10"><input type="checkbox" id="all"></th>
                             <th>ID đơn hàng</th>
                             <th>Khách hàng</th>
-                            <th>Sản phẩm</th>
-                            <th>Kích thước</th>
-                            <th>Số lượng</th>
-                            <th>Đơn giá</th>
+                            <th>Tổng tiền</th>
                             <th>Chú ý</th>
                             <th>Địa chỉ</th>
                             <th>Số điện thoại</th>
-                            <th>Tình trạng</th>
+                            <th>Trạng thái</th>
                             <th>Thao tác</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${listCartItem}" var="orders">
+                        <c:forEach items="${listCart}" var="orders">
                             <tr>
                                 <td width="10"><input type="checkbox" name="check1" value="1"></td>
                                 <td>${orders.id}</td>
-                                <td>${orders.order.buyer.fullname}</td>
-                                <td>${orders.product.name}</td>
-                                <td>${orders.size}</td>
-                                <td>${orders.quantity}</td>
-                                <td>${orders.unitPrice}</td>
-                                <td>${orders.order.note}</td>
-                                <td>${orders.order.address}</td>
-                                <td>${orders.order.phoneNumber}</td>
+                                <td>${orders.buyer.fullname}</td>
+                                <td>${orders.total}</td>
+                                <td>${orders.note}</td>
+                                <td>${orders.address}</td>
+                                <td>${orders.phoneNumber}</td>
                                 <td><span class="badge bg-success">${orders.status}</span></td>
                                 <td class="table-td-center">
+                                    <a href="${pageContext.request.contextPath}/Admin/orderDetails/list?id=${orders.id}">
+                                        <button class="btn btn-primary btn-sm edit" type="button" title="Xem chi tiết"
+                                                data-toggle="modal" data-target="#ModalUP"><i class="fas fa-eye"></i>
+                                        </button>
+                                    </a>
                                     <a href="${pageContext.request.contextPath}/Admin/order/edit?id=${orders.id}">
                                         <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"
                                                 id="show-emp"
@@ -122,11 +121,45 @@
         </div>
     </div>
 </main>
+
+
+<!-- Modal -->
+<div class="modal fade" id="orderDetailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Chi tiết đơn hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table id="orderDetailTable" class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Data will be loaded dynamically here using AJAX -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Essential javascripts for application to work-->
 <script src="${url}/js/jquery-3.2.1.min.js"></script>
 <script src="${url}/js/popper.min.js"></script>
 <script src="${url}/js/bootstrap.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="${url}/src/jquery.table2excel.js"></script>
 <script src="${url}/js/main.js"></script>
 <!-- The javascript plugin to display page loading on top-->
@@ -137,8 +170,28 @@
 <script type="text/javascript" src="${url}/js/plugins/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="${url}/js/plugins/dataTables.bootstrap.min.js"></script>
 
-<script type="text/javascript">$('#sampleTable').DataTable();</script>
+<%--<script type="text/javascript">$('#sampleTable').DataTable();</script>--%>
 <script>
+    $(document).ready(function () {
+        // Handle click event for viewing order details
+        $('.view-details').click(function () {
+            var orderId = $(this).data('orderid');
+            $.ajax({
+                url: '${pageContext.request.contextPath}/Admin/orderDetails/list',
+                type: 'GET',
+                data: {orderId: orderId},
+                success: function (data) {
+                    $('#orderDetailTable tbody').html(data);
+                    $('#orderDetailModal').modal('show');
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+
+
     function deleteRow(r) {
         var i = r.parentNode.parentNode.rowIndex;
         document.getElementById("myTable").deleteRow(i);
@@ -164,18 +217,6 @@
         $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
         e.stopImmediatePropagation();
     });
-
-    //EXCEL
-    // $(document).ready(function () {
-    //   $('#').DataTable({
-
-    //     dom: 'Bfrtip',
-    //     "buttons": [
-    //       'excel'
-    //     ]
-    //   });
-    // });
-
 
     //Thời Gian
     function time() {
@@ -228,28 +269,7 @@
             win.print();
         }
     }
-    //     //Sao chép dữ liệu
-    //     var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
 
-    // copyTextareaBtn.addEventListener('click', function(event) {
-    //   var copyTextarea = document.querySelector('.js-copytextarea');
-    //   copyTextarea.focus();
-    //   copyTextarea.select();
-
-    //   try {
-    //     var successful = document.execCommand('copy');
-    //     var msg = successful ? 'successful' : 'unsuccessful';
-    //     console.log('Copying text command was ' + msg);
-    //   } catch (err) {
-    //     console.log('Oops, unable to copy');
-    //   }
-    // });
-
-
-    //Modal
-    $("#show-emp").on("click", function () {
-        $("#ModalUP").modal({backdrop: false, keyboard: false})
-    });
 </script>
 </body>
 
