@@ -71,7 +71,7 @@
                                     class="fas fa-file-pdf"></i> Xuất PDF</a>
                         </div>
                         <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
+                            <a id="deleteSelected" class="btn btn-delete btn-sm" type="button" title="Xóa"><i
                                     class="fas fa-trash-alt"></i> Xóa tất cả </a>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                         <tbody>
                         <c:forEach items="${productList}" var="pro">
                             <tr>
-                                <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                                <td width="10"><input type="checkbox" name="check1" value="${pro.id}"></td>
                                 <td>${pro.id}</td>
                                 <td>${pro.name}</td>
                                 <c:url value="${pro.image }" var="imgUrl"></c:url>
@@ -108,7 +108,7 @@
                                 <td>${pro.manufacture}</td>
                                 <td>${pro.status == 0 ? 'Còn hàng' : 'Hết hàng'}</td>
                                 <td class="table-td-center">
-                                    <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
+                                    <button class="btn btn-primary btn-sm trash delete-product" data-id="${pro.id}" type="button" title="Xóa"
                                             onclick="confirmDelete(${pro.id})"><i class="fas fa-trash-alt"></i>
                                     </button>
                                     <a href="${pageContext.request.contextPath}/Admin/product/edit?id=${pro.id}">
@@ -195,22 +195,101 @@
     }
 </script>
 <script>
-    function confirmDelete(blogId) {
-        swal({
-            title: "Cảnh báo",
-            text: "Bạn có chắc chắn muốn xóa người dùng này?",
-            buttons: ["Hủy bỏ", "Đồng ý"],
-        }).then((willDelete) => {
-            if (willDelete) {
-                window.location.href = "${pageContext.request.contextPath}/Admin/product/delete?id=" + blogId;
+    <%--function confirmDelete(blogId) {--%>
+    <%--    swal({--%>
+    <%--        title: "Cảnh báo",--%>
+    <%--        text: "Bạn có chắc chắn muốn xóa sản phẩm này?",--%>
+    <%--        buttons: ["Hủy bỏ", "Đồng ý"],--%>
+    <%--    }).then((willDelete) => {--%>
+    <%--        if (willDelete) {--%>
+    <%--            window.location.href = "${pageContext.request.contextPath}/Admin/product/delete?id=" + blogId;--%>
+    <%--        }--%>
+    <%--    });--%>
+    <%--}--%>
+    $(document).ready(function () {
+        // Sử dụng delegated event cho các nút xóa
+        $(document).on('click', '.delete-product', function (e) {
+            e.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
+            var username = '${sessionScope.account.username}'; // Lấy thông tin người dùng từ phiên
+            var deleteUserButton = $(this); // Lưu trữ phần tử .delete-user ban đầu
+            var logId = $(this).data('id'); // Lấy id người dùng từ thuộc tính data-id
+            console.log(username);
+            // Hiển thị hộp thoại xác nhận trước khi xóa
+            if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
+                // Gửi yêu cầu AJAX để xóa người dùng
+                $.ajax({
+                    url: '${pageContext.request.contextPath}/Admin/product/delete?id=' + logId + '&username=' + username,
+                    type: 'DELETE', // Sử dụng phương thức DELETE
+                    success: function (response) {
+                        // Xóa dòng chứa nút xóa được nhấn
+                        deleteUserButton.closest('tr').remove();
+                        // Hiển thị thông báo hoặc thực hiện các hành động khác
+                        alert("Xóa sản phẩm thành công");
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error deleting user:", error);
+                        // Xử lý lỗi nếu cần
+                    }
+                });
             }
         });
-    }
+    });
 
     oTable = $('#sampleTable').dataTable();
     $('#all').click(function (e) {
         $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
         e.stopImmediatePropagation();
+    });
+    var selectedLogs = [];
+    $(document).ready(function() {
+        // Hàm để cập nhật trạng thái của các dòng đã chọn khi trang được tải lại hoặc khi checkbox thay đổi
+        function updateSelectedLogs() {
+            selectedLogs = [];
+            $('input[name="check1"]:checked').each(function() {
+                selectedLogs.push($(this).val());
+            });
+        }
+
+        // Xử lý sự kiện khi checkbox được chọn hoặc bỏ chọn
+        $(document).on('change', 'input[name="check1"]', function() {
+            updateSelectedLogs();
+        });
+
+        // Xử lý sự kiện khi nút xóa được nhấn
+        $('#deleteSelected').click(function (e) {
+            e.preventDefault();
+
+            if (selectedLogs.length === 0) {
+                alert("Vui lòng chọn ít nhất một sản phẩm để xóa.");
+                return;
+            }
+
+            if (confirm("Bạn có chắc chắn muốn xóa những sản phẩm đã chọn không?")) {
+                // Gửi yêu cầu AJAX với dữ liệu là mảng các ID đã chọn
+                $.ajax({
+                    url: '${pageContext.request.contextPath}/Admin/product/deleteSelected',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(selectedLogs),
+                    success: function (response) {
+                        alert("Xóa sản phẩm đã chọn thành công");
+                        // Xóa các dòng từ bảng mà không cần tải lại trang
+                        selectedLogs.forEach(function(logId) {
+                            $('input[name="check1"][value="' + logId + '"]').closest('tr').remove();
+                        });
+                        // Sau khi xóa thành công, cập nhật lại trạng thái của các dòng đã chọn
+                        updateSelectedLogs();
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error deleting logs:", error);
+                        alert("Đã xảy ra lỗi khi xóa log.");
+                    }
+                });
+            }
+        });
+
+        // Cập nhật trạng thái của các dòng đã chọn khi trang được tải lại
+        updateSelectedLogs();
     });
 </script>
 </body>
