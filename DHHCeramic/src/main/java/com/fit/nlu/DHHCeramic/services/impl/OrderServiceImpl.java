@@ -10,11 +10,16 @@ import java.util.List;
 
 
 public class OrderServiceImpl implements OrderService {
-   OrderDao cartDao = (OrderDao) new OrderDaoImpl();
+    OrderDao cartDao = (OrderDao) new OrderDaoImpl();
 
     @Override
     public List<Order> search(String name) {
         return cartDao.search(name);
+    }
+
+    @Override
+    public List<Order> getByUserId(int userId) {
+        return cartDao.getByUserId(userId);
     }
 
     @Override
@@ -34,13 +39,19 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public Order get(String id) {
+        return cartDao.get(id);
+    }
+
+    @Override
     public void edit(Order newCart) {
         Order oldCart = cartDao.get(newCart.getId());
-
         oldCart.setBuyDate(newCart.getBuyDate());
         oldCart.setBuyer(newCart.getBuyer());
-
-
+        oldCart.setTotal(newCart.getTotal());
+        oldCart.setAddress(newCart.getAddress());
+        oldCart.setPhoneNumber(newCart.getPhoneNumber());
+        oldCart.setStatus(newCart.getStatus());
         cartDao.edit(oldCart);
 
     }
