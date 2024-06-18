@@ -1,7 +1,6 @@
 package com.fit.nlu.DHHCeramic.dao;
 
 
-
 import com.fit.nlu.DHHCeramic.model.Order;
 
 import java.util.List;
@@ -21,5 +20,7 @@ public interface OrderDao {
     List<Order> getAll();
 
     List<Order> search(String name);
+
+    List<Order> getByUserId(int userId);
 }
 

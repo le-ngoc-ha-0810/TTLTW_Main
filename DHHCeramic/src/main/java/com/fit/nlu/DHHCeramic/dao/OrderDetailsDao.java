@@ -24,4 +24,5 @@ public interface OrderDetailsDao {
     List<OrderDetails> search(String name);
 
     List<OrderDetails> getByUserID(int id);
+    List<OrderDetails> getByOrderId(String orderId);
 }
