@@ -29,9 +29,9 @@ public class OrderDetailsDaoImpl extends JDBCConnection implements OrderDetailsD
 
     @Override
     public void insert(OrderDetails cartItem) {
-        String sql = "INSERT INTO order_details(id, orderId, productId, quantity, unitPrice,size,status) VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO order_details(id, orderId, productId, quantity, unitPrice, size) VALUES (?,?,?,?,?,?)";
         Connection con = getJDBCConnection();
-
+        String status = "";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, cartItem.getId());
@@ -40,16 +40,7 @@ public class OrderDetailsDaoImpl extends JDBCConnection implements OrderDetailsD
             ps.setInt(4, cartItem.getQuantity());
             ps.setLong(5, cartItem.getUnitPrice());
             ps.setString(6, cartItem.getSize());
-            ps.setString(7, cartItem.getStatus());
             ps.executeUpdate();
-
-//			ResultSet generatedKeys = ps.getGeneratedKeys();
-//			if (generatedKeys.next()) {
-//				int id = generatedKeys.getInt(1);
-//				cartItem.setId(id);
-//			}
-
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -57,7 +48,7 @@ public class OrderDetailsDaoImpl extends JDBCConnection implements OrderDetailsD
 
     @Override
     public void edit(OrderDetails cartItem) {
-        String sql = "UPDATE order_details SET  quantity = ?, unitPrice=?, size=?, status=? WHERE id = ?";
+        String sql = "UPDATE order_details SET  quantity = ?, unitPrice=?, size=? WHERE id = ?";
         Connection con = getJDBCConnection();
 
         try {
@@ -66,8 +57,7 @@ public class OrderDetailsDaoImpl extends JDBCConnection implements OrderDetailsD
             ps.setInt(1, cartItem.getQuantity());
             ps.setLong(2, cartItem.getUnitPrice());
             ps.setString(3, cartItem.getSize());
-            ps.setString(4, cartItem.getStatus());
-            ps.setString(5, cartItem.getId());
+            ps.setString(4, cartItem.getId());
 
             ps.executeUpdate();
 
@@ -91,7 +81,57 @@ public class OrderDetailsDaoImpl extends JDBCConnection implements OrderDetailsD
             e.printStackTrace();
         }
     }
-
+    @Override
+    public List<OrderDetails> getByOrderId(String orderId) {
+        List<OrderDetails> orderDetailsList = new ArrayList<>();
+        String sql = "SELECT " +
+                "order_details.id, " +
+                "order_details.quantity, " +
+                "order_details.unitPrice, " +
+                "orders.userId, " +
+                "orders.createdAt, " +
+                "orders.status, " +
+                "orders.total, " +
+                "products.name, " +
+                "products.price, " +
+                "products.saleId, " +
+                "products.image, " +
+                "order_details.size " +
+                "FROM order_details " +
+                "INNER JOIN orders " +
+                "ON order_details.orderId = orders.id " +
+                "INNER JOIN products " +
+                "ON order_details.productId = products.id " +
+                "WHERE order_details.orderId = ?";
+        try (Connection con = getJDBCConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, orderId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                User user = userDao.get(rs.getInt("userId"));
+                Order order = new Order();
+                order.setBuyer(user);
+                order.setBuyDate(rs.getDate("createdAt"));
+                order.setStatus(rs.getString("status"));
+                Product product = new Product();
+                product.setName(rs.getString("name"));
+                product.setPrice(rs.getLong("price"));
+                product.setSaleId(rs.getLong("saleId"));
+                product.setImage(rs.getString("image"));
+                OrderDetails orderDetails = new OrderDetails();
+                orderDetails.setId(rs.getString("id"));
+                orderDetails.setOrder(order);
+                orderDetails.setProduct(product);
+                orderDetails.setQuantity(rs.getInt("quantity"));
+                orderDetails.setUnitPrice(rs.getLong("unitPrice"));
+                orderDetails.setSize(rs.getString("size"));
+                orderDetailsList.add(orderDetails);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orderDetailsList;
+    }
     @Override
     public OrderDetails get(String id) {
         String sql = "SELECT " +
@@ -102,12 +142,13 @@ public class OrderDetailsDaoImpl extends JDBCConnection implements OrderDetailsD
                 "orders.phoneNumber, " +
                 "orders.address, " +
                 "orders.createdAt, " +
+                "orders.status, " +
+                "orders.total, " +
                 "products.name, " +
                 "products.price, " +
                 "products.saleId, " +
                 "products.image, " +
-                "order_details.size, " +
-                "order_details.status " +
+                "order_details.size " +
                 "FROM order_details " +
                 "INNER JOIN orders " +
                 "ON order_details.orderId = orders.id " +
@@ -129,7 +170,7 @@ public class OrderDetailsDaoImpl extends JDBCConnection implements OrderDetailsD
                 cart.setPhoneNumber("phoneNumber");
                 cart.setAddress("address");
                 cart.setBuyDate(rs.getDate("createdAt"));
-
+                cart.setStatus(rs.getString("status"));
                 Product product = new Product();
                 product.setName(rs.getString("name"));
                 product.setPrice(rs.getLong("price"));
@@ -143,7 +184,6 @@ public class OrderDetailsDaoImpl extends JDBCConnection implements OrderDetailsD
                 cartItem.setQuantity(rs.getInt("quantity"));
                 cartItem.setUnitPrice(rs.getLong("unitPrice"));
                 cartItem.setSize(rs.getString("size"));
-                cartItem.setStatus(rs.getString("status"));
                 return cartItem;
             }
         } catch (SQLException e) {
@@ -152,7 +192,6 @@ public class OrderDetailsDaoImpl extends JDBCConnection implements OrderDetailsD
         }
         return null;
     }
-
     @Override
     public List<OrderDetails> getAll() {
         List<OrderDetails> cartItemList = new ArrayList<OrderDetails>();
@@ -164,12 +203,13 @@ public class OrderDetailsDaoImpl extends JDBCConnection implements OrderDetailsD
                 "orders.phoneNumber, " +
                 "orders.address, " +
                 "orders.createdAt, " +
+                "orders.status, " +
+                "orders.total, " +
                 "products.name, " +
                 "products.price, " +
                 "products.saleId, " +
                 "products.image, " +
-                "order_details.size, " +
-                "order_details.status " +
+                "order_details.size " +
                 "FROM order_details " +
                 "INNER JOIN orders " +
                 "ON order_details.orderId = orders.id " +
@@ -187,8 +227,8 @@ public class OrderDetailsDaoImpl extends JDBCConnection implements OrderDetailsD
                 cart.setBuyer(user);
                 cart.setPhoneNumber(rs.getString("phoneNumber")); // Lấy giá trị từ cơ sở dữ liệu
                 cart.setAddress(rs.getString("address")); // Lấy giá trị từ cơ sở dữ liệu
-
                 cart.setBuyDate(rs.getDate("createdAt"));
+                cart.setStatus(rs.getString("status"));
 
                 Product product = new Product();
                 product.setName(rs.getString("name"));
@@ -203,7 +243,6 @@ public class OrderDetailsDaoImpl extends JDBCConnection implements OrderDetailsD
                 cartItem.setQuantity(rs.getInt("quantity"));
                 cartItem.setUnitPrice(rs.getLong("unitPrice"));
                 cartItem.setSize(rs.getString("size"));
-                cartItem.setStatus(rs.getString("status"));
 
                 cartItemList.add(cartItem); // dòng này để thêm cartItem vào danh sách
             }
@@ -218,26 +257,25 @@ public class OrderDetailsDaoImpl extends JDBCConnection implements OrderDetailsD
         return null;
     }
 
-    @Override
     public List<OrderDetails> getByUserID(int id) {
-        List<OrderDetails> list = new ArrayList<OrderDetails>();
+        List<OrderDetails> list = new ArrayList<>();
         String sql = "SELECT " +
-                "order_details.id, " +
+                "order_details.id AS detail_id, " +
                 "order_details.quantity, " +
                 "order_details.unitPrice, " +
+                "orders.id AS order_id, " +
                 "orders.userId, " +
                 "orders.createdAt, " +
+                "orders.status, " +
+                "orders.total, " +
                 "products.name, " +
                 "products.price, " +
                 "products.saleId, " +
                 "products.image, " +
-                "order_details.size, " +
-                "order_details.status " +
+                "order_details.size " +
                 "FROM order_details " +
-                "INNER JOIN orders " +
-                "ON order_details.orderId = orders.id " +
-                "INNER JOIN products " +
-                "ON order_details.productId = products.id " +
+                "INNER JOIN orders ON order_details.orderId = orders.id " +
+                "INNER JOIN products ON order_details.productId = products.id " +
                 "WHERE orders.userId = ?";
         Connection con = getJDBCConnection();
 
@@ -248,10 +286,11 @@ public class OrderDetailsDaoImpl extends JDBCConnection implements OrderDetailsD
 
             while (rs.next()) {
                 User user = userDao.get(rs.getInt("userId"));
-
-                Order cart = new Order();
-                cart.setBuyer(user);
-                cart.setBuyDate(rs.getDate("createdAt"));
+                Order order = new Order();
+                order.setId(rs.getString("order_id"));
+                order.setBuyer(user);
+                order.setBuyDate(rs.getDate("createdAt"));
+                order.setStatus(rs.getString("status"));
 
                 Product product = new Product();
                 product.setName(rs.getString("name"));
@@ -260,28 +299,20 @@ public class OrderDetailsDaoImpl extends JDBCConnection implements OrderDetailsD
                 product.setImage(rs.getString("image"));
 
                 OrderDetails cartItem = new OrderDetails();
-                cartItem.setId(rs.getString("id"));
-                cartItem.setOrder(cart);
+                cartItem.setId(rs.getString("detail_id"));
+                cartItem.setOrder(order);
                 cartItem.setProduct(product);
                 cartItem.setQuantity(rs.getInt("quantity"));
                 cartItem.setUnitPrice(rs.getLong("unitPrice"));
                 cartItem.setSize(rs.getString("size"));
-                cartItem.setStatus(rs.getString("status"));
 
                 list.add(cartItem);
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return list;
     }
-
-//    @Override
-//    public CartItem get(String name) {
-//        // TODO Auto-generated method stub
-//        return null;
-//    }
 
 }
 
