@@ -67,18 +67,21 @@
         <li><a class="app-menu__item menu-link" href="${pageContext.request.contextPath}/Admin/log/list"><i class='app-menu__icon bx bx bxl-blogger'></i><span
                 class="app-menu__label">Quản lý log
           </span></a></li>
-<%--        <li><a class="app-menu__item" href="${pageContext.request.contextPath}/A"><i class='app-menu__icon bx bx bxs-discount'></i><span--%>
-<%--                class="app-menu__label">Quản lý giảm giá--%>
-<%--          </span></a></li>--%>
+        <li><a class="app-menu__item menu-link" href="${pageContext.request.contextPath}/admin/productImports"><i class='app-menu__icon bx bx bxl-blogger'></i><span
+                class="app-menu__label">Quản lý nhập hàng
+          </span></a></li>
+        <%--        <li><a class="app-menu__item" href="${pageContext.request.contextPath}/A"><i class='app-menu__icon bx bx bxs-discount'></i><span--%>
+        <%--                class="app-menu__label">Quản lý giảm giá--%>
+        <%--          </span></a></li>--%>
         <li><a class="app-menu__item menu-link" href="${pageContext.request.contextPath}/Admin/contact/list"><i class="app-menu__icon bx bxs-contact"></i><span
                 class="app-menu__label">Quản lý liên hệ
           </span></a></li>
         <li><a class="app-menu__item menu-link" href="${pageContext.request.contextPath}/Admin/comment/list"><i class="app-menu__icon bx bxs-chat"></i><span
                 class="app-menu__label">Quản lý bình luận
           </span></a></li>
-<%--        <li><a class="app-menu__item" href="${pageContext.request.contextPath}/view/admin/view/table-data-help.jsp"><i class="app-menu__icon bx bxs-help-circle"></i><span--%>
-<%--                class="app-menu__label">Quản lý trợ giúp--%>
-<%--          </span></a></li>--%>
+        <%--        <li><a class="app-menu__item" href="${pageContext.request.contextPath}/view/admin/view/table-data-help.jsp"><i class="app-menu__icon bx bxs-help-circle"></i><span--%>
+        <%--                class="app-menu__label">Quản lý trợ giúp--%>
+        <%--          </span></a></li>--%>
         <!--      <li><a class="app-menu__item" href="table-data-money.jsp"><i class='app-menu__icon bx bx-dollar'></i><span-->
         <!--            class="app-menu__label">Bảng kê lương</span></a></li>-->
         <!--      <li><a class="app-menu__item" href="quan-ly-bao-cao.jsp"><i-->
@@ -86,8 +89,8 @@
         <!--      </li>-->
         <!--      <li><a class="app-menu__item" href="page-calendar.jsp"><i class='app-menu__icon bx bx-calendar-check'></i><span-->
         <!--            class="app-menu__label">Lịch công tác </span></a></li>-->
-<%--        <li><a class="app-menu__item" href="${pageContext.request.contextPath }/Admin/myAccount?id=${sessionScope.account.id}"><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Cài--%>
-<%--            đặt tài khoản</span></a></li>--%>
+        <%--        <li><a class="app-menu__item" href="${pageContext.request.contextPath }/Admin/myAccount?id=${sessionScope.account.id}"><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Cài--%>
+        <%--            đặt tài khoản</span></a></li>--%>
     </ul>
 </aside>
 
