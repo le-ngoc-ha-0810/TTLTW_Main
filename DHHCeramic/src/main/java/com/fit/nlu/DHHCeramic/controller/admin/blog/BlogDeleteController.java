@@ -1,6 +1,5 @@
 package com.fit.nlu.DHHCeramic.controller.admin.blog;
 
-
 import com.fit.nlu.DHHCeramic.services.BlogService;
 import com.fit.nlu.DHHCeramic.services.impl.BlogServiceImpl;
 
@@ -17,20 +16,26 @@ public class BlogDeleteController extends HttpServlet {
     BlogService blogService = new BlogServiceImpl();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
-        blogService.delete(Integer.parseInt(id));
         HttpSession session = request.getSession(false);
         if (session != null && session.getAttribute("account") != null) {
-            response.sendRedirect(request.getContextPath() + "/Admin/blog/list");
+            blogService.delete(Integer.parseInt(id));
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write("{ \"message\": \"Xóa blog thành công\" }");
         } else {
             response.sendRedirect(request.getContextPath() + "/AdminLogin");
         }
+    }
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doDelete(request, response); // Chuyển tiếp yêu cầu GET thành DELETE để xử lý
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
+        doDelete(request, response); // Chuyển tiếp yêu cầu POST thành DELETE để xử lý
     }
 }
