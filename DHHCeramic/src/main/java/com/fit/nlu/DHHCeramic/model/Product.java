@@ -16,11 +16,14 @@ public class Product extends BaseModel implements Serializable {
     private String size;
     private String manufacture;
 
+    private int remainingStock;
+    private String stockStatus;
+
     public Product() {
         super();
     }
 
-    public Product(int id, String name, long price, long saleId, Category category, int stock, String des, String image, int isLike, int status, String size, String manufacture) {
+    public Product(int id, String name, long price, long saleId, Category category, int stock, String des, String image, int isLike, int status, String size, String manufacture, int remainingStock, String stockStatus) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -33,6 +36,8 @@ public class Product extends BaseModel implements Serializable {
         this.status = status;
         this.size = size;
         this.manufacture = manufacture;
+        this.remainingStock = remainingStock;
+        this.stockStatus = stockStatus;
     }
 
     @Override
@@ -134,6 +139,22 @@ public class Product extends BaseModel implements Serializable {
         this.manufacture = manufacture;
     }
 
+    public int getRemainingStock() {
+        return remainingStock;
+    }
+
+    public void setRemainingStock(int remainingStock) {
+        this.remainingStock = remainingStock;
+    }
+
+    public String getStockStatus() {
+        return stockStatus;
+    }
+
+    public void setStockStatus(String stockStatus) {
+        this.stockStatus = stockStatus;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -146,8 +167,11 @@ public class Product extends BaseModel implements Serializable {
                 ", des='" + des + '\'' +
                 ", image='" + image + '\'' +
                 ", isLike=" + isLike +
+                ", status=" + status +
                 ", size='" + size + '\'' +
                 ", manufacture='" + manufacture + '\'' +
+                ", remainingStock=" + remainingStock +
+                ", stockStatus='" + stockStatus + '\'' +
                 '}';
     }
 }

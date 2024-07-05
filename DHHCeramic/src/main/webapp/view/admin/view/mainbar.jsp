@@ -64,11 +64,14 @@
         <li><a class="app-menu__item menu-link" href="${pageContext.request.contextPath}/Admin/blog/list"><i class='app-menu__icon bx bx bxl-blogger'></i><span
                 class="app-menu__label">Quản lý tin tức
           </span></a></li>
-        <li><a class="app-menu__item menu-link" href="${pageContext.request.contextPath}/Admin/log/list"><i class='app-menu__icon bx bx bxl-blogger'></i><span
+        <li><a class="app-menu__item menu-link" href="${pageContext.request.contextPath}/Admin/log/list"><i class='app-menu__icon bx bx-list-check'></i><span
                 class="app-menu__label">Quản lý log
           </span></a></li>
-        <li><a class="app-menu__item menu-link" href="${pageContext.request.contextPath}/admin/productImports"><i class='app-menu__icon bx bx bxl-blogger'></i><span
+        <li><a class="app-menu__item menu-link" href="${pageContext.request.contextPath}/admin/productImports"><i class='app-menu__icon bx bx-package'></i><span
                 class="app-menu__label">Quản lý nhập hàng
+          </span></a></li>
+        <li><a class="app-menu__item menu-link" href="${pageContext.request.contextPath}/admin/warehouse"><i class='app-menu__icon bx bx-package'></i><span
+                class="app-menu__label">Quản lý tồn kho
           </span></a></li>
         <%--        <li><a class="app-menu__item" href="${pageContext.request.contextPath}/A"><i class='app-menu__icon bx bx bxs-discount'></i><span--%>
         <%--                class="app-menu__label">Quản lý giảm giá--%>
