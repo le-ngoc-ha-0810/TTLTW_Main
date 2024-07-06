@@ -80,7 +80,7 @@ public class LogDaoImpl implements LogDao {//
                 log.setAddress(resultSet.getString("address"));
                 log.setPrevalue(resultSet.getString("prevalue"));
                 log.setValue(resultSet.getString("value"));
-                log.setCreatedBy(resultSet.getString("createdBy"));
+                log.setCreatedBy(resultSet.getString("createdAt"));
                 log.setCreatedDate(resultSet.getDate("createdDate"));
                 logs.add(log);
             }
