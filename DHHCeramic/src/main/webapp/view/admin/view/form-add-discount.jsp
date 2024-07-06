@@ -21,15 +21,127 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 
+    <script>
+
+        function readURL(input, thumbimage) {
+            if (input.files && input.files[0]) { //Sử dụng  cho Firefox - chrome
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $("#thumbimage").attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            } else { // Sử dụng cho IE
+                $("#thumbimage").attr('src', input.value);
+
+            }
+            $("#thumbimage").show();
+            $('.filename').text($("#uploadfile").val());
+            $('.Choicefile').css('background', '#14142B');
+            $('.Choicefile').css('cursor', 'default');
+            $(".removeimg").show();
+            $(".Choicefile").unbind('click');
+
+        }
+
+        // $(document).ready(function () {
+        //     $(".Choicefile").bind('click', function () {
+        //         $("#uploadfile").click();
+        //
+        //     });
+        //     $(".removeimg").click(function () {
+        //         $("#thumbimage").attr('src', '').hide();
+        //         $("#myfileupload").html('<input type="file" id="uploadfile"  onchange="readURL(this);" />');
+        //         $(".removeimg").hide();
+        //         $(".Choicefile").bind('click', function () {
+        //             $("#uploadfile").click();
+        //         });
+        //         $('.Choicefile').css('background', '#14142B');
+        //         $('.Choicefile').css('cursor', 'pointer');
+        //         $(".filename").text("");
+        //     });
+        // })
+    </script>
 </head>
 
-<body onload="time()" class="app sidebar-mini rtl">
+</head>
+
+<body class="app sidebar-mini rtl">
+<style>
+    .Choicefile {
+        display: block;
+        background: #14142B;
+        border: 1px solid #fff;
+        color: #fff;
+        width: 150px;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        padding: 5px 0px;
+        border-radius: 5px;
+        font-weight: 500;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .Choicefile:hover {
+        text-decoration: none;
+        color: white;
+    }
+
+    #uploadfile,
+    .removeimg {
+        display: none;
+    }
+
+    #thumbbox {
+        position: relative;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .removeimg {
+        height: 25px;
+        position: absolute;
+        background-repeat: no-repeat;
+        top: 5px;
+        left: 5px;
+        background-size: 25px;
+        width: 25px;
+        /* border: 3px solid red; */
+        border-radius: 50%;
+
+    }
+
+    .removeimg::before {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        content: '';
+        border: 1px solid red;
+        background: red;
+        text-align: center;
+        display: block;
+        margin-top: 11px;
+        transform: rotate(45deg);
+    }
+
+    .removeimg::after {
+        /* color: #FFF; */
+        /* background-color: #DC403B; */
+        content: '';
+        background: red;
+        border: 1px solid red;
+        text-align: center;
+        display: block;
+        transform: rotate(-45deg);
+        margin-top: -2px;
+    }
+</style>
 <!-- Navbar-->
 <jsp:include page="/view/admin/view/mainbar.jsp"></jsp:include>
 <main class="app-content">
     <div class="app-title">
         <ul class="app-breadcrumb breadcrumb">
-            <li class="breadcrumb-item">Danh sách khuyến mãi</li>
+            <li class="breadcrumb-item">Danh sách giảm giá</li>
             <li class="breadcrumb-item"><a href="#">Thêm khuyến mãi</a></li>
         </ul>
     </div>
@@ -38,35 +150,36 @@
             <div class="tile">
                 <h3 class="tile-title">Tạo mới khuyến mãi</h3>
                 <div class="tile-body">
-                    <form class="row">
+                    <form class="row" role="form" action="${pageContext.request.contextPath}/Admin/discount/add" method="post">
+                        <input type="hidden" name="user"
+                               value="${sessionScope.account.username}">
                         <div class="form-group  col-md-4">
                             <label class="control-label">ID khuyến mãi ( Nếu không nhập sẽ tự động phát sinh )</label>
-                            <input class="form-control" type="text">
+                            <input class="form-control" type="text" name="id" required>
                         </div>
                         <div class="form-group  col-md-4">
                             <label class="control-label">Tên khuyến mãi</label>
-                            <input class="form-control" type="text">
+                            <input class="form-control" type="text" name="name" required>
                         </div>
                         <div class="form-group  col-md-4">
                             <label class="control-label">Mô tả</label>
-                            <input class="form-control" type="number">
+                            <input class="form-control" type="text" name="description" required>
                         </div>
                         <div class="form-group  col-md-4">
                             <label class="control-label">Phần trăm khuyến mãi</label>
-                            <input class="form-control" type="text">
+                            <input class="form-control" type="text" name="discountPercent" required>
                         </div>
                         <div class="form-group  col-md-4">
                             <label class="control-label">Ngày bắt đầu</label>
-                            <input class="form-control" type="date">
+                            <input class="form-control" type="date" name="startDate" required>
                         </div>
                         <div class="form-group  col-md-4">
                             <label class="control-label">Ngày kết thúc</label>
-                            <input class="form-control" type="date">
-                        </div>
+                            <input class="form-control" type="date" name="endDate" required>
+                        </div>  <button class="btn btn-save" type="submit">Lưu lại</button>
+                        <a class="btn btn-cancel" href="${pageContext.request.contextPath}/Admin/discount/list">Hủy bỏ</a>
                     </form>
                 </div>
-                <button class="btn btn-save" type="button">Lưu lại</button>
-                <a class="btn btn-cancel" href="${pageContext.request.contextPath}/view/admin/view/table-data-discount.jsp">Hủy bỏ</a>
             </div>
         </div>
     </div>

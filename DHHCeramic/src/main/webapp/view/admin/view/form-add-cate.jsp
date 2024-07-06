@@ -149,9 +149,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-
             <div class="tile">
-
                 <h3 class="tile-title">Tạo loại sản phẩm mới</h3>
                 <div class="tile-body">
                     <form class="row" role="form" action="${pageContext.request.contextPath}/Admin/cate/add"
