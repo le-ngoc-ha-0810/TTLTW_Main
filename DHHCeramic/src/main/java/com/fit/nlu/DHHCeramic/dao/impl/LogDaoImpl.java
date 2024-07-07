@@ -9,10 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class LogDaoImpl implements LogDao {//
-    //    public LogDaoImpl() {
-//    }
-    //test
+public class LogDaoImpl implements LogDao {
     @Override
     public void insert(Log log) {
         String sql = "INSERT INTO logs (ip, level, address, prevalue, value,createdAt, createdDate) VALUES (?,?,?, ?, ?, ?, ?)";
@@ -34,23 +31,17 @@ public class LogDaoImpl implements LogDao {//
 
     @Override
     public void update(Log log) {
-        String sql = "UPDATE logs SET ip = ?, level = ?, address = ?, prevalue = ?, value = ?, updatedAt=?, updatedDate=? WHERE id = ?";
+        String sql = "UPDATE logs SET level = ? WHERE id = ?";
         Connection con = JDBCConnection.getJDBCConnection();
         try (PreparedStatement statement = con.prepareStatement(sql)) {
-            statement.setString(1, log.getIp());
-            statement.setInt(2, log.getLevel());
-            statement.setString(3, log.getAddress());
-            statement.setString(4, log.getPrevalue());
-            statement.setString(5, log.getValue());
-            statement.setString(6, log.getUpdatedBy());
-            // Chuyển đổi từ java.util.Date sang java.sql.Date
-            statement.setDate(7, new java.sql.Date(log.getCreatedDate().getTime()));
-            statement.setInt(8, log.getId()); // Assuming a field named 'id' exists for the primary key
+            statement.setInt(1, log.getLevel());
+            statement.setInt(2, log.getId()); // Assuming a field named 'id' exists for the primary key
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
 
     @Override
@@ -94,13 +85,12 @@ public class LogDaoImpl implements LogDao {//
     @Override
     public Log getLogById(int id) {
         Log log = null;
-        String sql = "SELECT id, ip, level, address, prevalue, value FROM log WHERE id = ?";
+        String sql = "SELECT id, ip, level, address, prevalue, value FROM logs WHERE id = ?";
         Connection con = JDBCConnection.getJDBCConnection();
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-
             if (rs.next()) {
                 log = new Log();
                 log.setId(rs.getInt("id"));
