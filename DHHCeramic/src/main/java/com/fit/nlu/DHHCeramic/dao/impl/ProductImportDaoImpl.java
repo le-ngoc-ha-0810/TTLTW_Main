@@ -54,5 +54,109 @@ public class ProductImportDaoImpl extends JDBCConnection {
         }
         return productImports;
     }
+    public List<Product> getWarehouse() {
+        List<Product> warehouse = new ArrayList<>();
+        String sql = "SELECT \n" +
+                "    p.id AS productId, \n" +
+                "    p.name AS productName, \n" +
+                "    p.image,  \n" +
+                "    IFNULL(od.productOut, 0) AS productOut, \n" +
+                "    (pi.quantity - IFNULL(od.productOut, 0)) AS remainingStock,\n" +
+                "    CASE\n" +
+                "        WHEN pi.quantity IS NULL THEN 'Hết hàng'\n" +
+                "        WHEN (pi.quantity - IFNULL(od.productOut, 0)) <= pi.quantity * 0.5 THEN 'Sắp hết hàng'\n" +
+                "        ELSE 'Còn hàng'\n" +
+                "    END AS stockStatus\n" +
+                "FROM products p \n" +
+                "LEFT JOIN (\n" +
+                "    SELECT od.productId, IFNULL(SUM(od.quantity), 0) AS productOut \n" +
+                "    FROM order_details od \n" +
+                "    JOIN orders o ON od.orderId = o.id AND o.status NOT LIKE 'Đã hủy' \n" +
+                "    GROUP BY od.productId\n" +
+                ") AS od ON od.productId = p.id \n" +
+                "LEFT JOIN product_imports pi ON pi.productId = p.id \n" +
+                "GROUP BY p.id, p.image, p.name, pi.quantity;\n";
+
+        Connection con = JDBCConnection.getJDBCConnection();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Product product = new Product();
+                product.setId(rs.getInt("productId"));
+                product.setImage(rs.getString("image"));
+                product.setName(rs.getString("productName"));
+                product.setRemainingStock(rs.getInt("remainingStock"));
+                product.setStockStatus(rs.getString("stockStatus"));
+
+                warehouse.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return warehouse;
+    }
+    public List<Product> getStock() {
+        List<Product> warehouse = new ArrayList<>();
+        String sql = "SELECT \n" +
+                "    p.id AS productId, \n" +
+                "    p.name AS productName, \n" +
+                "    p.image,  \n" +
+                "    IFNULL(od.productOut, 0) AS productOut, \n" +
+                "    (pi.quantity - IFNULL(od.productOut, 0)) AS remainingStock,\n" +
+                "    CASE\n" +
+                "        WHEN pi.quantity IS NULL THEN 'Hết hàng'\n" +
+                "        WHEN (pi.quantity - IFNULL(od.productOut, 0)) <= pi.quantity * 0.5 THEN 'Sắp hết hàng'\n" +
+                "        ELSE 'Còn hàng'\n" +
+                "    END AS stockStatus\n" +
+                "FROM products p \n" +
+                "LEFT JOIN (\n" +
+                "    SELECT od.productId, IFNULL(SUM(od.quantity), 0) AS productOut \n" +
+                "    FROM order_details od \n" +
+                "    JOIN orders o ON od.orderId = o.id AND o.status NOT LIKE 'Đã hủy' \n" +
+                "    GROUP BY od.productId\n" +
+                ") AS od ON od.productId = p.id \n" +
+                "LEFT JOIN product_imports pi ON pi.productId = p.id \n" +
+                "GROUP BY p.id, p.image, p.name, pi.quantity\n" +
+                "HAVING stockStatus = 'Sắp hết hàng';\n";
+
+        Connection con = JDBCConnection.getJDBCConnection();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Product product = new Product();
+                product.setId(rs.getInt("productId"));
+                product.setImage(rs.getString("image"));
+                product.setName(rs.getString("productName"));
+                product.setRemainingStock(rs.getInt("remainingStock"));
+                product.setStockStatus(rs.getString("stockStatus"));
+
+                warehouse.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return warehouse;
+    }
+
 }
 
