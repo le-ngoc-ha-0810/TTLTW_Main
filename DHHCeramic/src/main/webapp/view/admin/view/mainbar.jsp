@@ -44,7 +44,7 @@
             <p class="app-sidebar__user-name"><b>Admin</b></p>
             <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
         </div>
-    </div>
+    </div>s
     <hr>
     <ul class="app-menu">
         <li><a class="app-menu__item menu-link " href="${pageContext.request.contextPath}/Admin/Welcome"><i class='app-menu__icon bx bx-tachometer'></i><span
@@ -70,6 +70,10 @@
         <li><a class="app-menu__item menu-link" href="${pageContext.request.contextPath}/admin/productImports"><i class='app-menu__icon bx bx-package'></i><span
                 class="app-menu__label">Quản lý nhập hàng
           </span></a></li>
+
+        <li><a class="app-menu__item" href="${pageContext.request.contextPath}/Admin/discount/list"><i class='app-menu__icon bx bx bxs-discount'></i><span
+                class="app-menu__label">Quản lý giảm giá
+            </span></a></li>
         <li><a class="app-menu__item menu-link" href="${pageContext.request.contextPath}/admin/warehouse"><i class='app-menu__icon bx bx-package'></i><span
                 class="app-menu__label">Quản lý tồn kho
           </span></a></li>

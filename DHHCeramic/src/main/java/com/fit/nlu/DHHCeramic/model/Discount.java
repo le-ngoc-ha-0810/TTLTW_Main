@@ -1,42 +1,30 @@
 package com.fit.nlu.DHHCeramic.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Discount extends BaseModel {
-    private int id;
-    private String code;
+public class Discount extends BaseModel implements Serializable {
     private String name;
     private String description;
     private String discountPercent;
     private Date startDate;
     private Date endDate;
-    private int limit;
-    private String createdBy;
-    private Date createdDate;
-    private String updateBy;
-    private Date updateDate;
 
     // Constructor
+
+    public Discount(String name, String description, String discountPercent, Date startDate, Date endDate) {
+        this.name = name;
+        this.description = description;
+        this.discountPercent = discountPercent;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
     public Discount() {
+        super();
     }
 
     // Getters and setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
     public String getName() {
         return name;
     }
@@ -77,43 +65,15 @@ public class Discount extends BaseModel {
         this.endDate = endDate;
     }
 
-    public int getLimit() {
-        return limit;
-    }
 
-    public void setLimit(int limit) {
-        this.limit = limit;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public String getUpdateBy() {
-        return updateBy;
-    }
-
-    public void setUpdateBy(String updateBy) {
-        this.updateBy = updateBy;
-    }
-
-    public Date getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
+    @Override
+    public String toString() {
+        return "Discount{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", discountPercent='" + discountPercent + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                '}';
     }
 }

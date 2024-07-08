@@ -1,13 +1,11 @@
 package com.fit.nlu.DHHCeramic.services.impl;
 
-
 import com.fit.nlu.DHHCeramic.dao.CategoryDao;
 import com.fit.nlu.DHHCeramic.dao.impl.CategoryDaoImpl;
 import com.fit.nlu.DHHCeramic.model.Category;
 import com.fit.nlu.DHHCeramic.services.CategoryService;
 
 import java.util.List;
-
 
 public class CategoryServiceImpl implements CategoryService {
     CategoryDao categoryDao = new CategoryDaoImpl();
@@ -23,13 +21,11 @@ public class CategoryServiceImpl implements CategoryService {
         oldCate.setName(newCategory.getName());
         oldCate.setStatus(newCategory.getStatus());
         categoryDao.edit(oldCate);
-
     }
 
     @Override
     public void delete(int id) {
         categoryDao.delete(id);
-
     }
 
     @Override

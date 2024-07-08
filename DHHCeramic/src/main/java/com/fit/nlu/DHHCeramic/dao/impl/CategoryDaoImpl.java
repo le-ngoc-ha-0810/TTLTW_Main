@@ -1,6 +1,5 @@
 package com.fit.nlu.DHHCeramic.dao.impl;
 
-
 import com.fit.nlu.DHHCeramic.dao.CategoryDao;
 import com.fit.nlu.DHHCeramic.jdbc.JDBCConnection;
 import com.fit.nlu.DHHCeramic.model.Category;

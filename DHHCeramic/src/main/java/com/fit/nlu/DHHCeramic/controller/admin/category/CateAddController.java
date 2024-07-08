@@ -35,7 +35,7 @@ public class CateAddController extends HttpServlet {
         }
         HttpSession session = request.getSession(false);
         if (session != null && session.getAttribute("account") != null) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/view/admin/view/addCategory.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/view/admin/view/form-add-cate.jsp");
             dispatcher.forward(request, response);
         } else {
             response.sendRedirect(request.getContextPath() + "/AdminLogin");

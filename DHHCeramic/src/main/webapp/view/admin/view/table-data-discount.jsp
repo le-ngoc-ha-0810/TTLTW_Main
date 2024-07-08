@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:url value="/view/admin/static" var="url"></c:url>
+<%@ page buffer="64kb" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +29,7 @@
 <main class="app-content">
     <div class="app-title">
         <ul class="app-breadcrumb breadcrumb side">
-            <li class="breadcrumb-item active"><a href="#"><b>Danh sách sản phẩm</b></a></li>
+            <li class="breadcrumb-item active"><a href="#"><b>Danh sách khuyến mãi</b></a></li>
         </ul>
         <div id="clock"></div>
     </div>
@@ -88,96 +89,28 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                            <td>1</td>
-                            <td>Khuyến mãi tồn kho</td>
-                            <td>Tất cả sản phẩm tồn kho được giảm</td>
-                            <td><span class="badge bg-success">30%</span></td>
-                            <td>20/10/2023</td>
-                            <td>1/11/2023</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                                        onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
-                                </button>
-                                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
-                                        data-toggle="modal"
-                                        data-target="#ModalUP"><i class="fas fa-edit"></i></button>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                            <td>2</td>
-                            <td>Khuyến mãi 20/10</td>
-                            <td>Tất cả sản phẩm gạch lát nền được giảm</td>
-                            <td><span class="badge bg-success">20%</span></td>
-                            <td>20/10/2023</td>
-                            <td>20/10/2023</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                                        onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
-                                </button>
-                                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
-                                        data-toggle="modal"
-                                        data-target="#ModalUP"><i class="fas fa-edit"></i></button>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                            <td>3</td>
-                            <td>Sân vườn đẹp</td>
-                            <td>Tất cả sản phẩm gạch sân vườn được giảm</td>
-                            <td><span class="badge bg-success">10%</span></td>
-                            <td>1/11/2023</td>
-                            <td>10/11/2023</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                                        onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
-                                </button>
-                                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
-                                        data-toggle="modal"
-                                        data-target="#ModalUP"><i class="fas fa-edit"></i></button>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                            <td>4</td>
-                            <td>Sinh nhật DHH Ceramic</td>
-                            <td>Tất cả sản phẩm giảm một nữa, mỗi khách hàng chỉ được mua 1 lần</td>
-                            <td><span class="badge bg-success">50%</span></td>
-                            <td>13/11/2023</td>
-                            <td>18/11/2023</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                                        onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
-                                </button>
-                                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
-                                        data-toggle="modal"
-                                        data-target="#ModalUP"><i class="fas fa-edit"></i></button>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                            <td>5</td>
-                            <td>Sản phẩm mới</td>
-                            <td>Sản phẩm gạch tranh thảm mới ra mắt được giảm giá</td>
-                            <td><span class="badge bg-success">20%</span></td>
-                            <td>20/10/2023</td>
-                            <td>1/11/2023</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                                        onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
-                                </button>
-                                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
-                                        data-toggle="modal"
-                                        data-target="#ModalUP"><i class="fas fa-edit"></i></button>
-
-                            </td>
-                        </tr>
+                        <c:forEach items="${listDiscount}" var="dis">
+                            <tr>
+                                <td width="10"><input type="checkbox" name="check1"  value="${dis.id}"></td>
+                                <td>${dis.id}</td>
+                                <td>${dis.name}</td>
+                                <td>${dis.description}</td>
+                                <td>${dis.discountPercent}</td>
+                                <td>${dis.startDate}</td>
+                                <td>${dis.endDate}</td>
+                                <td class="table-td-center">
+                                    <button class="btn btn-primary btn-sm trash delete-dis" data-id="${dis.id}" type="button" title="Xóa"
+                                            onclick="confirmDelete(${dis.id})"><i class="fas fa-trash-alt"></i>
+                                    </button>
+                                    <a href="${pageContext.request.contextPath}/Admin/discount/edit?id=${dis.id}">
+                                        <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"
+                                                id="show-emp"
+                                                data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i>
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
 
                         </tbody>
                     </table>
@@ -187,60 +120,60 @@
     </div>
 </main>
 
-<!--
-  MODAL
--->
-<div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-     data-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
+<%--<!----%>
+<%--  MODAL--%>
+<%---->--%>
+<%--<div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"--%>
+<%--     data-keyboard="false">--%>
+<%--    <div class="modal-dialog modal-dialog-centered" role="document">--%>
+<%--        <div class="modal-content">--%>
 
-            <div class="modal-body">
-                <div class="row">
-                    <div class="form-group  col-md-12">
-          <span class="thong-tin-thanh-toan">
-            <h5>Chỉnh sửa thông tin khuyến mãi cơ bản</h5>
-          </span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label">Mã khuyến mãi </label>
-                        <input class="form-control" type="number" value="1">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label">Tên Khuyến mãi</label>
-                        <input class="form-control" type="text" required value="Khuyến mãi tồn kho">
-                    </div>
-                    <div class="form-group  col-md-6">
-                        <label class="control-label">Mô tả</label>
-                        <input class="form-control" type="text" required value="Tất cả sản phẩm tồn kho được giảm">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label">Phần trăm</label>
-                        <input class="form-control" type="text" value="30%">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label">Ngày băt đầu</label>
-                        <input class="form-control" type="date" required value="20/10/2023">
-                    </div>
-                    <div class="form-group  col-md-6">
-                        <label class="control-label">Ngày kết thúc</label>
-                        <input class="form-control" type="date" required value="1/11/2023">
-                    </div>
-                </div>
-                <BR>
-                <BR>
-                <BR>
-                <button class="btn btn-save" type="button">Lưu lại</button>
-                <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-                <BR>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div>
+<%--            <div class="modal-body">--%>
+<%--                <div class="row">--%>
+<%--                    <div class="form-group  col-md-12">--%>
+<%--          <span class="thong-tin-thanh-toan">--%>
+<%--            <h5>Chỉnh sửa thông tin khuyến mãi cơ bản</h5>--%>
+<%--          </span>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="row">--%>
+<%--                    <div class="form-group col-md-6">--%>
+<%--                        <label class="control-label">Mã khuyến mãi </label>--%>
+<%--                        <input class="form-control" type="number" value="1">--%>
+<%--                    </div>--%>
+<%--                    <div class="form-group col-md-6">--%>
+<%--                        <label class="control-label">Tên Khuyến mãi</label>--%>
+<%--                        <input class="form-control" type="text" required value="Khuyến mãi tồn kho">--%>
+<%--                    </div>--%>
+<%--                    <div class="form-group  col-md-6">--%>
+<%--                        <label class="control-label">Mô tả</label>--%>
+<%--                        <input class="form-control" type="text" required value="Tất cả sản phẩm tồn kho được giảm">--%>
+<%--                    </div>--%>
+<%--                    <div class="form-group col-md-6">--%>
+<%--                        <label class="control-label">Phần trăm</label>--%>
+<%--                        <input class="form-control" type="text" value="30%">--%>
+<%--                    </div>--%>
+<%--                    <div class="form-group col-md-6">--%>
+<%--                        <label class="control-label">Ngày băt đầu</label>--%>
+<%--                        <input class="form-control" type="date" required value="20/10/2023">--%>
+<%--                    </div>--%>
+<%--                    <div class="form-group  col-md-6">--%>
+<%--                        <label class="control-label">Ngày kết thúc</label>--%>
+<%--                        <input class="form-control" type="date" required value="1/11/2023">--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <BR>--%>
+<%--                <BR>--%>
+<%--                <BR>--%>
+<%--                <button class="btn btn-save" type="button">Lưu lại</button>--%>
+<%--                <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>--%>
+<%--                <BR>--%>
+<%--            </div>--%>
+<%--            <div class="modal-footer">--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
 <!--
 MODAL
 -->
@@ -259,8 +192,7 @@ MODAL
 <!-- Data table plugin-->
 <script type="text/javascript" src="${url}/js/plugins/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="${url}/js/plugins/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript">
-    $('#sampleTable').DataTable();
+<script type="text/javascript">$('#sampleTable').DataTable();
 
     //Thời Gian
     function time() {
@@ -304,31 +236,90 @@ MODAL
     }
 </script>
 <script>
-    function deleteRow(r) {
-        var i = r.parentNode.parentNode.rowIndex;
-        document.getElementById("myTable").deleteRow(i);
-    }
 
-    jQuery(function () {
-        jQuery(".trash").click(function () {
-            swal({
-                title: "Cảnh báo",
-                text: "Bạn có chắc chắn là muốn xóa sản phẩm này?",
-                buttons: ["Hủy bỏ", "Đồng ý"],
-            })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        swal("Đã xóa thành công.!", {});
+    $(document).ready(function () {
+        // Sử dụng delegated event cho các nút xóa
+        $(document).on('click', '.delete-product', function (e) {
+            e.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
+            var username = '${sessionScope.account.username}'; // Lấy thông tin người dùng từ phiên
+            var deleteUserButton = $(this); // Lưu trữ phần tử .delete-user ban đầu
+            var logId = $(this).data('id'); // Lấy id người dùng từ thuộc tính data-id
+            console.log(username);
+            // Hiển thị hộp thoại xác nhận trước khi xóa
+            if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
+                // Gửi yêu cầu AJAX để xóa người dùng
+                $.ajax({
+                    url: '${pageContext.request.contextPath}/Admin/discount/delete?id=' + logId + '&username=' + username,
+                    type: 'DELETE', // Sử dụng phương thức DELETE
+                    success: function (response) {
+                        // Xóa dòng chứa nút xóa được nhấn
+                        deleteUserButton.closest('tr').remove();
+                        // Hiển thị thông báo hoặc thực hiện các hành động khác
+                        alert("Xóa sản phẩm thành công");
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error deleting user:", error);
+                        // Xử lý lỗi nếu cần
                     }
                 });
+            }
         });
     });
-    oTable = $('#sampleTable').dataTable();
-    $('#all').click(function (e) {
-        $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
-        e.stopImmediatePropagation();
+
+    var selectedLogs = [];
+    $(document).ready(function() {
+        // Hàm để cập nhật trạng thái của các dòng đã chọn khi trang được tải lại hoặc khi checkbox thay đổi
+        function updateSelectedLogs() {
+            selectedLogs = [];
+            $('input[name="check1"]:checked').each(function() {
+                selectedLogs.push($(this).val());
+            });
+        }
+
+        // Xử lý sự kiện khi checkbox được chọn hoặc bỏ chọn
+        $(document).on('change', 'input[name="check1"]', function() {
+            updateSelectedLogs();
+        });
+
+        // Xử lý sự kiện khi nút xóa được nhấn
+        $('#deleteSelected').click(function (e) {
+            e.preventDefault();
+
+            if (selectedLogs.length === 0) {
+                alert("Vui lòng chọn ít nhất một sản phẩm để xóa.");
+                return;
+            }
+
+            if (confirm("Bạn có chắc chắn muốn xóa những sản phẩm đã chọn không?")) {
+                // Gửi yêu cầu AJAX với dữ liệu là mảng các ID đã chọn
+                $.ajax({
+                    url: '${pageContext.request.contextPath}/Admin/discount/deleteSelected',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(selectedLogs),
+                    success: function (response) {
+                        alert("Xóa sản phẩm đã chọn thành công");
+                        // Xóa các dòng từ bảng mà không cần tải lại trang
+                        selectedLogs.forEach(function(logId) {
+                            $('input[name="check1"][value="' + logId + '"]').closest('tr').remove();
+                        });
+                        // Sau khi xóa thành công, cập nhật lại trạng thái của các dòng đã chọn
+                        updateSelectedLogs();
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error deleting logs:", error);
+                        alert("Đã xảy ra lỗi khi xóa log.");
+                    }
+                });
+            }
+        });
+
+        // Cập nhật trạng thái của các dòng đã chọn khi trang được tải lại
+        updateSelectedLogs();
     });
 </script>
+
+
 </body>
 
 </html>
