@@ -1,7 +1,3 @@
-<%@ page import="java.util.Date" %>
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.Map" %>
-<%@page import="java.sql.Timestamp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:url value="/view/client/static" var="url"></c:url>
@@ -129,7 +125,7 @@
         <%
             }
         %>
-        <div class="table-responsive cart_info">
+        <div class="table-responsive cart22_info">
             <table class="table table-condensed">
                 <thead>
                 <tr class="cart_menu">
@@ -138,7 +134,7 @@
                         Tất cả (${numProduct} sản phẩm)
                     </td>
                     <td class="description">Tên sản phẩm</td>
-                    <td class="price">Size</td>
+                    <td class="size">Size</td>
                     <td class="price">Đơn giá</td>
                     <td class="quantity">Số lượng</td>
                     <td class="total">Thành tiền</td>
@@ -160,7 +156,8 @@
                                     <!-- Tên sản phẩm -->
                                     <h4><a href="">${map.value.product.name}</a></h4>
                                 </td>
-                                <td class="cart_price">
+                                <input type="text" id="size_${map.key}" value="${map.value.size}" hidden>
+                                <td class="cart_size">
                                     <!-- Size sản phẩm -->
                                     <p>${map.value.size}</p>
                                 </td>
@@ -238,6 +235,18 @@
             </div>
         </div>
         <div class="row">
+            <div class="discount_area">
+                <div class="discount_header">
+                    <b style="margin-bottom:5px; margin-left: 10px">Khuyến mãi</b>
+                    <p class="number_of_discount">Có thể chọn mã giảm giá hoặc mã freeship</p>
+                </div>
+                <form id="discountForm" method="post" action="${pageContext.request.contextPath}/apply-discount">
+                    <input style="margin-left:15px" type="text" id="discount" name="discount" class="name"
+                           placeholder="Nhập mã khuyến mãi">
+                    <button type="submit">Nhập</button>
+                </form>
+                <a><i class="fas fa-tag"></i> Chọn mã khuyến mãi</a>
+            </div>
             <form class="container" style="display: flex" action="${pageContext.request.contextPath}/member/order"
                   method="post">
                 <div class="col-lg-7">
@@ -260,16 +269,6 @@
                         <input type="button" id="changePasswordBtn" class="change__password-btn"
                                style="margin-top: 12px; margin-left:12px;color: #c43434" onclick="showChangePassword()"
                                value="Thay đổi ">
-                        <div class="discount_area">
-                            <div class="discount_header">
-                                <b style="margin-bottom:5px; margin-left: 10px">Khuyến mãi</b>
-                                <p class="number_of_discount">Có thể chọn mã giảm giá hoặc mã freeship</p>
-                            </div>
-                            <input style="margin-left:15px" type="text" id="discount" name="discount" class="name"
-                                   placeholder="Nhập mã khuyến mãi">
-                            <button type="button" onclick="applyDiscountCode()">Nhập</button>
-                            <a><i class="fas fa-tag"></i> Chọn mã khuyến mãi</a>
-                        </div>
                         <div class="checkout__input">
                             <b style="margin-bottom:5px; margin-left: 10px">Lưu ý</b>
                             <input type="text" name="note" placeholder="hàng dễ vỡ,..." style="margin-left: 10px">
@@ -287,6 +286,8 @@
                             <c:set var="numProduct"
                                    value="${numProduct + 1}"/>
                         </c:forEach>
+                        <c:set var="discountTotal" value="${discountTotal}"/>
+                        <c:set var="discountApplied" value="${discountApplied}"/>
                         <div class="checkout_calculate">
                             <div class="temp_price">
                                 <p>Tạm tính</p>
@@ -294,12 +295,18 @@
                             </div>
                             <div class="discount_checkout">
                                 <p>Giảm giá</p>
-                                <p>0đ</p>
+                                <c:if test="${discountApplied}">
+                                <p>${discountTotal}</p>
+                                </c:if>
+                                <c:if test="${not discountApplied}">
+                                    <p>0đ</p>
+                                </c:if>
                             </div>
                             <div class="filter-price-range-filter__range-line-checkout"></div>
                             <div class="sum_price">
                                 <p style="font-size: 24px;">Tổng cộng:</p>
-                                <p id="total_dc" class="no_product" style="font-size: 24px;">${total}</p>
+                                <p id="total_dc" class="no_product" style="font-size: 24px;">${total - discountTotal}đ</p>
+                                <input type="hidden" name="total" value="${total - discountTotal}">
                             </div>
                             <p class="vat">(Đã bao gồm thuế VAT nếu có)</p>
                         </div>
@@ -390,6 +397,7 @@
         let totalPriceEle = document.getElementById('total_price_' + idItem);
         let sumTotalEle = document.getElementById('total_price');
         let sumTotal = document.getElementById('total_dc');
+        let size = document.getElementById('size_' + idItem).value;
         let quantity = inputQuantityEle.value;
 
         $.ajax({
@@ -398,7 +406,8 @@
             data: {
                 "action": "update-cart",
                 "id_item": idItem,
-                "quantity": quantity * 1 + type
+                "quantity": quantity * 1 + type,
+                "size": size
             },
             url: "<%=request.getContextPath()%>/cart/update",
             success: function (data) {
@@ -431,32 +440,3 @@
 </body>
 
 </html>
-<!-- Price -->
-<%--    <c:choose>--%>
-<%--        <!-- Kiểm tra xem sản phẩm có khuyến mãi không -->--%>
-<%--        <c:when test="${map.value.product.dateStart ne null || map.value.product.dateEnd ne null}">--%>
-<%--            <!-- Lấy thời gian hiện tại -->--%>
-<%--            <c:set var="serverTime" value="${now}"/>--%>
-<%--            <!-- Chuyển đổi thời gian hiện tại thành Timestamp -->--%>
-<%--            <c:set var="timestamp" value="${fn:toDate(serverTime.time)}"/>--%>
-<%--            <!-- Chuyển đổi thời gian bắt đầu và kết thúc khuyến mãi thành Timestamp -->--%>
-<%--            <c:set var="dateStart" value="${fn:toDate(map.value.product.dateStart)}"/>--%>
-<%--            <c:set var="dateEnd" value="${fn:toDate(map.value.product.dateEnd)}"/>--%>
-
-<%--            <!-- Kiểm tra xem sản phẩm đang trong thời gian khuyến mãi -->--%>
-<%--            <c:if test="${dateEnd.time gt timestamp.time and dateStart.time lt timestamp.time}">--%>
-<%--                <!-- Hiển thị giá giảm giá cùng với giá gốc -->--%>
-<%--                <p class="text-start text-md-center">--%>
-<%--                    <strong>${map.value.product.priceDiscount}₫</strong>--%>
-<%--                    <strong style="text-decoration: line-through;font-weight: normal;">${map.value.product.price}₫</strong>--%>
-<%--                </p>--%>
-<%--            </c:if>--%>
-<%--        </c:when>--%>
-<%--        <!-- Nếu không có khuyến mãi, chỉ hiển thị giá gốc -->--%>
-<%--        <c:otherwise>--%>
-<%--            <p class="text-start text-md-center">--%>
-<%--                <strong>${map.value.product.price}₫</strong>--%>
-<%--            </p>--%>
-<%--        </c:otherwise>--%>
-<%--    </c:choose>--%>
-<!-- Price -->
