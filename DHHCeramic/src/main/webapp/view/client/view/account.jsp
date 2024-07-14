@@ -117,7 +117,7 @@
                         </ul>
                     </nav>
                 </div>
-<%--                Ho so--%>
+                <%--                Ho so--%>
                 <div class="content-panel">
                     <div id="information">
                         <h2 class="title">Hồ sơ</h2>
@@ -202,7 +202,7 @@
                                     <label class="col-md-2  col-sm-3 col-xs-12 control-label">Mật khẩu</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
                                         <input type="password" class="form-control" name="password"
-                                               value="${sessionScope.account.password}"  readonly>
+                                               value="${sessionScope.account.password}" readonly>
                                         <input type="button" id="changePasswordBtn" class="change__password-btn"
                                                style="margin-top: 6px;" onclick="showChangePassword()"
                                                value="Thay đổi mật khẩu">
@@ -220,82 +220,57 @@
                     <!--Đơn mua-->
                     <div id="order" style="display: none">
                         <h2 class="title">Đơn hàng</h2>
-                        <%--                                                <div class="one-order">--%>
-                        <%--                                                    <div class="row order-header">--%>
-                        <%--                                                        <div class="col-md-8 col-sm-12 order-id">--%>
-                        <%--                                                            <strong>Đơn hàng:</strong>--%>
-                        <%--                                                            <span>#ID3721534</span>--%>
-                        <%--                                                        </div>--%>
-                        <%--                                                        <div class="col-md-4 col-sm-12 order-id">--%>
-                        <%--                                                            <span class="fas fa-truck"></span>--%>
-                        <%--                                                            <span class="complete">Đang xử lí</span>--%>
-                        <%--                                                        </div>--%>
-                        <%--                                                    </div>--%>
-                        <%--                                                    <div class="row">--%>
-                        <%--                                                        <div class="col-md-2 product-img">--%>
-                        <%--                                                            <img src="${url}/images/shop/pants/7milionShort.jpg">--%>
-                        <%--                                                        </div>--%>
-                        <%--                                                        <div class="col-md-10 product-info">--%>
-                        <%--                                                            <h4>Quần short 7millions Essentials+ / Màu đen</h4>--%>
-                        <%--                                                            <p>x1</p>--%>
-                        <%--                                                            <span class="base-price">300.000đ</span>--%>
-                        <%--                                                            <span class="discount">280.000đ</span>--%>
-                        <%--                                                        </div>--%>
-                        <%--                                                    </div>--%>
-                        <%--                                                    <hr>--%>
-                        <%--                                                    <div class="row">--%>
-                        <%--                                                        <div class="col-md-8 total">--%>
-                        <%--                                                            <span><i class="fas fa-donate"></i></span>--%>
-                        <%--                                                            <span class="total-price">Tổng tiền: <strong>280.000đ</strong></span>--%>
-                        <%--                                                        </div>--%>
-                        <%--                                                        <div class="col-md-4 total">--%>
-                        <%--                                                            <span><button class="btn-again" type="button">Liên hệ</button></span>--%>
-                        <%--                                                            <span><button class="btn-rate" type="button" data-toggle="modal"--%>
-                        <%--                                                                          data-target="#cancelOrder">Hủy đơn hàng</button></span>--%>
-
-                        <%--                                                        </div>--%>
-                        <%--                                                    </div>--%>
-                        <%--                                                </div>--%>
-                        <c:forEach items="${listCartItem}" var="cartItem">
+                        <c:forEach items="${listCart}" var="cart">
                             <div class="one-order">
                                 <div class="row order-header">
-                                    <div class="col-md-8 col-sm-12 order-id">
-                                        <strong>Đơn hàng: ${cartItem.id}</strong>
-
+                                    <div class="col-md-6 col-sm-12 order-id">
+                                        <strong>Đơn hàng: ${cart.id}</strong>
                                     </div>
                                     <div class="col-md-4 col-sm-12 order-id">
                                         <span class="fas fa-truck"></span>
-                                        <c:if test="${cartItem.status == null}">
+                                        <c:if test="${cart.status == null}">
                                             <span class="complete">Đang xử lí</span>
                                         </c:if>
-                                        <c:if test="${cartItem.status != null}">
-                                            <span class="complete">${cartItem.status}</span>
+                                        <c:if test="${cart.status != null}">
+                                            <span class="complete">${cart.status}</span>
                                         </c:if>
                                     </div>
+                                    <c:if test="${cart.status != 'Đã hủy' }">
+                                        <div class="col-md-2 col-sm-12 order-id">
+                                            <button class="btn-remove removeInAccount"
+                                                    onclick="openCancelModal('${cart.id}')">
+                                                <i class="fas fa-trash-alt"></i> Huỷ Đơn
+                                            </button>
+                                        </div>
+                                    </c:if>
                                 </div>
                                 <div id="contentProduct">
                                     <input type="hidden" name="user_id" value="${sessionScope.account.id}">
-
-                                    <div class="row">
-                                        <div id="cartItem_id" value="${cartItem.id}">
-                                        </div>
-                                        <div class="col-md-2 product-img">
-                                            <c:url value="${cartItem.product.image}"
-                                                   var="imgUrl"></c:url>
-                                            <img src="${imgUrl}">
-                                        </div>
-                                        <div class="col-md-10 product-info">
-                                            <h4>${cartItem.product.name}</h4>
-                                            <div class="quantityAndRemove">
-                                                <p>x${cartItem.quantity}</p>
-                                                <button class="btn-remove removeInAccount"
-                                                        onclick="return removeCartItem(document.getElementById('cartItem_id').getAttribute('value'))">
-                                                  <i class="fas fa-trash-alt"></i>  Huỷ Đơn </button>
+                                    <c:forEach items="${listCartItem}" var="cartItem">
+                                        <c:if test="${cartItem.order.id == cart.id}">
+                                            <div class="row">
+                                                <div id="cartItem_id" value="${cartItem.id}">
+                                                </div>
+                                                <div class="col-md-2 product-img">
+                                                    <c:url value="${cartItem.product.image}" var="imgUrl"></c:url>
+                                                    <img src="${imgUrl}">
+                                                </div>
+                                                <div class="col-md-10 product-info">
+                                                    <h4>${cartItem.product.name}</h4>
+                                                    <div class="quantityAndRemove">
+                                                        <p>x${cartItem.quantity}</p>
+                                                    </div>
+                                                    <c:if test="${cartItem.product.saleId == null || cartItem.product.saleId == 0}">
+                                                        <span class="discount">${cartItem.product.price}đ</span>
+                                                    </c:if>
+                                                    <c:if test="${cartItem.product.saleId != null && cartItem.product.saleId != 0}">
+                                                        <span class="base-price">${cartItem.product.price}đ</span>
+                                                        <span class="discount">${cartItem.product.saleId}đ</span>
+                                                    </c:if>
+                                                </div>
                                             </div>
-                                            <span class="base-price">${cartItem.product.price}đ</span>
-                                            <span class="discount">${cartItem.product.saleId}đ</span>
-                                        </div>
-                                    </div>
+                                        </c:if>
+                                    </c:forEach>
                                     <hr>
                                 </div>
                             </div>
@@ -335,7 +310,8 @@
             class="mdi mdi-close"></i> Turn Off</button>
     </div>
     </div>
-    </span>
+
+                                </span>
                             </div>
                             <hr>
                             <div class="p-3 one-notify">
@@ -347,7 +323,8 @@
                                     <div class="col-lg-10 col-sm-10 text-truncate">
                                         <h5>MỪNG GIÁNG SINH - SIÊU KHUYẾN MÃI</h5>
                                         <div class="mb-2">
-                                            Giảm giá đến 50% các sản phẩm, free ship cho đơn từ 500.000 VNĐ trở lên. Mua ngay
+                                            Giảm giá đến 50% các sản phẩm, free ship cho đơn từ 500.000 VNĐ trở lên. Mua
+                                            ngay
                                             nào...
                                         </div>
                                     </div>
@@ -378,8 +355,7 @@
                                     <div class="col-lg-10 col-sm-10 text-truncate">
                                         <h5>**RA MẮT SẢN PHẨM MỚI**</h5>
                                         <div class="mb-2">
-                                            Ghé thăm cửa hàng để xem những sản phẩm mới cũng như nhận những ưu đãi
-                                            hấp
+                                            Ghé thăm cửa hàng để xem những sản phẩm mới cũng như nhận những ưu đãi hấp
                                             dẫn từ...
                                         </div>
                                     </div>
@@ -394,8 +370,8 @@
     <div class="dropdown-menu dropdown-menu-right">
     <button class="dropdown-item" type="button" style="margin: 0 14px;"><i
             class="mdi mdi-delete"></i> Xóa</button>
-    <button class="dropdown-item" type="button"><i
-            class="mdi mdi-close"></i> Tắt thông báo</button>
+    <button class="dropdown-item" type="button">
+        <i class="mdi mdi-close"></i> Tắt thông báo</button>
     </div>
     </div>
     </span>
@@ -408,34 +384,24 @@
                     <div id="voucher" style="display: none">
                         <h2 class="title">Voucher khuyến mãi</h2>
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="content-voucher">
-                                    <span><img src="/CelineShop/view/client/static/images/home/logoSale.png"></span>
-                                    <h4>Giảm giá 10%</h4>
-                                    <ul class="list-unstyled m-t-md">
-                                        <li>Giảm giá 10% trên tổng hóa đơn khi mua từ 3 sản phẩm gạch lát nền cùng loại trở lên...</li>
-                                        <li>Hạn sử dụng: vô hạn</li>
-                                        <li>Áp dụng cho hình thức mua hàng trực tiếp và online</li>
-                                    </ul>
-                                    <button type="button">Sử dụng</button>
+                            <c:forEach items="${listDiscount}" var="discount">
+                                <div class="col-md-6">
+                                    <div class="content-voucher">
+                                        <span><img src="/CelineShop/view/client/static/images/home/logoSale.png"></span>
+                                        <h4>${discount.name}</h4>
+                                        <ul class="list-unstyled m-t-md">
+                                            <li><c:out value="${discount.description}" default="No description available" /></li>
+                                            <li>Ngày hết hạn: <fmt:formatDate value="${discount.endDate}" pattern="dd/MM/yyyy" /></li>
+                                            <li>Áp dụng cho hình thức mua hàng trực tiếp và online</li>
+                                        </ul>
+                                        <button type="button">Sử dụng</button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="content-voucher">
-                                    <span><img src="/CelineShop/view/client/static/images/home/logoSale.png"></span>
-                                    <h4>Giảm giá 5%</h4>
-                                    <ul class="list-unstyled m-t-md">
-                                        <li>Giảm giá 5% trên tổng hóa đơn khi khách hàng tới cửa hàng lấy hàng
-                                        </li>
-                                        <li>Áp dụng cho hình thức mua hàng trực tiếp</li>
-                                    </ul>
-                                    <button type="button">Sử dụng</button>
-                                </div>
-                            </div>
+                            </c:forEach>
                         </div>
                     </div>
 
-                    <!--Modal-->
+                    <!-- Modal -->
                     <div class="modal fade" id="cancelOrder" tabindex="-1" role="dialog"
                          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -447,11 +413,15 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <select>
-                                        <option>Thay đổi địa chỉ nhận hàng.</option>
-                                        <option>Tôi không muốn đặt đơn hàng này nữa.</option>
-                                        <option>Thay đổi hình thức thanh toán.</option>
-                                        <option>Tôi đặt nhầm size sản phẩm.</option>
+                                    <select id="cancelReason">
+                                        <option value="Thay đổi địa chỉ nhận hàng">Thay đổi địa chỉ nhận hàng.</option>
+                                        <option value="Tôi không muốn đặt đơn hàng này nữa.">Tôi không muốn đặt đơn hàng
+                                            này nữa.
+                                        </option>
+                                        <option value="Thay đổi hình thức thanh toán.">Thay đổi hình thức thanh toán.
+                                        </option>
+                                        <option value="Tôi đặt nhầm size sản phẩm.">Tôi đặt nhầm size sản phẩm.</option>
+                                        <option>Lí do khác</option>
                                     </select>
                                     <div id="another">
                                         <h5>Lí do khác</h5>
@@ -465,6 +435,7 @@
                             </div>
                         </div>
                     </div>
+                    <%--                    ket thuc modal--%>
                 </div>
             </div>
         </section>
@@ -556,10 +527,9 @@
         </div>
     </div>
 </div>
-
 <!-- Js Plugins -->
 <!-- Js Plugins -->
-<script src="${url}/js/jquery-3.3.1.min.js"></script>
+<%--<script src="${url}/js/jquery-3.3.1.min.js"></script>--%>
 <script src="${url}/js/bootstrap.min.js"></script>
 <script src="${url}/js/jquery.nice-select.min.js"></script>
 <script src="${url}/js/jquery-ui.min.js"></script>
@@ -569,6 +539,63 @@
 <script src="${url}/js/main.js"></script>
 <script src="${url}/js/account.js"></script>
 <script src="${pageContext.request.contextPath}/CKLibraries/ckfinder/ckfinder.js"></script>
+<!-- Thư viện jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Thư viện Bootstrap JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<script>
+    let orderIdToCancel; // Define orderIdToCancel variable
+
+    function cancelOrder() {
+        const reasonSelect = document.querySelector('#cancelOrder select');
+        const anotherReasonTextarea = document.querySelector('#anotherReason');
+        let reason = reasonSelect.value;
+
+        if (reason === "Lí do khác") {
+            reason = anotherReasonTextarea.value;
+        }
+
+        if (!reason) {
+            alert("Vui lòng nhập lí do hủy đơn.");
+            return;
+        }
+
+        // AJAX call to cancel the order
+        $.ajax({
+            url: '/DHHCeramic/cancelOrder',
+            method: 'POST',
+            data: {
+                orderId: orderIdToCancel,
+                reason: reason
+            },
+            success: function (response) {
+                if (response.success) {
+                    alert('Đơn hàng đã được hủy thành công.');
+                    location.reload(); // Reload the page to reflect changes
+                } else {
+                    alert('Đã xảy ra lỗi khi hủy đơn hàng.');
+                }
+            },
+            error: function () {
+                alert('Đã xảy ra lỗi khi hủy đơn hàng.');
+            }
+        });
+    }
+
+    function openCancelModal(orderId) {
+        console.log("Mở modal hủy đơn cho mã đơn hàng:", orderId);
+        orderIdToCancel = orderId; // Lưu mã đơn hàng
+        $('#cancelOrder').modal('show'); // Hiển thị modal
+    }
+
+    $(document).ready(function () {
+        // Bind cancelOrder function to the click event of the "Hủy đơn" button
+        $('.btn-rate').click(cancelOrder);
+    });
+</script>
+
 
 <script type="text/javascript">
     function BrowseServer() {
@@ -578,26 +605,6 @@
             document.getElementById('avatar').value = fileUrl;
         };
         finder.popup();
-    }
-</script>
-<script>
-    function removeCartItem(param) {
-        var txtSearch = param;
-        $.ajax({
-            url:  '/DHHCeramic/myAccount/remove-ordered-item',
-            type: 'GET',
-            data: {
-                id: txtSearch,
-                user_id: ${sessionScope.account.id},
-                timestamp: new Date().getTime() // Thêm timestamp hoặc tham số ngẫu nhiên
-            },
-            success: function (data) {
-                console.log("Received data:", data); // Thêm dòng này để kiểm tra giá trị của data
-                var row = document.getElementById('contentProduct');
-                row.innerHTML = '';
-                row.innerHTML = data;
-            }
-        });
     }
 </script>
 <script>
@@ -638,6 +645,7 @@
     });
     //-->
 </script>
+
 <!--[if lt IE 9]>
 <script src="js/html5shiv.js"></script>
 <script src="js/respond.min.js"></script>
