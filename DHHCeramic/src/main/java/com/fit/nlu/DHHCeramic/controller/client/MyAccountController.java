@@ -1,11 +1,15 @@
 package com.fit.nlu.DHHCeramic.controller.client;
 
 
+import com.fit.nlu.DHHCeramic.model.Discount;
+import com.fit.nlu.DHHCeramic.model.Order;
 import com.fit.nlu.DHHCeramic.model.OrderDetails;
 import com.fit.nlu.DHHCeramic.model.User;
+import com.fit.nlu.DHHCeramic.services.DiscountService;
 import com.fit.nlu.DHHCeramic.services.OrderDetailsService;
 import com.fit.nlu.DHHCeramic.services.OrderService;
 import com.fit.nlu.DHHCeramic.services.UserService;
+import com.fit.nlu.DHHCeramic.services.impl.DiscountServiceImpl;
 import com.fit.nlu.DHHCeramic.services.impl.OrderDetailsServiceImpl;
 import com.fit.nlu.DHHCeramic.services.impl.OrderServiceImpl;
 import com.fit.nlu.DHHCeramic.services.impl.UserServiceImpl;
@@ -29,18 +33,24 @@ public class MyAccountController extends HttpServlet {
     OrderDetailsService cartItemService = new OrderDetailsServiceImpl();
     OrderService cartService = new OrderServiceImpl();
 
+    DiscountService discountService = new DiscountServiceImpl();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<OrderDetails> listCartItem = new ArrayList<OrderDetails>();
+        List<Order> listCart = new ArrayList<Order>();
         String id = request.getParameter("id");
         System.out.println(id);
         User user = userService.get(Integer.parseInt(id));
-        listCartItem = cartItemService.getByUserID(Integer.parseInt(id));
-//        String idCart = listCartItem.toString();
-//        request.setAttribute("idCart", idCart);
+        listCart = cartService.getByUserId(Integer.parseInt(id));
+        List<Discount> listDiscount = discountService.getAll();
+        List<OrderDetails> listCartItem = cartItemService.getByUserID(Integer.parseInt(id));
         String alert = request.getParameter("alert");
         request.setAttribute("alert", alert);
+        request.setAttribute("listCart", listCart);
         request.setAttribute("listCartItem", listCartItem);
+        request.setAttribute("listDiscount", listDiscount);
+        System.out.println("List discount: " + listDiscount);
+        System.out.println("List of Cart Items: " + listCartItem);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/view/client/view/account.jsp");
         dispatcher.forward(request, response);
     }
@@ -59,7 +69,7 @@ public class MyAccountController extends HttpServlet {
         String phone = request.getParameter("phone");
         String avatar = request.getParameter("avatar");
         int role = Integer.parseInt(request.getParameter("role"));
-        System.out.println(id + name+ username+facebook +email +phone +address+avatar);
+        System.out.println(id + name + username + facebook + email + phone + address + avatar);
         User user = new User();
         user.setId(Integer.parseInt(id));
         user.setFullname(name);
