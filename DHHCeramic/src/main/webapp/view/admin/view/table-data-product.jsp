@@ -21,6 +21,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.4/dist/xlsx.full.min.js"></script>
 
 </head>
 
@@ -62,7 +63,7 @@
                         </div>
 
                         <div class="col-sm-2">
-                            <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất
+                            <a class="btn btn-excel btn-sm" href="" title="In" onclick="myApp.exportToExcel()"><i class="fas fa-file-excel"></i> Xuất
                                 Excel</a>
                         </div>
                         <div class="col-sm-2">
@@ -149,6 +150,7 @@
 <!-- Data table plugin-->
 <script type="text/javascript" src="${url}/js/plugins/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="${url}/js/plugins/dataTables.bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
 
 <script type="text/javascript">
     $('#sampleTable').DataTable();
@@ -192,6 +194,38 @@
             }
             return i;
         }
+    }
+    //In dữ liệu
+    var myApp = new function () {
+        this.printTable = function () {
+            var tab = document.getElementById('sampleTable');
+            var win = window.open('', '', 'height=700,width=700');
+            win.document.write(tab.outerHTML);
+            win.document.close();
+            win.print();
+        }
+        // Xuất dữ liệu ra file Excel
+        this.exportToExcel = function () {
+            var table = document.getElementById('sampleTable');
+            var ws = XLSX.utils.table_to_sheet(table);
+            for (var r = 0; r < ws['!ref'].split(':')[1].match(/\d+/)[0]; r++) {
+                delete ws[XLSX.utils.encode_cell({ c: ws['!ref'].split(':')[1].match(/[A-Z]+/)[0].charCodeAt(0) - 65, r: r })];
+            }
+            var wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+            var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+
+            function s2ab(s) {
+                var buf = new ArrayBuffer(s.length);
+                var view = new Uint8Array(buf);
+                for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+                return buf;
+            }
+            var title = document.title.split(' | ')[0];
+            var fileName = title + '.xlsx';
+
+            saveAs(new Blob([s2ab(wbout)], { type: 'application/octet-stream' }), fileName);
+        };
     }
 </script>
 <script>
