@@ -41,7 +41,8 @@
                     <div class="row element-button">
                         <div class="col-sm-2">
 
-                            <a class="btn btn-add btn-sm" href="${pageContext.request.contextPath}/view/admin/view/form-add-discount.jsp" title="Thêm"><i
+                            <a class="btn btn-add btn-sm"
+                               href="${pageContext.request.contextPath}/Admin//Admin/discount/add" title="Thêm"><i
                                     class="fas fa-plus"></i>
                                 Tạo mới khuyến mãi</a>
                         </div>
@@ -92,7 +93,7 @@
                         <tbody>
                         <c:forEach items="${listDiscount}" var="dis">
                             <tr>
-                                <td width="10"><input type="checkbox" name="check1"  value="${dis.id}"></td>
+                                <td width="10"><input type="checkbox" name="check1" value="${dis.id}"></td>
                                 <td>${dis.id}</td>
                                 <td>${dis.name}</td>
                                 <td>${dis.description}</td>
@@ -100,7 +101,7 @@
                                 <td>${dis.startDate}</td>
                                 <td>${dis.endDate}</td>
                                 <td class="table-td-center">
-                                    <button class="btn btn-primary btn-sm trash delete-dis" data-id="${dis.id}" type="button" title="Xóa"
+                                    <button class="btn btn-primary btn-sm trash delete-discount" data-id="${dis.id}" type="button" title="Xóa"
                                             onclick="confirmDelete(${dis.id})"><i class="fas fa-trash-alt"></i>
                                     </button>
                                     <a href="${pageContext.request.contextPath}/Admin/discount/edit?id=${dis.id}">
@@ -272,23 +273,23 @@ var myApp = new function () {
 
     $(document).ready(function () {
         // Sử dụng delegated event cho các nút xóa
-        $(document).on('click', '.delete-product', function (e) {
+        $(document).on('click', '.delete-discount', function (e) {
             e.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
             var username = '${sessionScope.account.username}'; // Lấy thông tin người dùng từ phiên
             var deleteUserButton = $(this); // Lưu trữ phần tử .delete-user ban đầu
-            var logId = $(this).data('id'); // Lấy id người dùng từ thuộc tính data-id
-            console.log(username);
+            var disId = $(this).data('id'); // Lấy id người dùng từ thuộc tính data-id
+
             // Hiển thị hộp thoại xác nhận trước khi xóa
-            if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
+            if (confirm("Bạn có chắc chắn muốn xóa mã giảm giá này không?")) {
                 // Gửi yêu cầu AJAX để xóa người dùng
                 $.ajax({
-                    url: '${pageContext.request.contextPath}/Admin/discount/delete?id=' + logId + '&username=' + username,
+                    url: '${pageContext.request.contextPath}/Admin/discount/delete?id=' + disId + '&username=' + username,
                     type: 'DELETE', // Sử dụng phương thức DELETE
                     success: function (response) {
                         // Xóa dòng chứa nút xóa được nhấn
                         deleteUserButton.closest('tr').remove();
                         // Hiển thị thông báo hoặc thực hiện các hành động khác
-                        alert("Xóa sản phẩm thành công");
+                        alert("Xóa thành công");
                     },
                     error: function (xhr, status, error) {
                         console.error("Error deleting user:", error);
@@ -319,11 +320,11 @@ var myApp = new function () {
             e.preventDefault();
 
             if (selectedLogs.length === 0) {
-                alert("Vui lòng chọn ít nhất một sản phẩm để xóa.");
+                alert("Vui lòng chọn ít nhất một mã giảm giá để xóa.");
                 return;
             }
 
-            if (confirm("Bạn có chắc chắn muốn xóa những sản phẩm đã chọn không?")) {
+            if (confirm("Bạn có chắc chắn muốn xóa những mã đã chọn không?")) {
                 // Gửi yêu cầu AJAX với dữ liệu là mảng các ID đã chọn
                 $.ajax({
                     url: '${pageContext.request.contextPath}/Admin/discount/deleteSelected',
@@ -333,8 +334,8 @@ var myApp = new function () {
                     success: function (response) {
                         alert("Xóa sản phẩm đã chọn thành công");
                         // Xóa các dòng từ bảng mà không cần tải lại trang
-                        selectedLogs.forEach(function(logId) {
-                            $('input[name="check1"][value="' + logId + '"]').closest('tr').remove();
+                        selectedLogs.forEach(function(disId) {
+                            $('input[name="check1"][value="' + disId + '"]').closest('tr').remove();
                         });
                         // Sau khi xóa thành công, cập nhật lại trạng thái của các dòng đã chọn
                         updateSelectedLogs();

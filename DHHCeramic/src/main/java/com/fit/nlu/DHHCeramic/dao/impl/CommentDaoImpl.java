@@ -4,6 +4,8 @@ package com.fit.nlu.DHHCeramic.dao.impl;
 import com.fit.nlu.DHHCeramic.dao.CommentDao;
 import com.fit.nlu.DHHCeramic.jdbc.JDBCConnection;
 import com.fit.nlu.DHHCeramic.model.Comment;
+import com.fit.nlu.DHHCeramic.model.Product;
+import com.fit.nlu.DHHCeramic.model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,9 +19,8 @@ public class CommentDaoImpl extends JDBCConnection implements CommentDao {
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, comment.getUsername());
-            ps.setInt(2, comment.getProduct_id());
-            ps.setString(3, comment.getAvatar());
+            ps.setString(1, comment.getUsername().getUsername());
+            ps.setInt(2, comment.getProduct_id().getId());
             ps.setInt(4, comment.getRating());
             ps.setString(5, comment.getContent());
             ps.setDate(6, (Date) comment.getTime());
@@ -31,23 +32,22 @@ public class CommentDaoImpl extends JDBCConnection implements CommentDao {
 
     @Override
     public void edit(Comment oldComment) {
-        String sql = "UPDATE comments SET username = ? , productId = ?,avatar=?,rating=?, content = ?,time=? WHERE id = ?";
-        Connection con = getJDBCConnection();
-
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, oldComment.getUsername());
-            ps.setInt(2, oldComment.getProduct_id());
-            ps.setString(3, oldComment.getAvatar());
-            ps.setInt(4, oldComment.getRating());
-            ps.setString(5, oldComment.getContent());
-            ps.setDate(6, (Date) oldComment.getTime());
-            ps.setInt(7, oldComment.getId());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+//        String sql = "UPDATE comments SET username = ? , productId = ?,avatar=?,rating=?, content = ?,time=? WHERE id = ?";
+//        Connection con = getJDBCConnection();
+//
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setString(1, oldComment.getUsername());
+//            ps.setInt(2, oldComment.getProduct_id());
+//            ps.setInt(4, oldComment.getRating());
+//            ps.setString(5, oldComment.getContent());
+//            ps.setDate(6, (Date) oldComment.getTime());
+//            ps.setInt(7, oldComment.getId());
+//            ps.executeUpdate();
+//        } catch (SQLException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
     }
 
     @Override
@@ -67,8 +67,8 @@ public class CommentDaoImpl extends JDBCConnection implements CommentDao {
 
     @Override
     public Comment get(int id) {
-        String sql = "SELECT username, productId, avatar, rating, content, time "
-                + " FROM comments" + " WHERE id=?";
+        String sql = "SELECT user.username, comments.productId, comments.avatar, comments.rating, comments.content, comments.time "
+                + " FROM comments join users on comments.userId = users.id" + " WHERE comments.id=?";
         Connection con = getJDBCConnection();
 
         try {
@@ -79,9 +79,12 @@ public class CommentDaoImpl extends JDBCConnection implements CommentDao {
             while (rs.next()) {
 
                 Comment comment = new Comment();
-                comment.setUsername(rs.getString("username"));
-                comment.setProduct_id(rs.getInt("productId"));
-                comment.setAvatar(rs.getString("avatar"));
+                User user = new User();
+                Product product = new Product();
+                product.setId(Integer.parseInt("productId"));
+                user.setUsername("username");
+                comment.setUsername(user);
+                comment.setProduct_id(product);
                 comment.setRating(rs.getInt("rating"));
                 comment.setContent(rs.getString("content"));
                 comment.setTime(rs.getDate("time"));
@@ -100,8 +103,8 @@ public class CommentDaoImpl extends JDBCConnection implements CommentDao {
     @Override
     public List<Comment> getAll() {
         List<Comment> commentList = new ArrayList<Comment>();
-        String sql = "SELECT id, username, productId, avatar, rating, content, time "
-                + " FROM comments";
+        String sql = "SELECT comments.id, user.username, comments.productId, comments.avatar, comments.rating, comments.content, comments.time "
+                + " FROM comments join users on comments.userId = users.id";
         Connection conn = getJDBCConnection();
 
         try {
@@ -110,10 +113,13 @@ public class CommentDaoImpl extends JDBCConnection implements CommentDao {
 
             while (rs.next()) {
                 Comment comment = new Comment();
+                User user = new User();
                 comment.setId(rs.getInt("id"));
-                comment.setUsername(rs.getString("username"));
-                comment.setProduct_id(rs.getInt("productId")); //là biến trên truy vaans
-                comment.setAvatar(rs.getString("avatar"));
+                Product product = new Product();
+                product.setId(Integer.parseInt("productId"));
+                user.setUsername("username");
+                comment.setUsername(user);
+                comment.setProduct_id(product);
                 comment.setRating(rs.getInt("rating"));
                 comment.setContent(rs.getString("content"));
                 comment.setTime(rs.getDate("time"));
@@ -126,5 +132,40 @@ public class CommentDaoImpl extends JDBCConnection implements CommentDao {
         }
 
         return commentList;
+    }
+
+    public double getAverageRating(int productId) {
+        try {
+            String sql = "SELECT AVG(rating) AS avgRating FROM comments WHERE productId = ?";
+            Connection conn = JDBCConnection.getJDBCConnection();
+            try (PreparedStatement statement = conn.prepareStatement(sql)) {
+                statement.setInt(1, productId);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        return resultSet.getDouble("avgRating");
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý lỗi nếu có
+        }
+        return 0.0; // Trả về giá trị mặc định nếu có lỗi
+    }
+    public int countComment(int productId) {
+        try {
+            String sql = "SELECT COUNT(id) as numOfComments FROM comments where productId = ?";
+            Connection conn = JDBCConnection.getJDBCConnection();
+            try (PreparedStatement statement = conn.prepareStatement(sql)) {
+                statement.setInt(1, productId);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        return resultSet.getInt("numOfComments");
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý lỗi nếu có
+        }
+        return 0;
     }
 }

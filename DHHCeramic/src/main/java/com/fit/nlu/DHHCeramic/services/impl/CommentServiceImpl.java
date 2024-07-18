@@ -41,4 +41,13 @@ public class CommentServiceImpl implements CommentService {
     public List<Comment> getAll() {
         return commentDao.getAll();
     }
+    @Override
+    public double getAverageRating(int productId){
+        return commentDao.getAverageRating(productId);
+    }
+    @Override
+    public int countComment(int productId){
+        return commentDao.countComment(productId);
+    }
+
 }

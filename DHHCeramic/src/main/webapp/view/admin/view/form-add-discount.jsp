@@ -63,8 +63,6 @@
     </script>
 </head>
 
-</head>
-
 <body class="app sidebar-mini rtl">
 <style>
     .Choicefile {
@@ -189,7 +187,8 @@
                         <div class="form-group  col-md-4">
                             <label class="control-label">Ngày kết thúc</label>
                             <input class="form-control" type="date" name="endDate" required>
-                        </div>  <button class="btn btn-save" type="submit">Lưu lại</button>
+                        </div>
+                        <button class="btn btn-save" type="submit">Lưu lại</button>
                         <a class="btn btn-cancel" href="${pageContext.request.contextPath}/Admin/discount/list">Hủy bỏ</a>
                     </form>
                 </div>

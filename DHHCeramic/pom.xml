@@ -113,6 +113,10 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.15.2</version>
         </dependency>
+<<<<<<< HEAD
+
+=======
+>>>>>>> 67832a42bff129552ad795147552161f0b135e21
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
@@ -130,4 +134,7 @@
             </plugin>
         </plugins>
     </build>
+
+
 </project>
+

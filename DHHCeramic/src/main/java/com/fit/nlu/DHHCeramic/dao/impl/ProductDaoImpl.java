@@ -2,10 +2,7 @@ package com.fit.nlu.DHHCeramic.dao.impl;
 
 import com.fit.nlu.DHHCeramic.dao.ProductDao;
 import com.fit.nlu.DHHCeramic.jdbc.JDBCConnection;
-import com.fit.nlu.DHHCeramic.model.Category;
-import com.fit.nlu.DHHCeramic.model.Comment;
-import com.fit.nlu.DHHCeramic.model.MoreImage;
-import com.fit.nlu.DHHCeramic.model.Product;
+import com.fit.nlu.DHHCeramic.model.*;
 import com.fit.nlu.DHHCeramic.services.CategoryService;
 import com.fit.nlu.DHHCeramic.services.impl.CategoryServiceImpl;
 
@@ -475,8 +472,8 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public List<Comment> getAllProductComments(int id) {
         List<Comment> listComment = new ArrayList<Comment>();
-        String sql = "SELECT username,avatar,rating,content,time "
-                + " FROM comments " + " WHERE productId=?";
+        String sql = "SELECT comments.rating,comments.content,comments.time, users.username "
+                + " FROM comments join users on comments.userId = users.id  " + " WHERE productId=?";
         Connection con = JDBCConnection.getJDBCConnection();
 
         try {
@@ -488,8 +485,9 @@ public class ProductDaoImpl implements ProductDao {
 
 
                 Comment comment = new Comment();
-                comment.setUsername(rs.getString("username"));
-                comment.setAvatar(rs.getString("avatar"));
+                User user = new User();
+                user.setUsername(rs.getString("username"));
+                comment.setUsername(user);
                 comment.setRating(rs.getInt("rating"));
                 comment.setContent(rs.getString("content"));
                 comment.setTime(rs.getDate("time"));

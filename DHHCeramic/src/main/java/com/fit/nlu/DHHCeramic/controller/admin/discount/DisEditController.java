@@ -1,6 +1,5 @@
 package com.fit.nlu.DHHCeramic.controller.admin.discount;
 
-import com.fit.nlu.DHHCeramic.model.Blog;
 import com.fit.nlu.DHHCeramic.model.Discount;
 import com.fit.nlu.DHHCeramic.model.Product;
 import com.fit.nlu.DHHCeramic.services.DiscountService;
@@ -13,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Date;
 
 @WebServlet(urlPatterns = {"/Admin/discount/edit"})
 public class DisEditController extends HttpServlet {

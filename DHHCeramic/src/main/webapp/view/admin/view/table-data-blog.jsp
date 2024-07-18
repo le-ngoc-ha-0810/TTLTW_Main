@@ -98,8 +98,7 @@
                             <td><img src="${imgUrl}" alt="" width="100px;"></td>
                             <td>${blog.blogCate}</td>
                             <td><span class="badge bg-success">${blog.date}</span></td>
-                            <td>${blog.des}
-                            </td>
+                            <td>${blog.des}</td>
                                 <td class="table-td-center">
                                     <button class="btn btn-primary btn-sm trash delete-blog" data-id="${blog.id}" type="button" title="Xóa"
                                             onclick="confirmDelete(${blog.id})"><i class="fas fa-trash-alt"></i>
