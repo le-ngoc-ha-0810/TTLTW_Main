@@ -13,7 +13,7 @@ public class CategoryDaoImpl extends JDBCConnection implements CategoryDao {
 
     @Override
     public void insert(Category category) {
-        String sql = "INSERT INTO categories(id,cateName, status, createdBy,createdDate) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO categories(id, cateName, status, createdBy, createdDate) VALUES (?, ?, ?, ?, ?)";
         Connection con = getJDBCConnection();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -21,7 +21,11 @@ public class CategoryDaoImpl extends JDBCConnection implements CategoryDao {
             ps.setString(2, category.getName());
             ps.setInt(3, category.getStatus());
             ps.setString(4, category.getCreatedBy());
-            ps.setDate(5, (Date) category.getCreatedDate());
+            if (category.getCreatedDate() != null) {
+                ps.setDate(5, new java.sql.Date(category.getCreatedDate().getTime()));
+            } else {
+                ps.setNull(5, java.sql.Types.DATE);
+            }
 
             ps.executeUpdate();
         } catch (SQLException e) {

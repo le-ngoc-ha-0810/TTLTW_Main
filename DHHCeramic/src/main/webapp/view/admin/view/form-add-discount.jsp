@@ -154,7 +154,7 @@
                         <input type="hidden" name="user"
                                value="${sessionScope.account.username}">
                         <div class="form-group  col-md-4">
-                            <label class="control-label">ID khuyến mãi ( Nếu không nhập sẽ tự động phát sinh )</label>
+                            <label class="control-label">ID khuyến mãi</label>
                             <input class="form-control" type="text" name="id" required>
                         </div>
                         <div class="form-group  col-md-4">
@@ -162,12 +162,25 @@
                             <input class="form-control" type="text" name="name" required>
                         </div>
                         <div class="form-group  col-md-4">
+                            <label class="control-label">Loại khuyến mãi</label>
+                            <select class="form-control" name="type" id="type" >
+                                <option>-- Chọn loại khuyến mãi --</option>
+                                <option value="PRODUCT">PRODUCT</option>
+                                <option value="CATEGORY">CATEGORY</option>
+                                <option value="ALL">ALL</option>
+                            </select>
+                        </div>
+                        <div class="form-group  col-md-4">
                             <label class="control-label">Mô tả</label>
                             <input class="form-control" type="text" name="description" required>
                         </div>
                         <div class="form-group  col-md-4">
-                            <label class="control-label">Phần trăm khuyến mãi</label>
+                            <label class="control-label">Phần trăm hoặc số tiền khuyến mãi</label>
                             <input class="form-control" type="text" name="discountPercent" required>
+                        </div>
+                        <div class="form-group  col-md-4">
+                            <label class="control-label">Sản phẩm áp dụng</label>
+                            <input class="form-control" type="text" name="disId" required>
                         </div>
                         <div class="form-group  col-md-4">
                             <label class="control-label">Ngày bắt đầu</label>

@@ -47,11 +47,14 @@
                                     class="fas fa-plus"></i>
                                 Tạo mới loại sản phẩm</a>
                         </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập"
-                               onclick="myFunction(this)"><i
-                                    class="fas fa-file-upload"></i> Tải từ file</a>
-                        </div>
+                        <form id="uploadForm" action="uploadCategory" method="post" enctype="multipart/form-data">
+                            <div class="col-sm-2">
+                                <label for="file-upload" class="btn btn-delete btn-sm nhap-tu-file">
+                                    <i class="fas fa-file-upload"></i> Tải từ file
+                                </label>
+                                <input id="file-upload" type="file" name="file" style="display: none;" onchange="document.getElementById('uploadForm').submit()">
+                            </div>
+                        </form>
 
                         <div class="col-sm-2">
                             <a class="btn btn-delete btn-sm print-file" type="button" title="In"

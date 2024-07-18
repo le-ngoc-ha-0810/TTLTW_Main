@@ -12,18 +12,20 @@ public class DiscountDaoImpl extends JDBCConnection implements DiscountDao {
 
     @Override
     public void insert(Discount discount) {
-        String sql = "INSERT INTO discounts(id, discounts.name, des, discountPercent, startDate, endDate, createdBy,createdDate) VALUE(?,?,?,?,?,?,?,?)";
-        Connection con = getJDBCConnection();
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
+        String sql = "INSERT INTO discounts(id, name, discountType, des, discountPercent, disId, startDate, endDate, createdBy, createdDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (Connection con = getJDBCConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
             ps.setInt(1, discount.getId());
             ps.setString(2, discount.getName());
-            ps.setString(3, discount.getDescription());
-            ps.setDouble(4, discount.getDiscountPercent());
-            ps.setDate(5, (Date) discount.getStartDate());
-            ps.setDate(6, (Date) discount.getEndDate());
-            ps.setString(7, discount.getCreatedBy());
-            ps.setDate(8, (Date) discount.getCreatedDate());
+            ps.setString(3, discount.getDiscountType());
+            ps.setString(4, discount.getDescription());
+            ps.setDouble(5, discount.getDiscountPercent());
+            ps.setInt(6, discount.getDisId());
+            ps.setDate(7, new java.sql.Date(discount.getStartDate().getTime()));
+            ps.setDate(8, new java.sql.Date(discount.getEndDate().getTime()));
+            ps.setString(9, discount.getCreatedBy());
+            ps.setDate(10, new java.sql.Date(discount.getCreatedDate().getTime()));
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -33,20 +35,20 @@ public class DiscountDaoImpl extends JDBCConnection implements DiscountDao {
 
     @Override
     public void edit(Discount discount) {
-        String sql = "UPDATE discounts SET discounts.name=?, des=?, discountPercent=?, startDate=?, endDate=?, updateBy=?, updateDate=? WHERE id=?";
-        Connection con = getJDBCConnection();
-        System.out.println("DAO" + discount);
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
+        String sql = "UPDATE discounts SET name=?, discountType=?, des=?, discountPercent=?, disId=?, startDate=?, endDate=?, updateBy=?, updateDate=? WHERE id=?";
+        try (Connection con = getJDBCConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, discount.getName());
-            ps.setString(2, discount.getDescription());
-            ps.setDouble(3, discount.getDiscountPercent());
-            ps.setDate(4, (Date) discount.getStartDate());
-            ps.setDate(5, (Date) discount.getEndDate());
-            ps.setString(6, discount.getUpdatedBy());
-            ps.setDate(7, (Date) discount.getUpdatedDate());
-            ps.setInt(8, discount.getId());
-            System.out.println(discount);
+            ps.setString(2, discount.getDiscountType());
+            ps.setString(3, discount.getDescription());
+            ps.setDouble(4, discount.getDiscountPercent());
+            ps.setInt(5, discount.getDisId());
+            ps.setDate(6, new java.sql.Date(discount.getStartDate().getTime()));
+            ps.setDate(7, new java.sql.Date(discount.getEndDate().getTime()));
+            ps.setString(8, discount.getUpdatedBy());
+            ps.setDate(9, new java.sql.Date(discount.getUpdatedDate().getTime()));
+            ps.setInt(10, discount.getId());
+
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -56,10 +58,9 @@ public class DiscountDaoImpl extends JDBCConnection implements DiscountDao {
     @Override
     public void delete(int id) {
         String sql = "DELETE FROM discounts WHERE id=?";
-        Connection con = getJDBCConnection();
+        try (Connection con = getJDBCConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -70,22 +71,27 @@ public class DiscountDaoImpl extends JDBCConnection implements DiscountDao {
     @Override
     public Discount get(int id) {
         String sql = "SELECT * FROM discounts WHERE id=?";
-        Connection con = getJDBCConnection();
+        try (Connection con = getJDBCConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                Discount discount = new Discount();
-                discount.setId(rs.getInt("id"));
-                discount.setName(rs.getString("name"));
-                discount.setDescription(rs.getString("des"));
-                discount.setDiscountPercent(rs.getDouble("discountPercent"));
-                discount.setStartDate(rs.getDate("startDate"));
-                discount.setEndDate(rs.getDate("endDate"));
-                return discount;
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Discount discount = new Discount();
+                    discount.setId(rs.getInt("id"));
+                    discount.setName(rs.getString("name"));
+                    discount.setDiscountType(rs.getString("discountType"));
+                    discount.setDescription(rs.getString("des"));
+                    discount.setDiscountPercent(rs.getDouble("discountPercent"));
+                    discount.setDisId(rs.getInt("disId"));
+                    discount.setStartDate(rs.getDate("startDate"));
+                    discount.setEndDate(rs.getDate("endDate"));
+                    discount.setCreatedBy(rs.getString("createdBy"));
+                    discount.setCreatedDate(rs.getDate("createdDate"));
+                    discount.setUpdatedBy(rs.getString("updateBy"));
+                    discount.setUpdatedDate(rs.getDate("updateDate"));
+                    return discount;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -96,21 +102,26 @@ public class DiscountDaoImpl extends JDBCConnection implements DiscountDao {
 
     @Override
     public List<Discount> getAll() {
-        List<Discount> list = new ArrayList<Discount>();
+        List<Discount> list = new ArrayList<>();
         String sql = "SELECT * FROM discounts";
-        Connection con = getJDBCConnection();
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+        try (Connection con = getJDBCConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
             while (rs.next()) {
                 Discount discount = new Discount();
-
                 discount.setId(rs.getInt("id"));
                 discount.setName(rs.getString("name"));
+                discount.setDiscountType(rs.getString("discountType"));
                 discount.setDescription(rs.getString("des"));
                 discount.setDiscountPercent(rs.getDouble("discountPercent"));
+                discount.setDisId(rs.getInt("disId"));
                 discount.setStartDate(rs.getDate("startDate"));
                 discount.setEndDate(rs.getDate("endDate"));
+                discount.setCreatedBy(rs.getString("createdBy"));
+                discount.setCreatedDate(rs.getDate("createdDate"));
+                discount.setUpdatedBy(rs.getString("updateBy"));
+                discount.setUpdatedDate(rs.getDate("updateDate"));
                 list.add(discount);
             }
         } catch (SQLException e) {
@@ -123,24 +134,27 @@ public class DiscountDaoImpl extends JDBCConnection implements DiscountDao {
     @Override
     public Discount get(String name) {
         String sql = "SELECT * FROM discounts WHERE name=?";
-        Connection con = getJDBCConnection();
+        try (Connection con = getJDBCConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, name);
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                Discount dis = new Discount();
-                dis.setId(rs.getInt("id"));
-                dis.setName(rs.getString("name"));
-                dis.setDiscountType(rs.getString("discountType"));
-                dis.setDescription(rs.getString("des"));
-                dis.setDiscountPercent(rs.getDouble("discountPercent"));
-                dis.setDisId(rs.getInt("disId"));
-                dis.setStartDate(rs.getDate("startDate"));
-                dis.setEndDate(rs.getDate("endDate"));
-                return dis;
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Discount dis = new Discount();
+                    dis.setId(rs.getInt("id"));
+                    dis.setName(rs.getString("name"));
+                    dis.setDiscountType(rs.getString("discountType"));
+                    dis.setDescription(rs.getString("des"));
+                    dis.setDiscountPercent(rs.getDouble("discountPercent"));
+                    dis.setDisId(rs.getInt("disId"));
+                    dis.setStartDate(rs.getDate("startDate"));
+                    dis.setEndDate(rs.getDate("endDate"));
+                    dis.setCreatedBy(rs.getString("createdBy"));
+                    dis.setCreatedDate(rs.getDate("createdDate"));
+                    dis.setUpdatedBy(rs.getString("updateBy"));
+                    dis.setUpdatedDate(rs.getDate("updateDate"));
+                    return dis;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -150,20 +164,29 @@ public class DiscountDaoImpl extends JDBCConnection implements DiscountDao {
 
     @Override
     public List<Discount> search(String key) {
-        List<Discount> list = new ArrayList<Discount>();
+        List<Discount> list = new ArrayList<>();
         String sql = "SELECT * FROM discounts WHERE name LIKE ?";
-        Connection con = getJDBCConnection();
+        try (Connection con = getJDBCConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, "%" + key + "%");
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                Discount dis = new Discount();
-                dis.setId(rs.getInt("id"));
-                dis.setName(rs.getString("name"));
-                list.add(dis);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Discount dis = new Discount();
+                    dis.setId(rs.getInt("id"));
+                    dis.setName(rs.getString("name"));
+                    dis.setDiscountType(rs.getString("discountType"));
+                    dis.setDescription(rs.getString("des"));
+                    dis.setDiscountPercent(rs.getDouble("discountPercent"));
+                    dis.setDisId(rs.getInt("disId"));
+                    dis.setStartDate(rs.getDate("startDate"));
+                    dis.setEndDate(rs.getDate("endDate"));
+                    dis.setCreatedBy(rs.getString("createdBy"));
+                    dis.setCreatedDate(rs.getDate("createdDate"));
+                    dis.setUpdatedBy(rs.getString("updateBy"));
+                    dis.setUpdatedDate(rs.getDate("updateDate"));
+                    list.add(dis);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
