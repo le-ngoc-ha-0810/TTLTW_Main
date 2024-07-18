@@ -15,4 +15,8 @@ public interface CommentDao {
     Comment get(int id);
 
     List<Comment> getAll();
+
+    double getAverageRating(int productId);
+
+    public int countComment(int productId);
 }

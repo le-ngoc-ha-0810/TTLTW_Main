@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:url value="/view/client/static" var="url"></c:url>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -88,14 +89,35 @@
                 <div class="product__details__text">
                     <h3>${product.name}</h3>
                     <div class="product__details__rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-half-o"></i>
-                        <span>(18 Đánh giá)</span>
+                        <c:if test="${productRatings[product.id] == 0}">
+                            <span style="font-size: 15px; color: darkgray">Chưa có đánh giá</span>
+                        </c:if>
+                        <c:if test="${productRatings[product.id] > 0}">
+                            <c:forEach begin="1" end="5" var="star">
+                                <c:choose>
+                                    <c:when test="${star <= productRatings[product.id]}">
+                                        <i class="fas fa-star"></i>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:choose>
+                                            <c:when test="${star >= productRatings[product.id] and star - productRatings[product.id] < 1}">
+                                                <i class="fas fa-star-half-alt"></i>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <i class="fa-regular fa-star"></i>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                            <span>(${numberOfComments} Đánh giá)</span>
+                        </c:if>
+
+
                     </div>
-                    <div class="product__details__price">${product.price} VND</div>
+                    <div class="product__details__price">
+                        <fmt:formatNumber value="${product.price}" type="number" pattern="#,##0"/> VND
+                    </div>
                     <p></p>
                     <div class="product__details__quantity">
                         <div class="quantity">
@@ -134,7 +156,7 @@
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link  active" data-toggle="tab" href="#tabs-1" role="tab"
-                               aria-selected="true">Đánh giá <span>(14)</span></a>
+                               aria-selected="true">Đánh giá <span>(${numberOfComments})</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
@@ -173,11 +195,11 @@
                                     <c:forEach items="${listComment}" var="comment">
                                         <div class="product__comment-text1">
                                             <div class="product__comment-text1-cmt">
-                                                <c:url value="${comment.avatar}"
-                                                       var="imgUrl"></c:url>
-                                                <img src="${imgUrl}" alt=""
-                                                     style="width: 20px;height: 20px;">
-                                                <p>${comment.username}</p>
+<%--                                                <c:url value="${comment.avatar}"--%>
+<%--                                                       var="imgUrl"></c:url>--%>
+<%--                                                <img src="${imgUrl}" alt=""--%>
+<%--                                                     style="width: 20px;height: 20px;">--%>
+                                                <p>${comment.username.username}</p>
                                             </div>
                                             <div class="home-product-item__rating"
                                                  style="float: left; margin-left: -12px;padding-right: 12px;">

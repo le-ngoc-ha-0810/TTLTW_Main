@@ -5,8 +5,8 @@ import java.sql.Date;
 
 public class Comment implements Serializable {
     private int id;
-    private int productId;
-    private String username;
+    private Product productId;
+    private User username;
     private String avatar;
     private int rating;
     private String content;
@@ -15,7 +15,7 @@ public class Comment implements Serializable {
     public Comment() {
     }
 
-    public Comment(int id, int productId, String username, String avatar, int rating, String content, Date time) {
+    public Comment(int id, Product productId, User username, String avatar, int rating, String content, Date time) {
         this.id = id;
         this.productId = productId;
         this.username = username;
@@ -33,28 +33,20 @@ public class Comment implements Serializable {
         this.id = id;
     }
 
-    public int getProduct_id() {
+    public Product getProduct_id() {
         return productId;
     }
 
-    public void setProduct_id(int product_id) {
+    public void setProduct_id(Product product_id) {
         this.productId = product_id;
     }
 
-    public String getUsername() {
+    public User getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(User username) {
         this.username = username;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
     }
 
     public int getRating() {
@@ -80,5 +72,7 @@ public class Comment implements Serializable {
     public void setTime(Date time) {
         this.time = time;
     }
+
+
 
 }

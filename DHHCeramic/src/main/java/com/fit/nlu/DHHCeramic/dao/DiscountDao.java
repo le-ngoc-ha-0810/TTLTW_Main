@@ -1,6 +1,8 @@
 package com.fit.nlu.DHHCeramic.dao;
 
 import com.fit.nlu.DHHCeramic.model.Discount;
+import org.apache.poi.ss.usermodel.Workbook;
+
 import java.util.List;
 
 public interface DiscountDao {
@@ -17,4 +19,6 @@ public interface DiscountDao {
     List<Discount> getAll();
 
     List<Discount> search(String name);
+
+    public Workbook exportExcel();
 }

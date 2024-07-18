@@ -178,10 +178,8 @@
                             <label class="control-label">Ngày kết thúc</label>
                             <input class="form-control" type="date" name="endDate" value="${discount.endDate}" required>
                         </div>
-
-
-    <button class="btn btn-save" type="submit">Lưu lại</button>
-    <a class="btn btn-cancel" href="${pageContext.request.contextPath}/Admin/discount/list">Hủy bỏ</a>
+                        <button class="btn btn-save" type="submit">Lưu lại</button>
+                        <a class="btn btn-cancel" href="${pageContext.request.contextPath}/Admin/discount/list">Hủy bỏ</a>
                     </form>
                 </div>
 

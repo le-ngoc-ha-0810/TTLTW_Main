@@ -1,6 +1,7 @@
 package com.fit.nlu.DHHCeramic.services;
 
 import com.fit.nlu.DHHCeramic.model.Discount;
+import org.apache.poi.ss.usermodel.Workbook;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface DiscountService {
     List<Discount> getAll();
 
     List<Discount> search(String name);
+
+    public Workbook exportExcel();
 }

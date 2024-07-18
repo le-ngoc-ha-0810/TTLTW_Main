@@ -4,6 +4,7 @@ import com.fit.nlu.DHHCeramic.dao.DiscountDao;
 import com.fit.nlu.DHHCeramic.dao.impl.DiscountDaoImpl;
 import com.fit.nlu.DHHCeramic.model.Discount;
 import com.fit.nlu.DHHCeramic.services.DiscountService;
+import org.apache.poi.ss.usermodel.Workbook;
 
 import java.util.List;
 
@@ -47,5 +48,10 @@ public class DiscountServiceImpl implements DiscountService {
     @Override
     public List<Discount> search(String name) {
         return discountDao.search(name);
+    }
+
+    @Override
+    public Workbook exportExcel() {
+        return discountDao.exportExcel();
     }
 }
