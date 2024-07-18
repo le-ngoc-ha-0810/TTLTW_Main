@@ -148,40 +148,59 @@
     <div class="row">
         <div class="col-md-12">
             <div class="tile">
-                <h3 class="tile-title">Tạo mới khuyến mãi</h3>
+                <h3 class="tile-title">Chỉnh sửa khuyến mãi</h3>
                 <div class="tile-body">
-                    <form class="row" role="form" action="${pageContext.request.contextPath}/Admin/discount/edit" method="post">
-<%--                        <input type="hidden" name="id" value="${blog.id}">--%>
+                    <form class="row" role="form"
+                          action="${pageContext.request.contextPath}/Admin/discount/edit?id=${discount.id}"
+                          method="post">
+                        <%--                        <input type="hidden" name="id" value="${blog.id}">--%>
                         <input type="hidden" name="user"
                                value="${sessionScope.account.username}">
-                        <div class="form-group  col-md-4">
-                            <label class="control-label">ID khuyến mãi ( Nếu không nhập sẽ tự động phát sinh )</label>
-                            <input class="form-control" type="text" name="id" value="${discount.id}" required>
-                        </div>
                         <div class="form-group  col-md-4">
                             <label class="control-label">Tên khuyến mãi</label>
                             <input class="form-control" type="text" name="name" value="${discount.name}" required>
                         </div>
                         <div class="form-group  col-md-4">
-                            <label class="control-label">Mô tả</label>
-                            <input class="form-control" type="text" name="description" value="${discount.description}" required>
+                            <label class="control-label">Loại khuyến mãi</label>
+                            <select class="form-control" name="type" id="type">
+                                <option>-- Chọn loại khuyến mãi --</option>
+                                <option value="PRODUCT" ${discount.discountType == 'PRODUCT' ? 'selected' : ''} >
+                                    PRODUCT
+                                </option>
+                                <option value="CATEGORY" ${discount.discountType == 'CATEGORY' ? 'selected' : ''}>
+                                    CATEGORY
+                                </option>
+                                <option value="ALL" ${discount.discountType == 'ALL' ? 'selected' : ''}>ALL</option>
+                            </select>
                         </div>
                         <div class="form-group  col-md-4">
-                            <label class="control-label">Phần trăm khuyến mãi</label>
-                            <input class="form-control" type="text" name="discountPercent" value="${discount.discountPercent}" required>
+                            <label class="control-label">Mô tả</label>
+                            <input class="form-control" type="text" name="description" value="${discount.description}"
+                                   required>
+                        </div>
+                        <div class="form-group  col-md-4">
+                            <label class="control-label">Phần trăm(0-1) hoặc số tiền khuyến mãi (>1)</label>
+                            <input class="form-control" type="text" name="discountPercent"
+                                   value="${discount.discountPercent}" required>
+                        </div>
+                        <div class="form-group  col-md-4">
+                            <label class="control-label">Sản phẩm</label>
+                            <input class="form-control" type="text" name="disId"
+                                   value="${discount.disId}" required>
                         </div>
                         <div class="form-group  col-md-4">
                             <label class="control-label">Ngày bắt đầu</label>
-                            <input class="form-control" type="date" name="startDate" value="${discount.startDate}" required>
+                            <input class="form-control" type="date" name="startDate" value="${discount.startDate}"
+                                   required>
                         </div>
                         <div class="form-group  col-md-4">
                             <label class="control-label">Ngày kết thúc</label>
                             <input class="form-control" type="date" name="endDate" value="${discount.endDate}" required>
                         </div>
 
-
-    <button class="btn btn-save" type="submit">Lưu lại</button>
-    <a class="btn btn-cancel" href="${pageContext.request.contextPath}/Admin/discount/list">Hủy bỏ</a>
+                        <button class="btn btn-save" type="submit">Lưu lại</button>
+                        <a class="btn btn-cancel" href="${pageContext.request.contextPath}/Admin/discount/list">Hủy
+                            bỏ</a>
                     </form>
                 </div>
 
