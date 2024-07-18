@@ -51,6 +51,12 @@
                                     <i class="fas fa-print"></i> In dữ liệu
                                 </a>
                             </div>
+                            <div class="col-sm-2">
+                                <label for="file-upload" class="btn btn-delete btn-sm nhap-tu-file">
+                                    <i class="fas fa-file-upload"></i> Tải từ file
+                                </label>
+                                <input id="file-upload" type="file" name="file" style="display: none;" onchange="document.getElementById('uploadForm').submit()">
+                            </div>
                             <div class="col-sm-3">
                                 <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button" title="Sao chép">
                                     <i class="fas fa-copy"></i> Sao chép
