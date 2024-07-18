@@ -1,5 +1,6 @@
 package com.fit.nlu.DHHCeramic.controller.admin;
 
+import com.fit.nlu.DHHCeramic.dao.impl.ProductImportDaoImpl;
 import com.fit.nlu.DHHCeramic.model.*;
 import com.fit.nlu.DHHCeramic.services.*;
 import com.fit.nlu.DHHCeramic.services.impl.*;
@@ -25,6 +26,7 @@ public class AdminWelcome extends HttpServlet {
     OrderService cartService = new OrderServiceImpl();
     ProductService productService = new ProductServiceImpl();
     CategoryService categoryService = new CategoryServiceImpl();
+    ProductImportDaoImpl productImportDao = new ProductImportDaoImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,22 +40,10 @@ public class AdminWelcome extends HttpServlet {
         request.setAttribute("users", users.size());
         List<Order> carts = cartService.getAll();
         request.setAttribute("carts", carts.size());
-
-
-        // Số sản phẩm sắp hết hàng
-        int lowStockProductCount = 0;
-
-        // Kiểm tra từng sản phẩm nếu số lượng tồn kho dưới 10
-        for (Product product : products) {
-            if (product.getStock() < 10) {
-                lowStockProductCount++;
-                // In thông tin của sản phẩm có số lượng tồn kho dưới 10
-                System.out.println("SẮP HẾT HÀNG\n" + product);
-            }
-        }
+        List<Product> lowStockProductCount = productImportDao.getStock();
 
         // Truyền số sản phẩm sắp hết hàng vào request để sử dụng trong JSP
-        request.setAttribute("lowStockProductCount", lowStockProductCount);
+        request.setAttribute("lowStockProductCount", lowStockProductCount.size());
 
         Gson gsonObj = new Gson();
         Map<Object, Object> map = null;

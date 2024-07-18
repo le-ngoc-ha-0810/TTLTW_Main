@@ -19,10 +19,18 @@ public class DiscountServiceImpl implements DiscountService {
     @Override
     public void edit(Discount newDiscount) {
         Discount oldDis = discountDao.get(newDiscount.getId());
-        oldDis.setName(newDiscount.getName());
-        oldDis.setDescription(newDiscount.getDescription());
-        oldDis.setDiscountPercent(newDiscount.getDiscountPercent());
-        discountDao.edit(oldDis);
+        if (oldDis != null) {
+            oldDis.setName(newDiscount.getName());
+            oldDis.setDiscountType(newDiscount.getDiscountType());
+            oldDis.setDescription(newDiscount.getDescription());
+            oldDis.setDiscountPercent(newDiscount.getDiscountPercent());
+            oldDis.setDisId(newDiscount.getDisId());
+            oldDis.setStartDate(newDiscount.getStartDate());
+            oldDis.setEndDate(newDiscount.getEndDate());
+            oldDis.setUpdatedBy(newDiscount.getUpdatedBy());
+            oldDis.setUpdatedDate(newDiscount.getUpdatedDate());
+            discountDao.edit(oldDis);
+        }
     }
 
     @Override

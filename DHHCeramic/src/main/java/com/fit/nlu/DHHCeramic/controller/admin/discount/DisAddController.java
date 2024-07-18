@@ -38,10 +38,15 @@ public class DisAddController extends HttpServlet {
         Discount dis = new Discount();
         dis.setId(Integer.parseInt(request.getParameter("id")));
         dis.setName(request.getParameter("name"));
+        dis.setDiscountType(request.getParameter("type"));
         dis.setDescription(request.getParameter("description"));
-        dis.setDiscountPercent(request.getParameter("discountPercent"));
+        dis.setDiscountPercent(Double.valueOf(request.getParameter("discountPercent")));
+        dis.setDisId(Integer.parseInt(request.getParameter("disId")));
         dis.setStartDate(java.sql.Date.valueOf(request.getParameter("startDate")));
         dis.setEndDate(java.sql.Date.valueOf(request.getParameter("endDate")));
+        // Set createdBy and createdDate
+        dis.setCreatedBy(request.getParameter("user")); // Hoặc lấy giá trị từ session hoặc nơi khác
+        dis.setCreatedDate(new java.util.Date());
         discountService.insert(dis);
         response.sendRedirect(request.getContextPath() + "/Admin/discount/list");
     }

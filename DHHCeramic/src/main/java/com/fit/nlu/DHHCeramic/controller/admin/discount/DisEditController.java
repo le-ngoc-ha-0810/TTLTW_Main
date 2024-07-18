@@ -1,6 +1,7 @@
 package com.fit.nlu.DHHCeramic.controller.admin.discount;
 
 import com.fit.nlu.DHHCeramic.model.Discount;
+import com.fit.nlu.DHHCeramic.model.Product;
 import com.fit.nlu.DHHCeramic.services.DiscountService;
 import com.fit.nlu.DHHCeramic.services.impl.DiscountServiceImpl;
 
@@ -34,14 +35,21 @@ public class DisEditController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
-        Discount discount = new Discount();
-        discount.setId(Integer.parseInt(request.getParameter("id")));
-        discount.setName(request.getParameter("name"));
-        discount.setDescription(request.getParameter("description"));
-        discount.setDiscountPercent(request.getParameter("discountPercent"));
-        discount.setStartDate(java.sql.Date.valueOf(request.getParameter("startDate")));
-        discount.setEndDate(java.sql.Date.valueOf(request.getParameter("endDate")));
-        discountService.edit(discount);
+        Discount dis = new Discount();
+        dis.setId(Integer.parseInt(request.getParameter("id")));
+        dis.setName(request.getParameter("name"));
+        dis.setDiscountType(request.getParameter("type"));
+        dis.setDescription(request.getParameter("description"));
+        dis.setDiscountPercent(Double.valueOf(request.getParameter("discountPercent")));
+        dis.setDisId(Integer.parseInt(request.getParameter("disId")));
+        dis.setStartDate(java.sql.Date.valueOf(request.getParameter("startDate")));
+        dis.setEndDate(java.sql.Date.valueOf(request.getParameter("endDate")));
+        dis.setUpdateBy(request.getParameter("user"));
+        dis.setUpdatedDate(java.sql.Date.valueOf(LocalDate.now()));
+
+        Discount oldProduct = discountService.get(dis.getId());
+        discountService.edit(dis);
+//        discountService.logProductEdit(user, oldProduct, product, request);
         response.sendRedirect(request.getContextPath() + "/Admin/discount/list");
     }
 }

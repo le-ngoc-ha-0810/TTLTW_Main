@@ -5,7 +5,7 @@
 <html lang="en">
 
 <head>
-    <title>Thêm khuyến mãi | Quản trị Admin</title>
+    <title>Chỉnh sửa Log | Quản trị Admin</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,14 +13,14 @@
     <link rel="stylesheet" type="text/css" href="${url}/css/main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <!-- or -->
-    <link rel="stylesheet" href=https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css"
           href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-
     <script>
 
         function readURL(input, thumbimage) {
@@ -43,23 +43,23 @@
 
         }
 
-        // $(document).ready(function () {
-        //     $(".Choicefile").bind('click', function () {
-        //         $("#uploadfile").click();
-        //
-        //     });
-        //     $(".removeimg").click(function () {
-        //         $("#thumbimage").attr('src', '').hide();
-        //         $("#myfileupload").html('<input type="file" id="uploadfile"  onchange="readURL(this);" />');
-        //         $(".removeimg").hide();
-        //         $(".Choicefile").bind('click', function () {
-        //             $("#uploadfile").click();
-        //         });
-        //         $('.Choicefile').css('background', '#14142B');
-        //         $('.Choicefile').css('cursor', 'pointer');
-        //         $(".filename").text("");
-        //     });
-        // })
+        $(document).ready(function () {
+            $(".Choicefile").bind('click', function () {
+                $("#uploadfile").click();
+
+            });
+            $(".removeimg").click(function () {
+                $("#thumbimage").attr('src', '').hide();
+                $("#myfileupload").html('<input type="file" id="uploadfile"  onchange="readURL(this);" />');
+                $(".removeimg").hide();
+                $(".Choicefile").bind('click', function () {
+                    $("#uploadfile").click();
+                });
+                $('.Choicefile').css('background', '#14142B');
+                $('.Choicefile').css('cursor', 'pointer');
+                $(".filename").text("");
+            });
+        })
     </script>
 </head>
 
@@ -139,69 +139,53 @@
 <main class="app-content">
     <div class="app-title">
         <ul class="app-breadcrumb breadcrumb">
-            <li class="breadcrumb-item">Danh sách giảm giá</li>
-            <li class="breadcrumb-item"><a href="#">Thêm khuyến mãi</a></li>
+            <li class="breadcrumb-item"><a
+                    href="${pageContext.request.contextPath}/Admin/log/list">Danh sách Log</a></li>
+            <li class="breadcrumb-item"><a>Hạ level log</a></li>
         </ul>
     </div>
     <div class="row">
         <div class="col-md-12">
+
             <div class="tile">
-                <h3 class="tile-title">Tạo mới khuyến mãi</h3>
+
+                <h3 class="tile-title">Chỉnh sửa level log</h3>
                 <div class="tile-body">
-                    <form class="row" role="form" action="${pageContext.request.contextPath}/Admin/discount/add" method="post">
+                    <form class="row" role="form" role="form" action="edit" method="post">
                         <input type="hidden" name="user"
                                value="${sessionScope.account.username}">
-                        <div class="form-group  col-md-4">
-                            <label class="control-label">ID khuyến mãi</label>
-                            <input class="form-control" type="text" name="id" required>
+                        <div class="form-group col-md-4">
+                            <label class="control-label">ID Log</label>
+                            <input class="form-control" type="text" name="id" value="${log.id}" required>
                         </div>
-                        <div class="form-group  col-md-4">
-                            <label class="control-label">Tên khuyến mãi</label>
-                            <input class="form-control" type="text" name="name" required>
-                        </div>
-                        <div class="form-group  col-md-4">
-                            <label class="control-label">Loại khuyến mãi</label>
-                            <select class="form-control" name="type" id="type" >
-                                <option>-- Chọn loại khuyến mãi --</option>
-                                <option value="PRODUCT">PRODUCT</option>
-                                <option value="CATEGORY">CATEGORY</option>
-                                <option value="ALL">ALL</option>
+                        <div class="form-group col-md-4">
+                            <label class="control-label">Level Log</label>
+                            <select class="form-control" name="level" value="${log.level}" required>
+                                <option value="0">Info</option>
+                                <option value="1">Error</option>
+                                <option value="2">Warning</option>
+                                <option value="3">Danger</option>
                             </select>
                         </div>
-                        <div class="form-group  col-md-4">
-                            <label class="control-label">Mô tả</label>
-                            <input class="form-control" type="text" name="description" required>
-                        </div>
-                        <div class="form-group  col-md-4">
-                            <label class="control-label">Phần trăm hoặc số tiền khuyến mãi</label>
-                            <input class="form-control" type="text" name="discountPercent" required>
-                        </div>
-                        <div class="form-group  col-md-4">
-                            <label class="control-label">Sản phẩm áp dụng</label>
-                            <input class="form-control" type="text" name="disId" required>
-                        </div>
-                        <div class="form-group  col-md-4">
-                            <label class="control-label">Ngày bắt đầu</label>
-                            <input class="form-control" type="date" name="startDate" required>
-                        </div>
-                        <div class="form-group  col-md-4">
-                            <label class="control-label">Ngày kết thúc</label>
-                            <input class="form-control" type="date" name="endDate" required>
-                        </div>
                         <button class="btn btn-save" type="submit">Lưu lại</button>
-                        <a class="btn btn-cancel" href="${pageContext.request.contextPath}/Admin/discount/list">Hủy bỏ</a>
+                        <a class="btn btn-cancel" href="${pageContext.request.contextPath}/Admin/log/list">Hủy bỏ</a>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>
 </main>
+
+
 <!-- Essential javascripts for application to work-->
-<script src="${pageContext.request.contextPath}/view/client/view/js/jquery-3.2.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/view/client/view/js/popper.min.js"></script>
-<script src="${pageContext.request.contextPath}/view/client/view/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/view/client/view/js/main.js"></script>
+<script src="${url}/js/jquery-3.2.1.min.js"></script>
+<script src="${url}/js/popper.min.js"></script>
+<script src="${url}/js/bootstrap.min.js"></script>
+<script src="${url}/js/main.js"></script>
 <!-- The javascript plugin to display page loading on top-->
-<script src="${pageContext.request.contextPath}/view/client/view/js/plugins/pace.min.js"></script>
+<script src="${url}/js/plugins/pace.min.js"></script>
+
 </body>
+
 </html>

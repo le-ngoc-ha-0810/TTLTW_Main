@@ -1,3 +1,10 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: admin
+  Date: 6/7/2024
+  Time: 3:50 PM
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:url value="/view/admin/static" var="url"></c:url>
@@ -6,7 +13,7 @@
 <html lang="en">
 
 <head>
-    <title>Danh sách sản phẩm | Quản trị Admin</title>
+    <title>Quản lý tồn kho | Quản trị Admin</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +29,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.4/dist/xlsx.full.min.js"></script>
-
 </head>
 
 <body onload="time()" class="app sidebar-mini rtl">
@@ -39,99 +45,79 @@
             <div class="tile">
                 <div class="tile-body">
                     <div class="row element-button">
-                        <div class="col-sm-2">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()">
+                                    <i class="fas fa-print"></i> In dữ liệu
+                                </a>
+                            </div>
+                            <div class="col-sm-2">
+                                <label for="file-upload" class="btn btn-delete btn-sm nhap-tu-file">
+                                    <i class="fas fa-file-upload"></i> Tải từ file
+                                </label>
+                                <input id="file-upload" type="file" name="file" style="display: none;" onchange="document.getElementById('uploadForm').submit()">
+                            </div>
+                            <div class="col-sm-3">
+                                <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button" title="Sao chép">
+                                    <i class="fas fa-copy"></i> Sao chép
+                                </a>
+                            </div>
+                            <div class="col-sm-3">
+                                <a class="btn btn-excel btn-sm" href="" title="In" onclick="myApp.exportToExcel()">
+                                    <i class="fas fa-file-excel"></i> Xuất Excel
+                                </a>
+                            </div>
+                            <div class="col-sm-3">
+                                <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)">
+                                    <i class="fas fa-file-pdf"></i> Xuất PDF
+                                </a>
+                            </div>
+                        </div>
 
-                            <a class="btn btn-add btn-sm" href="${pageContext.request.contextPath}/Admin/product/add"
-                               title="Thêm"><i
-                                    class="fas fa-plus"></i>
-                                Tạo mới sản phẩm</a>
-                        </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
-                                    class="fas fa-print"></i> In dữ liệu</a>
-                        </div>
-
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm print-file" type="button" title="In"
-                               onclick="myApp.printTable()"><i
-                                    class="fas fa-print"></i> In dữ liệu</a>
-                        </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button"
-                               title="Sao chép"><i
-                                    class="fas fa-copy"></i> Sao chép</a>
-                        </div>
-
-                        <div class="col-sm-2">
-                            <a class="btn btn-excel btn-sm" href="" title="In" onclick="myApp.exportToExcel()"><i class="fas fa-file-excel"></i> Xuất
-                                Excel</a>
-                        </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm pdf-file" type="button" title="In"
-                               onclick="myFunction(this)"><i
-                                    class="fas fa-file-pdf"></i> Xuất PDF</a>
-                        </div>
-                        <div class="col-sm-2">
-                            <a id="deleteSelected" class="btn btn-delete btn-sm" type="button" title="Xóa"><i
-                                    class="fas fa-trash-alt"></i> Xóa tất cả </a>
-                        </div>
-                    </div>
-                    <table class="table table-hover table-bordered" id="sampleTable">
-                        <thead>
-                        <tr>
-                            <th width="10"><input type="checkbox" id="all"></th>
-                            <th>Mã sản phẩm</th>
-                            <th>Tên sản phẩm
-                            <th>Ảnh</th>
-                            <th>Tên loại sản phẩm</th>
-                            <th>Giá giảm</th>
-                            <th>Kích thước</th>
-                            <th>Mô tả</th>
-                            <th>Giá tiền</th>
-                            <th>Nguồn gốc</th>
-                            <th>Trạng thái</th>
-                            <th>Chức năng</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach items="${productList}" var="pro">
+                        <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0"
+                               border="0"
+                               id="sampleTable">
+                            <thead>
                             <tr>
-                                <td width="10"><input type="checkbox" name="check1" value="${pro.id}"></td>
-                                <td>${pro.id}</td>
-                                <td>${pro.name}</td>
-                                <c:url value="${pro.image }" var="imgUrl"></c:url>
-                                <td><img src="${imgUrl}" alt="" width="100px;"></td>
-                                <td>${pro.category.name}</td>
-                                <td>${pro.saleId}</td>
-                                <td>${pro.size}</td>
-                                <td>${pro.des}</td>
-                                <td>${pro.price}</td>
-                                <td>${pro.manufacture}</td>
-                                <td>${pro.status == 0 ? 'Còn hàng' : 'Hết hàng'}</td>
-                                <td class="table-td-center">
-                                    <button class="btn btn-primary btn-sm trash delete-product" data-id="${pro.id}" type="button" title="Xóa"
-                                            onclick="confirmDelete(${pro.id})"><i class="fas fa-trash-alt"></i>
-                                    </button>
-                                    <a href="${pageContext.request.contextPath}/Admin/product/edit?id=${pro.id}">
-                                        <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"
-                                                id="show-emp"
-                                                data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i>
-                                        </button>
-                                    </a>
-                                    <a href="${pageContext.request.contextPath}/Admin/product/image-add?id=${pro.id}">
-                                            <button type="button" class="btn btn-primary btn-sm-outline" title="Ảnh" style="width:35px;background-color: #bbefbb;">
-                                                <i class="fas fa-image" style="color:green;"></i>
-                                            </button>
-                                    </a>
-                                </td>
+                                <th width="10"><input type="checkbox" id="all"></th>
+                                <th>ID</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Hình ảnh</th>
+                                <th>Số sản phẩm tồn kho</th>
+                                <th width="100">Trạng thái</th>
                             </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="warehouse" items="${warehouse}">
+                                <tr>
+                                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                                    <td>${warehouse.id}</td>
+                                    <td>${warehouse.name}</td>
+                                    <c:url value="${warehouse.image }" var="imgUrl"></c:url>
+                                    <td><img src="${imgUrl}" alt="" width="100px;"></td>
+                                    <td>${warehouse.remainingStock}</td>
+                                    <c:choose>
+                                        <c:when test="${warehouse.stockStatus == 'Hết hàng'}">
+                                            <td><span style="display: inline-block; padding: 0.3em 0.6em; background-color: #ffcccc; color: #cc0000; font-weight: bold; border-radius: 8px;font-size: 0.9em;">Hết hàng</span></td>
+                                        </c:when>
+                                        <c:when test="${warehouse.stockStatus == 'Sắp hết hàng'}">
+                                            <td><span class="badge bg-danger">Sắp hết hàng</span></td>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td><span class="badge bg-success">Còn hàng</span></td>
+                                        </c:otherwise>
+                                    </c:choose>
+
+
+
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 </main>
 
 
@@ -195,7 +181,6 @@
             return i;
         }
     }
-    //In dữ liệu
     var myApp = new function () {
         this.printTable = function () {
             var tab = document.getElementById('sampleTable');
